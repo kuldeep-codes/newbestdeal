@@ -1,167 +1,319 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://newbestdeal.com/</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blog-list/bloglist-1</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blog-list/bloglist-2</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/about</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blog-list/bloglist-3</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-112</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/contact</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-113</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-120</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blog-list/bloglist-4</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-121</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-114</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-115</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-122</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-124</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blog-list/bloglist-5</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-125</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-118</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-116</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/index.html</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-117</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-119</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-126</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-101</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-110</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-102</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-127</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-123</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-128</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-103</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blog-list/bloglist-6</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-104</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-129</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-130</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-109</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-111</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-105</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-131</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-106</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-107</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://newbestdeal.com/blogs/blog-108</loc>
-    <changefreq>daily</changefreq>
-  </url>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+		<!--	created with www.mysitemapgenerator.com	-->
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>http://newbestdeal.com/</loc>
+	<lastmod>2021-09-16T13:16:09+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/index.html</loc>
+	<lastmod>2021-09-16T13:16:10+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blog-list/bloglist-1</loc>
+	<lastmod>2021-09-16T13:16:11+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/about</loc>
+	<lastmod>2021-09-16T13:16:12+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/contact</loc>
+	<lastmod>2021-09-16T13:16:12+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-132</loc>
+	<lastmod>2021-09-16T13:16:13+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-133</loc>
+	<lastmod>2021-09-16T13:16:14+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-134</loc>
+	<lastmod>2021-09-16T13:16:14+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-135</loc>
+	<lastmod>2021-09-16T13:16:14+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-136</loc>
+	<lastmod>2021-09-16T13:16:14+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-137</loc>
+	<lastmod>2021-09-16T13:16:15+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blog-list/bloglist-2</loc>
+	<lastmod>2021-09-16T13:16:15+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-138</loc>
+	<lastmod>2021-09-16T13:16:15+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-139</loc>
+	<lastmod>2021-09-16T13:16:16+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-140</loc>
+	<lastmod>2021-09-16T13:16:16+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-141</loc>
+	<lastmod>2021-09-16T13:16:17+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-142</loc>
+	<lastmod>2021-09-16T13:16:17+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-143</loc>
+	<lastmod>2021-09-16T13:16:17+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blog-list/bloglist-3</loc>
+	<lastmod>2021-09-16T13:16:17+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-144</loc>
+	<lastmod>2021-09-16T13:16:18+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-145</loc>
+	<lastmod>2021-09-16T13:16:18+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-146</loc>
+	<lastmod>2021-09-16T13:16:18+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-147</loc>
+	<lastmod>2021-09-16T13:16:18+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-148</loc>
+	<lastmod>2021-09-16T13:16:18+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-149</loc>
+	<lastmod>2021-09-16T13:16:19+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blog-list/bloglist-4</loc>
+	<lastmod>2021-09-16T13:16:19+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-150</loc>
+	<lastmod>2021-09-16T13:16:19+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-112</loc>
+	<lastmod>2021-09-16T13:16:19+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-113</loc>
+	<lastmod>2021-09-16T13:16:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-114</loc>
+	<lastmod>2021-09-16T13:16:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-115</loc>
+	<lastmod>2021-09-16T13:16:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-116</loc>
+	<lastmod>2021-09-16T13:16:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blog-list/bloglist-5</loc>
+	<lastmod>2021-09-16T13:16:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-117</loc>
+	<lastmod>2021-09-16T13:16:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-118</loc>
+	<lastmod>2021-09-16T13:16:21+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-119</loc>
+	<lastmod>2021-09-16T13:16:21+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-120</loc>
+	<lastmod>2021-09-16T13:16:21+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-121</loc>
+	<lastmod>2021-09-16T13:16:21+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-122</loc>
+	<lastmod>2021-09-16T13:16:22+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blog-list/bloglist-6</loc>
+	<lastmod>2021-09-16T13:16:22+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-123</loc>
+	<lastmod>2021-09-16T13:16:22+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-124</loc>
+	<lastmod>2021-09-16T13:16:22+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-125</loc>
+	<lastmod>2021-09-16T13:16:22+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-126</loc>
+	<lastmod>2021-09-16T13:16:23+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-127</loc>
+	<lastmod>2021-09-16T13:16:23+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-128</loc>
+	<lastmod>2021-09-16T13:16:24+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blog-list/bloglist-7</loc>
+	<lastmod>2021-09-16T13:16:23+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-129</loc>
+	<lastmod>2021-09-16T13:16:23+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-130</loc>
+	<lastmod>2021-09-16T13:16:24+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-131</loc>
+	<lastmod>2021-09-16T13:16:24+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-101</loc>
+	<lastmod>2021-09-16T13:16:24+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-102</loc>
+	<lastmod>2021-09-16T13:16:24+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-103</loc>
+	<lastmod>2021-09-16T13:16:24+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blog-list/bloglist-8</loc>
+	<lastmod>2021-09-16T13:16:24+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-104</loc>
+	<lastmod>2021-09-16T13:16:25+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-105</loc>
+	<lastmod>2021-09-16T13:16:25+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-106</loc>
+	<lastmod>2021-09-16T13:16:25+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-107</loc>
+	<lastmod>2021-09-16T13:16:25+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-108</loc>
+	<lastmod>2021-09-16T13:16:26+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-109</loc>
+	<lastmod>2021-09-16T13:16:26+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blog-list/bloglist-9</loc>
+	<lastmod>2021-09-16T13:16:26+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-110</loc>
+	<lastmod>2021-09-16T13:16:26+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>http://newbestdeal.com/blogs/blog-111</loc>
+	<lastmod>2021-09-16T13:16:26+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
 </urlset>
