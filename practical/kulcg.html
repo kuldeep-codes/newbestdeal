@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cg Praxticals</title>
+</head>
+<body>
+    <!-- directives:[] -->
+<div id="content"><h2 id="installingrequiredlibraries">Installing required libraries</h2>
+    <pre><code class="python language-python">pip install graphics.py
+    </code></pre>
+    <h2 id="program1">Program 1</h2>
+    <blockquote>
+      <p>Write a program to implement Bresenhams line drawing algorithm.</p>
+      <ul>
+      <li>[x] </li>
+      </ul>
+    </blockquote>
+    <h3 id="code">Code</h3>
+    <pre><code class="python language-python">from graphics import*
+    from time import sleep
+    
+    
+    def putPixel(x, y, win):
+        pt = Point(x, y)
+        pt.draw(win)
+    
+    
+    def bresenhamALgo(x1, y1, x2, y2):
+        win = GraphWin('Bresenham Algorithm', 600, 600)
+        if x1 == x2 and y1 == y2:
+            putPixel(x1, y1, win)
+            sleep(0.1)
+        else:
+            dx = abs(x1-x2)
+            dy = abs(y1-y2)
+    
+            # initialization of the inital disision parameter
+            p = 2*dy-dx
+            while x1 &lt;= x2:
+                putPixel(x1, y1, win)
+                sleep(0.1)
+                if p &lt; 0:
+                    p += 2*dy
+                else:
+                    y1 += 1
+                    p += 2*(dy-dx)
+                x1 += 1
+        win.getMouse()
+        win.close()
+    
+    
+    def ddaAlgo(x1, y1, x2, y2):
+        win = GraphWin('DDA Algorithm', 600, 600)
+        if x1 == x2 and y1 == y2:
+            putPixel(x1, y1, win)
+            sleep(0.1)
+            return
+        else:
+            dx = abs(x1-x2)
+            dy = abs(y1-y2)
+            m = dy/dx
+            while round(x1) &lt;= x2 and round(y1) &lt;= y2:
+                putPixel(round(x1), round(y1), win)
+                sleep(0.1)
+                if m &gt; 1:
+                    x1 += 1/m
+                    y1 += 1
+                else:
+                    y1 += m
+                    x1 += 1
+        win.getMouse()
+        win.close()
+    
+    
+    x1, y1 = map(int, input('Enter Coordinates of first point: ').split())
+    x2, y2 = map(int, input('Enter Coordinates of last point: ').split())
+    bresenhamALgo(x1, y1, x2, y2)
+    ddaAlgo(x1, y1, x2, y2)
+    </code></pre>
+    <p><strong>Output</strong></p>
+    <p><img src="raw-lecture/Pasted%20image%2020220427215542.png" alt="" /></p>
+    <h2 id="program2">Program 2</h2>
+    <blockquote>
+      <p>Write a program to implement mid-point circle drawing algorithm.</p>
+      <ul>
+      <li>[x] </li>
+      </ul>
+    </blockquote>
+    <h3 id="code-1">Code</h3>
+    <pre><code class="python language-python">from graphics import *
+    import time
+    
+    def MidPointCircleDraw(x_centre, y_centre, r):
+        win = GraphWin('Midpoint Circle Generation', 600, 600)
+    
+        x = r
+        y = 0
+    
+        print(f'({x + x_centre}, {y + y_centre})', end='')
+    
+        if r &gt; 0:
+            print(f'({x + x_centre}, {-y + y_centre})', end='')
+            print(f'({y + x_centre}, {x + y_centre})', end='')
+            print(f'({-y + x_centre}, {x + y_centre})', end='')
+    
+        p = 1 - r
+        while x &gt; y:
+            y += 1
+    
+            if p &lt;= 0:
+                p += 2 * y + 1
+            else:
+                x -= 1
+                p  += 2 * y - 2 * x + 1
+    
+            if x &lt; y:
+                break
+    
+            x1 = x + x_centre
+            y1 = y + y_centre
+    
+            x2 = -x + x_centre
+            y2 = y + y_centre
+    
+            x3 = x + x_centre
+            y3 = -y + y_centre
+    
+            x4 = -x + x_centre
+            y4 = -y + y_centre
+    
+            putPixel(x1, y1, win)
+            time.sleep(0.01)
+            putPixel(x2, y2, win)
+            time.sleep(0.01)
+            putPixel(x3, y3, win)
+            time.sleep(0.01)
+            putPixel(x4, y4, win)
+            time.sleep(0.01)
+    
+            print(f'({x1}, {y1})', end=' ')
+            print(f'({x2}, {y2})', end=' ')
+            print(f'({x3}, {y3})', end=' ')
+            print(f'({x4}, {y4})', end=' ')
+    
+            if x != y:
+                x1 = y + x_centre
+                y1 = x + y_centre
+    
+                x2 = -y + x_centre
+                y2 = x + y_centre
+    
+                x3 = y + x_centre
+                y3 = -x + y_centre
+    
+                x4 = -y + x_centre
+                y4 =  -x + y_centre
+    
+                putPixel(x1, y1, win)
+                time.sleep(0.01)
+                putPixel(x2, y2, win)
+                time.sleep(0.01)
+                putPixel(x3, y3, win)
+                time.sleep(0.01)
+                putPixel(x4, y4, win)
+                time.sleep(0.01)
+    
+                print(f'({x1}, {y1})', end=' ')
+                print(f'({x2}, {y2})', end=' ')
+                print(f'({x3}, {y3})', end=' ')
+                print(f'({x4}, {y4})', end=' ')
+    
+        win.getMouse()
+        win.close()
+    
+    def putPixel(x, y, win):
+        pt = Point(x, y)
+        pt.draw(win)
+    
+    if __name__ == '__main__':
+        x, y = map(int, input('Enter Center Coordinates: ').split())
+        r = int(input('Enter the radius: '))
+    
+        MidPointCircleDraw(x, y, r)
+    </code></pre>
+    <p><strong>Output</strong></p>
+    <p><img src="raw-lecture/Pasted%20image%2020220427215641.png" alt="" /></p>
+    <h2 id="program3">Program 3</h2>
+    <blockquote>
+      <p>Write a program to clip a line using Cohen and Sutherland line clipping algorithm.</p>
+      <ul>
+      <li>[x] </li>
+      </ul>
+    </blockquote>
+    <h3 id="code-2">Code</h3>
+    <pre><code class="python language-python">import matplotlib.pyplot as plt
+    
+    
+    ymin = float(input("Enter ymin value : "))
+    ymax = float(input("Enter ymax value : "))
+    xmin = float(input("Enter xmin value : "))
+    xmax = float(input("Enter xmax value : "))
+    
+    line = int(input("Enter the no. of lines : "))
+    x0 = []
+    x1 = []
+    y0 = []
+    y1 = []
+    for i in range(0, line):
+        x0.append(float(input("Enter the X coordinate of starting point of line : ")))
+        y0.append(float(input("Enter the y coordinate of starting point of line : ")))
+        x1.append(float(input("Enter the x coordinate of ending point of line : ")))
+        y1.append(float(input("Enter the y coordinate of ending point of line : ")))
+    
+    fig, graphs = plt.subplots(2)
+    # plot the graph before clipping of x0,y0 to x1,y1
+    graphs[0].plot([xmin, xmin], [ymin, ymax], linewidth=2, color="Black")
+    graphs[0].plot([xmin, xmax], [ymin, ymin], linewidth=2, color="Black")
+    graphs[0].plot([xmax, xmax], [ymin, ymax], linewidth=2, color="Black")
+    graphs[0].plot([xmin, xmax], [ymax, ymax], linewidth=2, color="Black")
+    for i in range(0, line):
+        graphs[0].plot([x0[i], x1[i]], [y0[i], y1[i]], linewidth=2)
+    
+    graphs[0].set_title("Window before clipping")
+    
+    
+    def region(x, y):
+        r = 0000
+    
+        # using top-bottom-right-left rule
+        if(x &lt; xmin):
+            if(y &lt; ymin):
+                r = "0101"
+            elif(y &gt; ymax):
+                r = "1001"
+            else:
+                r = "0001"
+    
+        elif(x &gt; xmax):
+            if(y &lt; ymin):
+                r = "0110"
+            elif(y &gt; ymax):
+                r = "1010"
+            else:
+                r = "0010"
+    
+        else:
+            if(y &lt; ymin):
+                r = "0100"
+            elif(y &gt; ymax):
+                r = "1000"
+            else:
+                r = "0000"
+        return r
+    
+    
+    def clipLine(x, y, m, c):
+        a = x
+        b = y
+        check = False
+        reg = region(x, y)
+        if(reg[0] == "1"):  # top clipping
+            b = ymax
+            a = (b-c)/m
+            check = True
+        elif(reg[1] == "1"):  # bottom clipping
+            b = ymin
+            a = (b-c)/m
+            check = True
+    
+        reg = region(a, b)
+    
+        if(reg[2] == "1"):
+            if(check == False):  # right clipping
+                a = xmax
+            b = m*a+c
+        elif(reg[3] == "1"):
+            if(check == False):  # left clipping
+                a = xmin
+            b = m*a+c
+    
+        return [a, b]
+    
+    
+    x0_new = []
+    x1_new = []
+    y0_new = []
+    y1_new = []
+    for i in range(0, line):
+        if(int(region(x0[i], y0[i])) | int(region(x1[i], y1[i])) == 0000):
+            x0_new.append(x0[i])
+            x1_new.append(x1[i])
+            y0_new.append(y0[i])
+            y1_new.append(y1[i])
+    
+        elif(int(region(x0[i], y0[i])) &amp; int(region(x1[i], y1[i])) == 0000):
+            # line needs to be clipped
+            m = (y1[i]-y0[i])/(x1[i]-x0[i])
+            c = y0[i] - m*x0[i]
+            a, b = clipLine(x0[i], y0[i], m, c)
+            x0_new.append(a)
+            y0_new.append(b)
+            a, b = clipLine(x1[i], y1[i], m, c)
+            x1_new.append(a)
+            y1_new.append(b)
+    
+    # plot the graph before clipping of x0_new,y0_new to x1_new,y1_new
+    graphs[1].plot([xmin, xmin], [ymin, ymax], linewidth=2, color="Black")
+    graphs[1].plot([xmin, xmax], [ymin, ymin], linewidth=2, color="Black")
+    graphs[1].plot([xmax, xmax], [ymin, ymax], linewidth=2, color="Black")
+    graphs[1].plot([xmin, xmax], [ymax, ymax], linewidth=2, color="Black")
+    for i in range(0, len(x0_new)):
+        graphs[1].plot([x0_new[i], x1_new[i]], [y0_new[i], y1_new[i]], linewidth=2)
+    graphs[1].set_title("Window After clipping")
+    fig.tight_layout()
+    plt.show()
+    </code></pre>
+    <p><strong>Output</strong>
+    <img src="raw-lecture/Pasted%20image%2020220427215909.png" alt="" /></p>
+    <h2 id="program4">Program 4</h2>
+    <blockquote>
+      <p>Write a program to clip a polygon using Sutherland Hodgeman algorithm.</p>
+      <ul>
+      <li>[x] </li>
+      </ul>
+    </blockquote>
+    <h3 id="code-3">Code</h3>
+    <pre><code class="python language-python">import matplotlib.pyplot as plt
+    
+    ymin = float(input("Enter ymin value : "))
+    ymax = float(input("Enter ymax value : "))
+    xmin = float(input("Enter xmin value : "))
+    xmax = float(input("Enter xmax value : "))
+    
+    line = int(input("Enter the no. of vertices : "))
+    x = []
+    y = []
+    for i in range(0, line):
+        x.append(float(input("Enter the X coordinate of starting point of line : ")))
+        y.append(float(input("Enter the y coordinate of starting point of line : ")))
+    
+    figure, axis = plt.subplots(2, 1)
+    axis[0].set_title("Before clipping")
+    plt.tight_layout()
+    # plot the graph before clipping of x0,y0 to x1,y1
+    axis[0].plot([xmin, xmin], [ymin, ymax], linewidth=2, color="Black")
+    axis[0].plot([xmin, xmax], [ymin, ymin], linewidth=2, color="Black")
+    axis[0].plot([xmax, xmax], [ymin, ymax], linewidth=2, color="Black")
+    axis[0].plot([xmin, xmax], [ymax, ymax], linewidth=2, color="Black")
+    for i in range(0, line-1):
+        axis[0].plot([x[i], x[i+1]], [y[i], y[i+1]], linewidth=2)
+    axis[0].plot([x[0], x[line-1]], [y[0], y[line-1]], linewidth=2)
+    
+    
+    def region(x, y):
+        r = 0000
+        if(x &lt; xmin):
+            if(y &lt; ymin):
+                r = "0101"
+            elif(y &gt; ymax):
+                r = "1001"
+            else:
+                r = "0001"
+    
+        elif(x &gt; xmax):
+            if(y &lt; ymin):
+                r = "0100"
+            elif(y &gt; ymax):
+                r = "1010"
+            else:
+                r = "0010"
+    
+        else:
+            if(y &lt; ymin):
+                r = "0100"
+            elif(y &gt; ymax):
+                r = "1000"
+            else:
+                r = "0000"
+        return r
+    
+    
+    def clipLine(x, y, m, c):
+        a = x
+        b = y
+        check = False
+        reg = region(x, y)
+        if(reg[0] == "1"):  # top clipping
+            b = ymax
+            a = (b-c)/m
+            check = True
+        elif(reg[1] == "1"):  # bottom clipping
+            b = ymin
+            a = (b-c)/m
+            check = True
+    
+        reg = region(a, b)
+    
+        if(reg[2] == "1"):
+            if(check == False):  # right clipping
+                a = xmax
+            b = m*a+c
+        elif(reg[3] == "1"):
+            if(check == False):  # left clipping
+                a = xmin
+            b = m*a+c
+    
+        return [a, b]
+    
+    
+    x_new = []
+    y_new = []
+    for i in range(0, line-1):
+    
+        if(int(region(x[i], y[i])) | int(region(x[i+1], y[i+1])) == 0000):
+            x_new.append(x[i])
+            x_new.append(x[i+1])
+            y_new.append(y[i])
+            y_new.append(y[i+1])
+        elif(int(region(x[i], y[i])) &amp; int(region(x[i], y[i])) == 0000):
+            # line needs to be clipped
+            m = (y[i+1]-y[i])/(x[i+1]-x[i])
+            c = y[i] - m*x[i]
+            a, b = clipLine(x[i], y[i], m, c)
+            x_new.append(a)
+            y_new.append(b)
+            a, b = clipLine(x[i+1], y[i+1], m, c)
+            x_new.append(a)
+            y_new.append(b)
+    if(int(region(x[0], y[0])) | int(region(x[line-1], y[line-1])) == 0000):
+        x_new.append(x[0])
+        x_new.append(x[line-1])
+        y_new.append(y[0])
+        y_new.append(y[line-1])
+    elif(int(region(x[0], y[0])) &amp; int(region(x[line-1], y[line-1])) == 0000):
+        # line needs to be clipped
+        m = (y[line-1]-y[0])/(x[line-1]-x[0])
+        c = y[0] - m*x[0]
+        a, b = clipLine(x[0], y[0], m, c)
+        x_new.append(a)
+        y_new.append(b)
+        a, b = clipLine(x[line-1], y[line-1], m, c)
+        x_new.append(a)
+        y_new.append(b)
+    
+    
+    axis[1].set_title("After clipping")
+    # plot the graph before clipping of x0_new,y0_new to x1_new,y1_new
+    axis[1].plot([xmin, xmin], [ymin, ymax], linewidth=2, color="Black")
+    axis[1].plot([xmin, xmax], [ymin, ymin], linewidth=2, color="Black")
+    axis[1].plot([xmax, xmax], [ymin, ymax], linewidth=2, color="Black")
+    axis[1].plot([xmin, xmax], [ymax, ymax], linewidth=2, color="Black")
+    for i in range(0, len(x_new), 2):
+        axis[1].plot([x_new[i], x_new[i+1]],
+                     [y_new[i], y_new[i+1]], linewidth=2)
+    plt.show()
+    </code></pre>
+    <p><strong>Output</strong>
+    <img src="raw-lecture/Pasted%20image%2020220427220155.png" alt="" /></p>
+    <h2 id="program5">Program 5</h2>
+    <blockquote>
+      <p>Write a program to fill a polygon using Scan line fill algorithm.</p>
+      <ul>
+      <li>[x] </li>
+      </ul>
+    </blockquote>
+    <h3 id="code-4">Code</h3>
+    <pre><code class="python language-python">from time import sleep
+    from graphics import *
+    
+    
+    class Edge:
+        def __init__(self):
+            self.x1 = 0
+            self.x2 = 0
+            self.y1 = 0
+            self.y2 = 0
+            self.flag = 0
+    
+    
+    win = GraphWin('Ploting Scan Line Fill', 600, 600)
+    
+    poly = []
+    ymin, ymax = 600, 0
+    n = int(input("Enter the number of vertices: "))
+    
+    m = [0]*n
+    x_int = [-600]*n
+    inter_x = [-600]*n
+    for i in range(n):
+        edge = Edge()
+        x, y = map(int, input(
+            'Enter Coordinates of vertex '+str(int(i+1))+': ').split())
+        if y &gt; ymax:
+            ymax = y
+        if y &lt; ymin:
+            ymin = y
+        edge.x1 = x
+        edge.y1 = y
+        poly.append(edge)
+    
+    for i in range(n-1):
+        poly[i].x2 = poly[i+1].x1
+        poly[i].y2 = poly[i+1].y1
+        poly[i].flag = 0
+    poly[n-1].x2 = poly[0].x1
+    poly[n-1].y2 = poly[0].y1
+    poly[n-1].flag = 0
+    
+    
+    for i in range(n):
+        if poly[i].y1 &lt; poly[i].y2:
+            temp = poly[i].x1
+            poly[i].x1 = poly[i].x2
+            poly[i].x2 = temp
+            temp = poly[i].y1
+            poly[i].y1 = poly[i].y2
+            poly[i].y2 = temp
+    
+    # Draw the polygon
+    for i in range(n):
+        l = Line(Point(poly[i].x1, poly[i].y1), Point(poly[i].x2, poly[i].y2))
+        l.draw(win)
+    
+    
+    # sorting of edges in the order of y1,y2,x1
+    for i in range(n-1):
+        for j in range(n-1):
+            if poly[j].y1 &lt; poly[j+1].y1:
+                temped = poly[j]
+                poly[j] = poly[j+1]
+                poly[j+1] = temped
+            if poly[j].y1 == poly[j+1].y1:
+                if poly[j].y2 &lt; poly[j+1].y2:
+                    temped = poly[j]
+                    poly[j] = poly[j+1]
+                    poly[j+1] = temped
+                if poly[j].y2 == poly[j+1].y2:
+                    if poly[j].x1 &lt; poly[j+1].x1:
+                        temped = poly[j]
+                        poly[j] = poly[j+1]
+                        poly[j+1] = temped
+    
+    # calculating 1/slope of each edge and storing top
+    for i in range(n):
+        dx = poly[i].x2-poly[i].x1
+        dy = poly[i].y2-poly[i].y1
+    
+        if dy == 0:
+            m[i] = 0
+        else:
+            m[i] = dx/dy
+        inter_x[i] = poly[i].x1
+    
+    
+    yy = ymax
+    while yy &gt; ymin:
+        for i in range(n):
+            if yy &gt; poly[i].y2 and yy &lt;= poly[i].y1:
+                poly[i].flag = 1
+            else:
+                poly[i].flag = 0
+    
+        j = 0
+        for i in range(n):
+            if poly[i].flag == 1:
+                if yy == poly[i].y1:
+                    x_int[j] == poly[i].x1
+                    j += 1
+                    if poly[i-1].y1 == yy and poly[i-1].y1 &lt; yy:
+                        x_int[j] = poly[i].x1
+                        j += 1
+    
+                    if i+1 &lt; n and poly[i+1].y1 == yy and poly[i+1].y1 &lt; yy:
+                        x_int[j] = poly[i].x1
+                        j += 1
+                else:
+                    x_int[j] = inter_x[i]+(-m[i])
+                    inter_x[i] = x_int[j]
+                    j += 1
+    
+        # sorting the x intersection
+        for i in range(j):
+            for k in range(j-1):
+                if x_int[k] &gt; x_int[k+1]:
+                    temp = int(x_int[k])
+                    x_int[k] = x_int[k+1]
+                    x_int[k+1] = temp
+    
+        # extracting pairs of values to draw lilnes
+        for i in range(0, j, 2):
+            l = Line(Point(int(x_int[i]), yy), Point(int(x_int[i+1]), yy))
+            l.draw(win)
+    
+        yy -= 1
+        sleep(0.01)
+    
+    
+    win.getMouse()
+    win.close()
+    </code></pre>
+    <p><strong>Output</strong>
+    <img src="raw-lecture/Pasted%20image%2020220427220440.png" alt="" /></p>
+    <h2 id="program6">Program 6</h2>
+    <blockquote>
+      <p>Write a program to apply various 2D transformations on a 2D object (use homogenous coordinates).</p>
+      <ul>
+      <li>[x] </li>
+      </ul>
+    </blockquote>
+    <h3 id="code-5">Code</h3>
+    <pre><code class="python language-python">import matplotlib.pyplot as plt
+    import math
+    
+    
+    def scaling(x, y, xs, ys):
+        x_new = x
+        y_new = y
+        for i in range(0, len(x)):
+            x_new[i] = x[i]*xs
+            y_new[i] = y[i]*ys
+        return [x_new, y_new]
+    
+    
+    def rotation(x, y, m):
+        ang = math.pi*m/180
+        x_new = x
+        y_new = y
+        for i in range(0, len(x)):
+            x_new[i] = x[i]*math.cos(ang) - y[i]*math.sin(ang)
+            y_new[i] = x[i]*math.sin(ang) + y[i]*math.cos(ang)
+        return [x_new, y_new]
+    
+    
+    def shear(x, y, xs, ys):
+        x_new = x
+        y_new = y
+        for i in range(0, len(x_new)):
+            x_new[i] = x[i] + xs*y[i]
+            y_new[i] = y[i] + ys*x[i]
+        return [x_new, y_new]
+    
+    
+    def translation(x, y, tx, ty):
+        x_new = x
+        y_new = y
+        for i in range(0, len(x_new)):
+            x_new[i] = x[i]+tx
+            y_new[i] = y[i]+tx
+        return [x_new, y_new]
+    
+    
+    def reflection(x, y, m, c):
+        x_new = x
+        y_new = y
+        for i in range(0, len(x_new)):
+            x_new[i] = (x[i]*(1-m*m) + y[i]*(2*m) - 2*c*m)/(1+m*m)
+            y_new[i] = (x[i]*(2*m) + y[i]*(m*m-1) + 2*c)/(1+m*m)
+        return [x_new, y_new]
+    
+    
+    x = []
+    y = []
+    n = int(input("Enter the no. of vertices : "))
+    for i in range(0, n):
+        x.append(float(input("Enter the x coordinate for vertex "+str(i+1)+": ")))
+        y.append(float(input("Enter the y coordinate for vertex "+str(i+1)+": ")))
+    
+    figure, axis = plt.subplots(2, 3)
+    plt.tight_layout()
+    # plot the graph
+    axis[0, 0].set_title("Figure before any transformation")
+    for i in range(0, n-1):
+        axis[0, 0].plot([x[i], x[i+1]], [y[i], y[i+1]])
+    axis[0, 0].plot([x[0], x[n-1]], [y[0], y[n-1]])
+    
+    
+    print("\nSCALING")
+    xs = float(input("Enter the x-scaling factor: "))
+    ys = float(input("Enter the y-scaling factor: "))
+    x_scale, y_scale = scaling(x, y, xs, ys)
+    # plot the graph
+    axis[0, 1].set_title("After scaling ")
+    for i in range(0, n-1):
+        axis[0, 1].plot([x_scale[i], x_scale[i+1]], [y_scale[i], y_scale[i+1]])
+    axis[0, 1].plot([x_scale[0], x_scale[n-1]], [y_scale[0], y_scale[n-1]])
+    
+    print("\nROTATION")
+    m = float(input("Enter the angle of rotation: "))
+    x_rotate, y_rotate = rotation(x, y, m)
+    # plot the graph
+    axis[0, 2].set_title("After rotation ")
+    for i in range(0, n-1):
+        axis[0, 2].plot([x_rotate[i], x_rotate[i+1]], [y_rotate[i], y_rotate[i+1]])
+    axis[0, 2].plot([x_rotate[0], x_rotate[n-1]], [y_rotate[0], y_rotate[n-1]])
+    
+    
+    print("\nSHEARING")
+    xs = float(input("Enter the x-shearing factor: "))
+    ys = float(input("Enter the y-shearing factor: "))
+    x_shear, y_shear = shear(x, y, xs, ys)
+    # plot the graph
+    axis[1, 0].set_title("After shearing ")
+    for i in range(0, n-1):
+        axis[1, 0].plot([x_shear[i], x_shear[i+1]], [y_shear[i], y_shear[i+1]])
+    axis[1, 0].plot([x_shear[0], x_shear[n-1]], [y_shear[0], y_shear[n-1]])
+    
+    
+    print("\nTRANSLATION")
+    tx = float(input("Enter the translation in x axis: "))
+    ty = float(input("Enter the translation in y axis:"))
+    x_translation, y_translation = translation(x, y, tx, ty)
+    # plot the graph
+    axis[1, 1].set_title("After translation ")
+    for i in range(0, n-1):
+        axis[1, 1].plot([x_translation[i], x_translation[i+1]],
+                        [y_translation[i], y_translation[i+1]])
+    axis[1, 1].plot([x_translation[0], x_translation[n-1]],
+                    [y_translation[0], y_translation[n-1]])
+    
+    print("\nREFLECTION ABOUT A LINE Y = MX+C")
+    m = float(input("Enter the slope of the line: "))
+    c = float(input("Enter the intercept: "))
+    x_ref, y_ref = reflection(x, y, m, c)
+    # plot the graph
+    axis[1, 2].set_title("After rotation ")
+    for i in range(0, n-1):
+        axis[1, 2].plot([x_ref[i], x_ref[i+1]], [y_ref[i], y_ref[i+1]])
+    axis[1, 2].plot([x_ref[0], x_ref[n-1]], [y_ref[0], y_ref[n-1]])
+    
+    plt.show()
+    </code></pre>
+    <p><strong>Output</strong>
+    <img src="raw-lecture/Pasted%20image%2020220427220819.png" alt="" /></p>
+    <h2 id="program7">Program 7</h2>
+    <blockquote>
+      <p>Write a program to apply various 3D transformations on a 3D object and then apply parallel and perspective projection on it.</p>
+      <ul>
+      <li>[x] </li>
+      </ul>
+    </blockquote>
+    <h3 id="code-6">Code</h3>
+    <pre><code class="python language-python">import matplotlib.pyplot as plt
+    import math
+    
+    
+    def scaling(x, y, z, xs, ys, zs):
+        x_new = x
+        y_new = y
+        z_new = z
+        for i in range(0, len(x)):
+            x_new[i] = x[i]*xs
+            y_new[i] = y[i]*ys
+            z_new[i] = z[i]*zs
+        return [x_new, y_new, z_new]
+    
+    
+    def rotation(x, y, z, m, axis):
+        ang = math.pi*m/180
+        x_new = x
+        y_new = y
+        z_new = z
+    
+        # Rotation about x axis
+        if(axis == 'x'):
+            for i in range(0, len(x_new)):
+                y_new[i] = y[i]*math.cos(ang) - z[i]*math.sin(ang)
+                z_new[i] = y[i]*math.sin(ang) + z[i]*math.cos(ang)
+    
+        # Rotation about y axis
+        if(axis == 'y'):
+            for i in range(0, len(x_new)):
+                x_new[i] = z[i]*math.sin(ang) + x[i]*math.cos(ang)
+                z_new[i] = z[i]*math.cos(ang) - x[i]*math.sin(ang)
+    
+        # Rotation about z axis
+        if(axis == 'z'):
+            for i in range(0, len(x_new)):
+                x_new[i] = x[i]*math.cos(ang) - y[i]*math.sin(ang)
+                y_new[i] = x[i]*math.sin(ang) + y[i]*math.cos(ang)
+    
+        return [x_new, y_new, z_new]
+    
+    
+    def shear(x, y, z, xs, ys, zs, axis):
+        x_new = x
+        y_new = y
+        z_new = z
+    
+        if(axis == 'x'):
+            for i in range(0, len(x_new)):
+                y_new[i] = y[i]+ys*x[i]
+                z_new[i] = z[i]+zs*x[i]
+    
+        if(axis == 'y'):
+            for i in range(0, len(x_new)):
+                x_new[i] = x[i]+xs*y[i]
+                z_new[i] = z[i]+zs*y[i]
+    
+        if(axis == 'z'):
+            for i in range(0, len(x_new)):
+                x_new[i] = x[i]+xs*z[i]
+                y_new[i] = y[i]+ys*z[i]
+    
+        return [x_new, y_new, z_new]
+    
+    
+    def translation(x, y, z, tx, ty, tz):
+        x_new = x
+        y_new = y
+        z_new = z
+        for i in range(0, len(x_new)):
+            x_new[i] = x[i]+tx
+            y_new[i] = y[i]+ty
+            z_new[i] = z[i]+tz
+        return [x_new, y_new, z_new]
+    
+    
+    x = []
+    y = []
+    z = []
+    n = int(input("Enter the no. of vertices : "))
+    for i in range(0, n):
+        x.append(float(input("Enter the x coordinate : ")))
+        y.append(float(input("Enter the y coordinate : ")))
+        z.append(float(input("Enter the z coordinate : ")))
+    
+    # Scaling
+    print("\nScaling")
+    xs = float(input("Enter the x-scaling factor"))
+    ys = float(input("Enter the y-scaling factor"))
+    zs = float(input("Enter the z-scaling factor"))
+    x_scale, y_scale, z_scale = scaling(x, y, z, xs, ys, zs)
+    
+    print("The coordinate after scaling are : \n")
+    for i in range(0, n):
+        print("(", x_scale[i], ",", y_scale[i], ",", z_scale[i], ")")
+    
+    
+    # Rotation about a line
+    print("\nRotation about a line")
+    m = float(input("Enter the angle : "))
+    axis = str.lower(input("Enter the axis along which to shear : "))
+    x_rotate, y_rotate, z_rotate = rotation(x, y, z, m, axis)
+    print("The coordinates after rotation are : ")
+    for i in range(0, n):
+        print("(", x_rotate[i], ",", y_rotate[i], ",", z_rotate[i], ")")
+    
+    
+    # Shearing
+    print("\nShearing")
+    xs = float(input("Enter the x-shearing factor"))
+    ys = float(input("Enter the y-shearing factor"))
+    zs = float(input("Enter the z-shearing factor"))
+    axis = str.lower(input("Enter the axis along which to shear : "))
+    
+    x_shear, y_shear, z_shear = shear(x, y, z, xs, ys, zs, axis)
+    print("The coordinates after shearing in respective axis are : ")
+    for i in range(0, n):
+        print("(", x_shear[i], ",", y_shear[i], ",", z_shear[i], ")")
+    
+    # Translation
+    print("\nTranslation")
+    tx = float(input("Enter the translation in x axis factor"))
+    ty = float(input("Enter the translation in y axis factor"))
+    tz = float(input("Enter the translation in z axis factor"))
+    x_translation, y_translation, z_translation = translation(x, y, z, tx, ty, tz)
+    print("The coordinates after Translation in respective axis are : ")
+    for i in range(0, n):
+        print("(", x_translation[i], ",",
+              y_translation[i], ",", z_translation[i], ")")
+    </code></pre>
+    <p><strong>Output</strong></p>
+    <p><img src="raw-lecture/Pasted%20image%2020220427221215.png" alt="" /></p>
+    <h2 id="program8">Program 8</h2>
+    <blockquote>
+      <p>Write a program to draw Hermite/Bezier curve.</p>
+      <ul>
+      <li>[x] </li>
+      </ul>
+    </blockquote>
+    <h3 id="codebeziercurve">Code (Bezier curve)</h3>
+    <pre><code class="python language-python">import math
+    from time import sleep
+    from graphics import *
+    import numpy as np
+    
+    
+    def putPixel(x, y, win):
+        pt = Point(x, y)
+        pt.draw(win)
+    
+    
+    def bezier(x, y):
+        win = GraphWin('Ploting Beziere curve with 4 control points', 600, 600)
+        for t in np.arange(0, 1.0, 0.0005):
+            xt = math.pow(1-t, 3)*x[0]+3*t*math.pow(1-t, 2) * \
+                x[1]+3*math.pow(t, 2)*(1-t)*x[2]+math.pow(t, 3)*x[3]
+            yt = math.pow(1-t, 3)*y[0]+3*t*math.pow(1-t, 2) * \
+                y[1]+3*math.pow(t, 2)*(1-t)*y[2]+math.pow(t, 3)*y[3]
+            putPixel(xt, yt, win)
+            sleep(0)
+        for i in range(4):
+            putPixel(x[i], y[i], win)
+            sleep(0)
+        win.getMouse()
+        win.close()
+    
+    
+    xList = []
+    yList = []
+    for i in range(0, 4):
+        x, y = map(int, input(
+            'Enter Coordinates of point '+str(int(i/2+1))+' of 4: ').split())
+        xList.append(x)
+        yList.append(y)
+    bezier(xList, yList)
+    </code></pre>
+    <p><strong>Output</strong></p>
+    <p><img src="raw-lecture/Pasted%20image%2020220427221406.png" alt="" /></p>
+    <h3 id="code-7">Code</h3>
+    <h3 id="hermitecurve">Hermite curve</h3>
+    <pre><code class="python language-python">from time import sleep
+    from graphics import *
+    import numpy as np
+    
+    
+    def putPixel(x, y, win):
+        pt = Point(x, y)
+        pt.draw(win)
+    
+    
+    def hermite(x1, y1, x2, y2, r1, r4):
+        win = GraphWin(
+            'Ploting Hermite curve with 2 control points and 2 tangent', 600, 600)
+        for t in np.arange(0, 0.1, 0.001):
+            x = (2*t*t*t-3*t*t+1)*x1+(-2*t*t*t+3*t*t) * \
+                x2+(t*t*t-2*t*t+t)*r1+(t*t*t-t*t)*r4
+            y = (2*t*t*t-3*t*t+1)*y1+(-2*t*t*t+3*t*t) * \
+                y2+(t*t*t-2*t*t+1)*r1+(t*t*t-t*t)*r4
+            putPixel(x, y, win)
+            sleep(0)
+        putPixel(x1, y1, win)
+        putPixel(x2, y2, win)
+        win.getMouse()
+        win.close()
+    
+    
+    x1, y1 = map(int, input('Enter Coordinates of 1st hermite point: ').split())
+    x2, y2 = map(int, input('Enter Coordinates of 2nd hermite point: ').split())
+    r1 = int(input('Enter the tangent to p1: '))
+    r4 = int(input('Enter the tangent to p4: '))
+    hermite(x1, y1, x2, y2, r1, r4)
+    </code></pre>
+    <p><strong>Output</strong>
+    <img src="raw-lecture/Pasted%20image%2020220427221617.png" alt="" /></p>
+    <h1 id="othersources">Other Sources</h1>
+    <h2 id="codesinckalindicollege">Codes in c++ (Kalindi College)</h2>
+    <p><img src="raw-lecture/COMPUTER%20GRAPHICS%20PRACTICALS(Harshita%20Bajaj,%2019570101).pdf" alt="" /></p></div>
+</body>
+</html>
