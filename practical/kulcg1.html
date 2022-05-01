@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cg Practicals</title>
+</head>
+<body>
+    <!-- directives:[] -->
+<!-- directives:[] -->
+<div id="content"><h2 id="program1">Program 1</h2>
+    <blockquote>
+      <p>Write a program to implement Bresenhams line drawing algorithm.</p>
+      <ul>
+      <li>[x] </li>
+      </ul>
+    </blockquote>
+    <h3 id="code">Code</h3>
+    <p>```cpp    #include<graphics.h>
+        #include<stdlib.h>
+        #include<stdio.h>
+        #include<iostream.h>
+        #include<math.h>
+        #include<conio.h></p>
+    <pre><code>void main()
+    {
+        /* request auto detection */
+        int gdriver = DETECT, gmode, errorcode;
+        int x1,x2,y1,y2;
+        float m,ynew;
+    
+        /* initialize graphics and local variables */
+        initgraph(&amp;gdriver, &amp;gmode, "..\\bgi");
+    
+        /* read result of initialization */
+        errorcode = graphresult();
+    
+        /* an error occurred */
+        if (errorcode != grOk)
+        {
+            printf("Graphics error: %s\n", grapherrormsg(errorcode));
+            printf("Press any key to halt:");
+            getch();
+            exit(1);
+        }
+    
+        cout&lt;&gt;x1;
+        cout&lt;&gt;x2;
+        cout&lt;&gt;y1;
+        cout&lt;&gt;y2;
+    
+        m=(y2-y1)/(float)(x2-x1);
+    
+        if(abs(m) &lt; 1)
+        {
+            if(x1 &lt; x2)
+            {
+                putpixel(x1,y1,GREEN);
+                ynew=y1;
+                for(int i=x1;i &lt; x2;i++)
+                {
+                    x1++;
+                    ynew+=m;
+                    putpixel(x1,floor(ynew+0.5),RED);
+                }
+            }
+            else
+            {
+                putpixel(x2,y2,GREEN);
+                ynew=y2;
+                for(int i=x2;i &lt; x1;i++)
+                {
+                    x2++;
+                    ynew+=m;
+                    putpixel(x2,floor(ynew+0.5),RED);
+                }
+            }
+        }
+    
+        /* clean up */
+        getch();
+        closegraph();
+    }
+    </code></pre>
+    <pre><code>### Alternative
+    </code></pre>
+    <p>cpp    #include<graphics.h>
+        #include<conio.h>
+        #include<dos.h>
+        #include<iostream.h></p>
+    <pre><code>void line2(int x1,int y1,int x2,int y2)
+    {
+        int dx,dy,pk,x,y;
+        if(x1==x2 &amp;&amp; y1==y2)
+            putpixel(x1,y1,15);
+        else
+        {
+            dx=x2-x1;
+            dy=y2-y1;
+    
+            if(dx&gt;dy)
+                pk=2*dx-dy;
+            else
+                pk=2*dy-dx;
+    
+            x=x1;
+            y=y1;
+            while(x&lt;=x2)
+            {
+                putpixel(x,y,15);
+                if(pk&lt;0)
+                {
+                    pk=pk+2*dy;
+                }
+                else
+                {
+                    y=y+1;
+                    pk=pk+2*dy-2*dx;
+                }
+                x=x+1;
+            }
+        }
+    }
+    
+    void main()
+    {
+        int gd =DETECT;
+        int gm;
+        initgraph(&amp;gd,&amp;gm,"C:\\TURBOC3\\BGI");
+        line2(100,100,300,300);
+        getch();
+        closegraph();
+    }
+    </code></pre>
+    <pre><code>**Reference**
+    - https://www.tutorialsduniya.com/programs/du/csh/computer-graphics/program1
+    
+    
+    ## Program 2
+    &gt;Write a program to implement mid-point circle drawing algorithm.
+    - [x] 
+    
+    ### Code
+    </code></pre>
+    <p>cpp    #include<graphics.h>
+        #include<stdlib.h>
+        #include<stdio.h>
+        #include<iostream.h>
+        #include<math.h>
+        #include<conio.h></p>
+    <pre><code>void plot8(int x, int y, int cx, int cy)
+    {
+        putpixel(x+cx,y+cy,RED);
+        putpixel(y+cx,x+cy,RED);
+        putpixel(y+cx,-x+cy,RED);
+        putpixel(x+cx,-y+cy,RED);
+        putpixel(-x+cx,-y+cy,RED);
+        putpixel(-y+cx,-x+cy,RED);
+        putpixel(-y+cx,x+cy,RED);
+        putpixel(-x+cx,y+cy,RED);
+    }
+    
+    void main()
+    {
+        /* request auto detection */
+        int gdriver = DETECT, gmode, errorcode;
+        int x,y,r,cx,cy,E,SE,D;
+    
+        /* initialize graphics and local variables */
+        initgraph(&amp;gdriver, &amp;gmode, "..\\bgi");
+    
+        /* read result of initialization */
+        errorcode = graphresult();
+    
+        /* an error occurred */
+        if (errorcode != grOk)
+        {
+            printf("Graphics error: %s\n", grapherrormsg(errorcode));
+            printf("Press any key to halt:");
+            getch();
+            exit(1);
+        }
+    
+        cout&lt;&gt;cx;
+        cout&lt;&gt;cy;
+        cout&lt;&gt;r;
+    
+        x=0;
+        y=r;
+    
+        plot8(x,y,cx,cy);
+    
+        D=1-r;
+    
+        while(y&gt;x)
+        {
+            if(D&lt;=0)
+            {
+                E=(2*x)+3;
+                D+=E;
+                x++;
+            }
+            else
+            {
+                SE=(2*x)-(2*y)+5;
+                D+=SE;
+                x++;
+                y--;
+            }
+            plot8(x,y,cx,cy);
+        }
+    
+        /* clean up */
+        getch();
+        closegraph();
+    }
+    </code></pre>
+    <pre><code>### Alternative
+    </code></pre>
+    <p>cpp    #include<graphics.h>
+        #include<conio.h>
+        #include<dos.h></p>
+    <pre><code>void circlepoints(int xc,int yc,int x, int y,int val)
+    {
+        putpixel(xc+x,yc+y,val);
+        putpixel(xc+y,yc+x,val);
+        putpixel(xc+y,yc-x,val);
+        putpixel(xc+x,yc-y,val);
+        putpixel(xc-x,yc-y,val);
+        putpixel(xc-y,yc-x,val);
+        putpixel(xc-x,yc+y,val);
+        putpixel(xc-y,yc+x,val);
+    }
+    
+    void midpointcircle(int xc,int yc,int r)
+    {
+        int x=0,y=r,pk;
+        pk=1-r;
+        circlepoints(xc,yc,x,y,15);
+        while(x&lt;y)
+        {
+            if(pk&lt;0)
+            {
+                pk=pk+2*x+1;
+            }
+            else
+            {
+                y=y-1;
+                pk=pk+2*x-2*y+1;
+            }
+            x=x+1;
+            circlepoints(xc,yc,x,y,15);
+        }
+    }
+    
+    void main()
+    {
+        int gd =DETECT;
+        int gm;
+        initgraph(&amp;gd,&amp;gm,"C:\\TURBOC3\\BGI");
+        midpointcircle(100,100,50);
+        getch();
+        closegraph();
+    }
+    </code></pre>
+    <pre><code>**Reference**
+    - https://www.tutorialsduniya.com/programs/du/csh/computer-graphics/program2
+    
+    
+    ## Program 3
+    &gt;Write a program to clip a line using Cohen and Sutherland line clipping algorithm.
+    - [x] 
+    
+    ### Code
+    </code></pre>
+    <p>cpp    #include<graphics.h>
+        #include<stdlib.h>
+        #include<stdio.h>
+        #include<iostream.h>
+        #include<conio.h></p>
+    <pre><code>typedef unsigned int outcode;
+    enum { TOP = 1, BOTTOM = 2, RIGHT = 4, LEFT = 8 };
+    
+    outcode comp_Outcode ( double x, double y, double xmin, double xmax, double ymin, double ymax)
+    {
+        outcode code = 0;
+    
+        if ( y &gt; ymax )
+            code |= TOP;
+    
+        else if ( y &lt; ymin )
+            code |= BOTTOM;
+    
+        if ( x &gt; xmax )
+            code |= RIGHT;
+    
+        else if ( x &lt; xmin )
+            code |= LEFT;
+    
+        return code;
+    }
+    
+    void cohen_lineclipping ( double x_init, double y_init, double x1, double y1, double xmin, double xmax, double ymin, double ymax )
+    {
+        outcode outcode0, outcode1, outcodeout ;
+        int accept = 0, done = 0;
+    
+        outcode0 = comp_Outcode ( x_init, y_init, xmin, xmax, ymin, ymax);
+        outcode1 = comp_Outcode ( x1, y1, xmin, xmax, ymin, ymax);
+    
+        do
+        {
+            if (!(outcode0 | outcode1))
+            {
+                accept = 1;
+                done = 1;
+            }
+    
+            else if ( outcode0 &amp; outcode1 )
+            {
+                done = 1;
+            }
+    
+            else
+            {
+                double x, y;
+                outcodeout = outcode0 ? outcode0 : outcode1 ;
+    
+                if ( outcodeout &amp; TOP )
+                {
+                    x = x_init + ( ymax - y_init ) * ( x1 - x_init ) / ( y1 - y_init ) ;
+                    y = ymax ;
+                }
+    
+                else if ( outcodeout &amp; BOTTOM )
+                {
+                    x = x_init + ( ymin - y_init ) * ( x1 - x_init ) / ( y1 - y_init ) ;
+                    y = ymin ;
+                }
+    
+                else if ( outcodeout &amp; LEFT )
+                {
+                    y = y_init + ( xmin - x_init ) * ( y1 - y_init ) / ( x1 - x_init );
+                    x = xmin;
+                }
+    
+                else
+                {
+                    y = y_init + ( xmax - x_init ) * ( y1 - y_init ) / ( x1 - x_init );
+                    x = xmax ;
+                }
+    
+                if ( outcodeout == outcode0 )
+                {
+                    x_init = x;
+                    y_init = y;
+                    outcode0 = comp_Outcode ( x_init, y_init, xmin, xmax, ymin, ymax );
+                }
+    
+                else
+                {
+                    x1 = x;
+                    y1 = y;
+                    outcode1 = comp_Outcode ( x1, y1, xmin, xmax, ymin, ymax );
+                }
+            }
+        }while ( done == 0 );
+    
+        if ( accept )
+        line ( x_init, y_init, x1, y1 );
+    }
+    
+    int main(void)
+    {
+        int gdriver = DETECT, gmode, errorcode;
+        double x_init, x1, y_init, y1, xmin, ymin, xmax, ymax;
+    
+        initgraph(&amp;gdriver, &amp;gmode, "C:\\TC\\BGI");
+    
+        errorcode = graphresult();
+    
+        if (errorcode != grOk)
+        {
+            printf("Graphics error: %s\n", grapherrormsg(errorcode));
+            printf("Press any key to halt:");
+            getch();
+            exit(1);
+        }
+    
+        cout&lt;&gt; x_init &gt;&gt; y_init ;
+    
+        cout&lt;&gt; x1 &gt;&gt; y1 ;
+    
+        cout&lt;&gt; xmin &gt;&gt; ymin;
+    
+        cout&lt;&gt; xmax &gt;&gt; ymax;
+    
+        line ( xmin, ymin, xmax, ymin );
+        line ( xmin, ymin, xmin, ymax );
+        line ( xmin, ymax, xmax, ymax );
+        line ( xmax, ymin, xmax, ymax );
+    
+        cohen_lineclipping ( x_init, y_init, x1, y1, xmin, xmax, ymin, ymax);
+    
+        setcolor ( 10 );
+        line ( x_init+50, y_init, x1+50, y1);
+    
+        getch();
+        closegraph();
+        return 0;
+    }
+    </code></pre>
+    <pre><code>### Alternative
+    </code></pre>
+    <p>cpp    #include <iostream.h>
+        #include <graphics.h>
+        #include <stdlib.h>
+        #include <stdio.h>
+        #include <conio.h></p>
+    <pre><code>typedef unsigned int outcode;
+    enum { TOP = 1, BOTTOM = 2, RIGHT = 4, LEFT = 8 };
+    
+    outcode comp_Outcode ( double x, double y, double xmin, double xmax, double ymin, double ymax)
+    {
+        outcode code = 0;
+    
+        if ( y &gt; ymax )
+            code |= TOP;
+    
+        else if ( y &lt; ymin )
+            code |= BOTTOM;
+    
+        if ( x &gt; xmax )
+            code |= RIGHT;
+    
+        else if ( x &lt; xmin )
+            code |= LEFT;
+    
+        return code;
+    }
+    
+    void cohen_lineclipping ( double x_init, double y_init, double x1, double y1, double xmin, double xmax, double ymin, double ymax )
+    {
+        outcode outcode0, outcode1, outcodeout ;
+        int accept = 0, done = 0;
+    
+        outcode0 = comp_Outcode ( x_init, y_init, xmin, xmax, ymin, ymax);
+        outcode1 = comp_Outcode ( x1, y1, xmin, xmax, ymin, ymax);
+    
+        do
+        {
+            if (!(outcode0 | outcode1))
+            {
+                accept = 1;
+                done = 1;
+            }
+    
+            else if ( outcode0 &amp; outcode1 )
+            {
+                done = 1;
+            }
+    
+            else
+            {
+                double x, y;
+                outcodeout = outcode0 ? outcode0 : outcode1 ;
+    
+                if ( outcodeout &amp; TOP )
+                {
+                    x = x_init + ( ymax - y_init ) * ( x1 - x_init ) / ( y1 - y_init ) ;
+                    y = ymax ;
+                }
+    
+                else if ( outcodeout &amp; BOTTOM )
+                {
+                    x = x_init + ( ymin - y_init ) * ( x1 - x_init ) / ( y1 - y_init ) ;
+                    y = ymin ;
+                }
+    
+                else if ( outcodeout &amp; LEFT )
+                {
+                    y = y_init + ( xmin - x_init ) * ( y1 - y_init ) / ( x1 - x_init );
+                    x = xmin;
+                }
+    
+                else
+                {
+                    y = y_init + ( xmax - x_init ) * ( y1 - y_init ) / ( x1 - x_init );
+                    x = xmax ;
+                }
+    
+                if ( outcodeout == outcode0 )
+                {
+                    x_init = x;
+                    y_init = y;
+                    outcode0 = comp_Outcode ( x_init, y_init, xmin, xmax, ymin, ymax );
+                }
+    
+                else
+                {
+                    x1 = x;
+                    y1 = y;
+                    outcode1 = comp_Outcode ( x1, y1, xmin, xmax, ymin, ymax );
+                }
+            }
+        }while ( done == 0 );
+    
+        if ( accept )
+        line ( x_init, y_init, x1, y1 );
+    }
+    
+    int main(void)
+    {
+        int gdriver = DETECT, gmode, errorcode;
+        double x_init, x1, y_init, y1, xmin, ymin, xmax, ymax;
+    
+        initgraph(&amp;gdriver, &amp;gmode, "C:\\TC\\BGI");
+    
+        errorcode = graphresult();
+    
+        if (errorcode != grOk)
+        {
+            printf("Graphics error: %s\n", grapherrormsg(errorcode));
+            printf("Press any key to halt:");
+            getch();
+            exit(1);
+        }
+    
+        cout&lt;&gt; x_init &gt;&gt; y_init ;
+    
+        cout&lt;&gt; x1 &gt;&gt; y1 ;
+    
+        cout&lt;&gt; xmin &gt;&gt; ymin;
+    
+        cout&lt;&gt; xmax &gt;&gt; ymax;
+    
+        line ( xmin, ymin, xmax, ymin );
+        line ( xmin, ymin, xmin, ymax );
+        line ( xmin, ymax, xmax, ymax );
+        line ( xmax, ymin, xmax, ymax );
+    
+        cohen_lineclipping ( x_init, y_init, x1, y1, xmin, xmax, ymin, ymax);
+    
+        setcolor ( 10 );
+        line ( x_init+50, y_init, x1+50, y1);
+    
+        getch();
+        closegraph();
+        return 0;
+    }
+    </code></pre>
+    <pre><code>**Reference**
+    - https://www.tutorialsduniya.com/programs/du/csh/computer-graphics/program3
+    
+    
+    ## Program 4
+    &gt;Write a program to clip a polygon using Sutherland Hodgeman algorithm.
+    - [x] 
+    
+    ### Code
+    </code></pre>
+    <p>cpp    #include<graphics.h>
+        #include<iostream.h>
+        #include<stdlib.h>
+        #include<stdio.h>
+        #include<conio.h></p>
+    <pre><code>int poly[100],xmin,xmax,ymin,ymax,n;
+    
+    void left_clip(int xmin,int ymin,int xmax,int ymax)
+    {
+        int temp[100],i,j=0,count=0,x1,y1,x2,y2;
+        for(i=0;i&lt;2*n;i+=2)
+        {
+            x1 = poly[i];
+            y1 = poly[i+1];
+            x2 = poly[i+2];
+            y2 = poly[i+3];
+            if(x1&lt;xmin &amp;&amp; x2&lt;xmin)
+            {
+    
+            }
+            else if(x1&gt;=xmin &amp;&amp; x2&gt;=xmin)
+            {
+                temp[j] = x2;
+                temp[j+1] = y2;
+                j+=2;
+                count++;
+            }
+            else if(x1=xmin)
+            {
+                int x=xmin;
+                int y= y1 + (xmin-x1)*(float)(y2-y1)/(x2-x1);
+                temp[j]=x;
+                temp[j+1]=y;
+                temp[j+2]=x2;
+                temp[j+3]=y2;
+                j+=4;
+                count+=2;
+            }
+            else
+            {
+                int x=xmin;
+                int y= y1 + (xmin-x1)*(float)(y2-y1)/(x2-x1);
+                temp[j] = x;
+                temp[j+1] = y;
+    
+                j+=2;
+                count++;
+            }
+        }
+        n=count;
+        temp[j]=temp[0];
+        temp[j+1]=temp[1];
+    
+        for(i=0;i&lt;2*(n+1);i++)
+        {
+            poly[i]=temp[i];
+        }
+    }
+    
+    void right_clip(int xmin,int ymin,int xmax,int ymax)
+    {
+        int temp[100],i,j=0,count=0,x1,y1,x2,y2;
+        for(i=0;i&lt;2*n;i+=2)
+        {
+            x1 = poly[i];
+            y1 = poly[i+1];
+            x2 = poly[i+2];
+            y2 = poly[i+3];
+    
+            if(x1&gt;xmax &amp;&amp; x2&gt;xmax)
+            {
+            }
+    
+            if(x1&lt;=xmax &amp;&amp; x2&lt;=xmax)
+            {
+                temp[j] = x2;
+                temp[j+1] = y2;
+                j+=2;
+                count+=1;
+            }
+            else if(x1&gt;xmax &amp;&amp; x2&lt;=xmax)
+            {
+                int x=xmax;
+                int y= y1 + (xmax-x1)*(float)(y2-y1)/(x2-x1);
+                temp[j]=x;
+                temp[j+1]=y;
+                temp[j+2]=x2;
+                temp[j+3]=y2;
+                j+=4;
+                count+=2;
+            }
+            else
+            {
+                int x=xmax;
+                int y= y1 + (xmax-x1)*(float)(y2-y1)/(x2-x1);
+                temp[j] = x;
+                temp[j+1] = y;
+                j+=2;
+                count+=1;
+            }
+        }
+        n=count;
+        temp[j]=temp[0];
+        temp[j+1]=temp[1];
+    
+        for(i=0;i&lt;2*(n+1);i++)
+        {
+            poly[i]=temp[i];
+        }
+    }
+    
+    void bottom_clip(int xmin,int ymin,int xmax,int ymax)
+    {
+        int temp[100],i,j=0,count=0,x1,y1,x2,y2;
+        for(i=0;i&lt;2*n;i+=2)
+        {
+            x1 = poly[i];
+            y1 = poly[i+1];
+            x2 = poly[i+2];
+            y2 = poly[i+3];
+            if(y1&lt;ymin &amp;&amp; y2&lt;ymin)
+            {
+            }
+    
+            else if(y1&gt;=ymin &amp;&amp; y2&gt;=ymin)
+            {
+                temp[j] = x2;
+                temp[j+1] = y2;
+                j+=2;
+                count++;
+            }
+    
+            else if(y1&lt;ymin &amp;&amp; y2&gt;=ymin)
+            {
+                int x= x1 +(float)((ymin-y1)*(x2-x1))/(y2-y1);
+                int y= ymin;
+                temp[j]=x;
+                temp[j+1]=y;
+                temp[j+2]=x2;
+                temp[j+3]=y2;
+                j+=4;
+                count+=2;
+            }
+    
+            else
+            {
+                int x= x1 +(float)((ymin-y1)*(x2-x1))/(y2-y1);
+                int y= ymin;
+                temp[j] = x;
+                temp[j+1] = y;
+                j+=2;
+                count++;
+            }
+        }
+        n=count;
+        temp[j]=temp[0];
+        temp[j+1]=temp[1];
+    
+        for(i=0;i&lt;2*(n+1);i++)
+        {
+            poly[i]=temp[i];
+        }
+    }
+    
+    void top_clip(int xmin,int ymin,int xmax,int ymax)
+    {
+        int temp[100],i,j=0,count=0,x1,y1,x2,y2;
+        for(i=0;i&lt;2*n;i+=2)
+        {
+            x1 = poly[i];
+            y1 = poly[i+1];
+            x2 = poly[i+2];
+            y2 = poly[i+3];
+            if(y1&gt;ymax &amp;&amp; y2&gt;ymax)
+            {
+    
+            }
+            else if(y1&lt;=ymax &amp;&amp; y2&lt;=ymax)
+            {
+                temp[j] = x2;
+                temp[j+1] = y2;
+                j+=2;
+                count++;
+            }
+    
+            else if(y1&gt;ymax &amp;&amp; y2&lt;=ymax)
+            {
+                int x= x1 + (ymax-y1)*(float)(x2-x1)/(y2-y1);
+                int y= ymax;
+                temp[j]=x;
+                temp[j+1]=y;
+                temp[j+2]=x2;
+                temp[j+3]=y2;
+                j+=4;
+                count+=2;
+            }
+    
+            else
+            {
+                int x= x1 + (ymax-y1)*(float)(x2-x1)/(y2-y1);
+                int y= ymax;
+                temp[j] = x;
+                temp[j+1] = y;
+                j+=2;
+                count++;
+            }
+        }
+        n=count;
+        temp[j]=temp[0];
+        temp[j+1]=temp[1];
+    
+        for(i=0;i&lt;2*(n+1);i++)
+        {
+            poly[i]=temp[i];
+        }
+    }
+    
+    int main(void)
+    {
+        int gd = DETECT, gm, errorcode;
+        int xmax, ymax;
+        initgraph(&amp;gd, &amp;gm, "C:\\TC\\BGI");
+        errorcode = graphresult();
+    
+        if (errorcode != grOk)
+        {
+            printf("Graphics error: %s\n", grapherrormsg(errorcode));
+            printf("Press any key to halt:");
+            getch();
+            exit(1);
+        }
+    
+        int i;
+        setcolor(RED);
+        xmin=200;
+        ymin=200;
+        xmax=300;
+        ymax=300;
+    
+        rectangle(100,100,300,300);
+        cout&lt;&gt;n;
+    
+        for(i=0;i&lt;2*n;i+=2)
+        {
+            cout&lt;&gt;poly[i]&gt;&gt;poly[i+1];
+        }
+    
+        setcolor(YELLOW);
+        poly[2*n]=poly[0];
+        poly[2*n+1]=poly[1];
+        drawpoly(n+1,poly);
+    
+        left_clip(xmin,ymin,xmax,ymax);
+        right_clip(xmin,ymin,xmax,ymax);
+        bottom_clip(xmin,ymin,xmax,ymax);
+        top_clip(xmin,ymin,xmax,ymax);
+    
+        cout&lt;
+    </code></pre>
+    <pre><code>**Reference**
+    - https://www.tutorialsduniya.com/programs/du/csh/computer-graphics/program4
+    
+    
+    ## Program 5
+    &gt;Write a program to fill a polygon using Scan line fill algorithm.
+    - [x] 
+    
+    ### Code
+    </code></pre>
+    <p>cpp    #include<iostream>
+        #include<conio.h>
+        #include<graphics.h>
+        using namespace std;</p>
+    <pre><code>// Define the structure to store the edges
+    struct edge
+    {
+        int x1,y1,x2,y2,flag;
+    };
+    
+    int main()
+    {
+        int gd=DETECT,gm,n,i,j,k;
+        edge ed[10], temped;
+        float dx,dy,m[10],x_int[10],inter_x[10];
+        int x[10],y[10],ymax=0,ymin=480,yy,temp;
+        initgraph(&amp;gd,&amp;gm,"");
+    
+        /*read the number of vertices of the polygon*/
+        cout&lt;&gt;n;
+    
+        /*read the vertices of the polygon and also find ymax and ymin*/
+        cout&lt;&gt;x[i]&gt;&gt;y[i];
+            if(y[i]&gt;ymax)
+            ymax=y[i];
+            if(y[i]&lt;ymin)
+            ymin=y[i];
+            ed[i].x1=x[i];
+            ed[i].y1=y[i]; 
+        }
+    
+        /*store the edge information*/
+        for(i=0;i&lt;n-1;i++) 
+        {
+            ed[i].x2=ed[i+1].x1;
+            ed[i].y2=ed[i+1].y1;
+            ed[i].flag=0;
+        }
+    
+        ed[i].x2=ed[0].x1;
+        ed[i].y2=ed[0].y1;
+        ed[i].flag=0;
+    
+        /*Check for y1&gt;y2, if not interchnge y1 and y2 */
+        for(i=0;i&lt;n;i++)
+        {
+            if(ed[i].y1 &lt; ed[i].y2) 
+            {
+                temp=ed[i].x1;
+                ed[i].x1=ed[i].x2;
+                ed[i].x2=temp;
+                temp=ed[i].y1;
+                ed[i].y1=ed[i].y2;
+                ed[i].y2=temp;
+            }
+        }
+    
+        /*Draw the polygon*/
+        for(i=0;i&lt;n;i++)
+        {
+            line(ed[i].x1, ed[i].y1,ed[i].x2,ed[i].y2);
+        }
+    
+        /*sorting of edges in the order of y1,y2,x1*/
+        for(i=0;i&lt;n-1;i++)
+        {
+            for(j=0;j&lt;n-1;j++) 
+            {
+                if(ed[j].y1&lt;ed[j+1].y1) 
+                {
+                    temped=ed[j];
+                    ed[j]=ed[j+1];
+                    ed[j+1]=temped;
+                }
+                if(ed[j].y1==ed[j+1].y1) 
+                {
+                    if(ed[j].y2&lt;ed[j+1].y2) 
+                    {
+                        temped=ed[j];
+                        ed[j]=ed[j+1];
+                        ed[j+1]=temped;
+                    }
+    
+                    if (ed[j].y2==ed[j+1].y2)
+                    {
+                        if(ed[j].x1&lt;ed[j+1].x1) 
+                        {
+                            temped=ed[j];
+                            ed[j]=ed[j+1];
+                            ed[j+1]=temped;
+                        }
+                    }
+                }
+            }
+        }
+    
+        /*calculating 1/slope of each edge and storing top*/
+        for(i=0;i&lt;n;i++)
+        {
+            dx=ed[i].x2-ed[i].x1;
+            dy=ed[i].y2-ed[i].y1;
+    
+            if(dy==0)
+            {
+                m[i]=0;
+            }
+            else 
+            {
+                m[i]=dx/dy; 
+            }
+            inter_x[i]=ed[i].x1;
+        }
+    
+        /*making the Actual edges*/
+        yy=ymax;
+        while(yy&gt;ymin)
+        {
+            for(i=0;i&lt;n;i++) 
+            {
+                if(yy&gt;ed[i].y2 &amp;&amp; yy&lt;=ed[i].y1) 
+                {
+                    ed[i].flag=1; 
+                }
+                else
+                {
+                    ed[i].flag=0;
+                }
+            }
+    
+            j=0;
+            for(i=0;i&lt;n;i++)
+            {
+                if(ed[i].flag==1)
+                {
+                    if(yy==ed[i].y1)
+                    {
+                        x_int[j]==ed[i].x1;
+                        j++;
+    
+                        if(ed[i-1].y1==yy &amp;&amp; ed[i-1].y1&lt;yy) 
+                        {
+                            x_int[j]=ed[i].x1;
+                            j++; 
+                        }
+    
+                        if(ed[i+1].y1==yy &amp;&amp; ed[i+1].y1&lt;yy)
+                        {
+                            x_int[j]=ed[i].x1;
+                            j++; 
+                        }
+                    }
+                    else 
+                    {
+                        x_int[j]=inter_x[i]+(-m[i]);
+                        inter_x[i]=x_int[j];
+                        j++; 
+                    } 
+                }
+            }
+    
+            /*sorting the x intersaction*/
+            for(i=0;i&lt;j;i++)
+            {
+                for(k=0;k&lt;j-1;k++)
+                {
+                    if(x_int[k]&gt;x_int[k+1])
+                    {
+                        temp=(int)x_int[k];
+                        x_int[k]=x_int[k+1];
+                        x_int[k+1]=temp;
+                    }
+                }
+            }
+    
+            /*extracting pairs of values to draw lilnes*/
+            for(i=0;i&lt;j;i=i+2)
+            {
+                line((int)x_int[i],yy,(int)x_int[i+1],yy);
+            }
+    
+            yy--;
+            delay(10);
+        }
+        getch();
+        return 0;
+    }
+    </code></pre>
+    <pre><code>**Reference**
+    - https://www.tutorialsduniya.com/programs/du/csh/computer-graphics/program5
+    
+    
+    ## Program 6
+    &gt;Write a program to apply various 2D transformations on a 2D object (use homogenous coordinates).
+    - [x] 
+    
+    ### Code
+    </code></pre>
+    <p>cpp    #include<stdio.h>
+        #include<conio.h>
+        #include<iostream.h>
+        #include<graphics.h>
+        #include<dos.h></p>
+    <pre><code>void main()
+    {  
+        clrscr();
+        int gd=DETECT;
+        int gm;
+        initgraph(&amp;gd,&amp;gm,"C:\\TURBOC3\\BGI");
+        int O[2],T[2],N[2],P[2],Q[2],i;
+        printf("Enter the coordinates x0 and y0 for the point:");
+        cin&gt;&gt;O[0]&gt;&gt;O[1];
+        printf("Enter the coordinates x1 and y1 for the point:");
+        cin&gt;&gt;P[0]&gt;&gt;P[1];
+        printf("Enter the translation for x and y axis:");
+        cin&gt;&gt;T[0]&gt;&gt;T[1];
+        line(O[0],O[1],P[0],P[1]);
+    
+        for(i=0;i &lt; 2;i++)
+        {
+            N[i]=O[i]+T[i];
+            Q[i]=P[i]+T[i];
+        }
+    
+        line(N[0],N[1],Q[0],Q[1]);
+        getch();
+    }        
+    </code></pre>
+    <pre><code>### Alternative
+    </code></pre>
+    <p>cpp    #include<stdio.h>
+        #include<conio.h>
+        #include<iostream.h>
+        #include<graphics.h>
+        void main()
+        {<br />
+            clrscr();
+            int gd=DETECT;
+            int gm;
+            initgraph(&amp;gd,&amp;gm,"C:\TURBOC3\BGI");
+            int O[2],S[2][2],N[2],P[2],Q[2],i,j,k;
+            printf("Enter the coordinates x0 and y0 for the point:");
+            cin&gt;&gt;O[0]&gt;&gt;O[1];
+            printf("Enter the coordinates x1 and y1 for the point:");
+            cin&gt;&gt;P[0]&gt;&gt;P[1];
+            printf("Enter the scaling for x and y axis:");
+            cin&gt;&gt;S[0][0]&gt;&gt;S[1][1];
+            S[0][1]=S[1][0]=0;
+            line(O[0],O[1],P[0],P[1]);
+            printf("Scaling Matrix formed is: \n");</p>
+    <pre><code>    for(i=0;i &lt; 2;i++)
+        { 
+            printf("\n");
+            for(j=0;j &lt; 2;j++)
+            {  
+                printf("[%d]",S[i][j]);
+            }
+        }
+    
+        for(i=0;i &lt; 2;i++)
+        {  
+            N[i]=0;
+        }
+    
+        for(i=0;i &lt; 2;i++)
+        {  
+            for(j=0;j &lt; 2;j++)
+            {
+                N[i]+=S[i][j]*O[j];
+                Q[i]+=S[i][j]*P[j];
+            }
+        }
+    
+        line(N[0],N[1],Q[0],Q[1]);
+        getch();
+    }
+    </code></pre>
+    <pre><code>### Alternative
+    </code></pre>
+    <p>cpp    #include<stdio.h>
+        #include<conio.h>
+        #include<iostream.h>
+        #include<math.h></p>
+    <pre><code>#define PI 3.14
+    void main()
+    {  
+        clrscr();
+        int O[2],theta,i,j;
+        float R[2][2],N[2],val=PI/180,a,b;
+        char dir[20];
+        printf("Enter the coordinates x and y for the point:");
+        cin&gt;&gt;O[0]&gt;&gt;O[1];
+        printf("Enter the angle for rotation:");
+        cin&gt;&gt;theta;
+        a=sin(theta*val);
+        b=cos(theta*val);
+        printf("Enter the direction of rotation:");
+        cin&gt;&gt;dir;
+        printf("Original coordinates:");
+        printf("[%d  %d]\n",O[0],O[1]);
+    
+        //Rotation matrix formed is | cos(theta)   -sin(theta) |
+        //                          | sin(theta)    cos(theta) |
+        if(dir=="anticlockwise")
+        {
+            R[0][0]=R[1][1]=b;
+            R[0][1]=-a;
+            R[1][0]=a;
+        }
+        else
+        {
+            R[0][0]=R[1][1]=b;
+            R[0][1]=a;
+            R[1][0]=-a;
+        }
+    
+        printf("\nRotation Matrix formed is: \n");
+        for(i=0;i &lt; 2;i++)
+        { 
+            printf("\n");
+            for(j=0;j &lt; 2;j++)
+            {  
+                printf("[%f]",R[i][j]);
+            }
+        }
+    
+        for(i=0;i &lt; 2;i++)
+        {  
+            N[i]=0;
+        }
+    
+        for(i=0;i &lt; 2;i++)
+        {  
+            for(j=0;j &lt; 2;j++)
+            {
+                N[i]+=R[i][j]*O[j];
+            }
+        }
+    
+        printf("\nNew coordinates:");
+        printf("[%f  %f]\n",N[0],N[1]);
+        getch();
+    }
+    </code></pre>
+    <pre><code>### Alternative
+    </code></pre>
+    <p>cpp    #include <conio.h>
+        #include <iostream>
+        #include <graphics.h>
+        using namespace std;</p>
+    <pre><code>//Shifted Origin at (400,400)
+    int c = 400;
+    
+    //Declaration of class point
+    class point
+    {
+        public:
+        float x,y;
+    };
+    
+    class matrix
+    {
+        private:
+        point p[20];
+        point t[2];
+        point pp[1];
+        int points;
+    
+        public:
+        void read()
+        {
+            setcolor(2);
+            cout&lt;&gt;points;
+            cout&lt;&gt;p[i].x&gt;&gt;p[i].y;
+            }
+        }
+    
+        void readT()
+        {
+            cout&lt;&gt;t[i].x&gt;&gt;t[i].y;
+        }
+    
+        void transform()
+        {
+            setcolor(3);
+            for(int i=0;i&lt;points;i++)
+            {
+                pp[0].x = p[i].x*t[0].x + p[i].y*t[1].x;
+                pp[0].y = p[i].x*t[0].y + p[i].y*t[1].y;
+    
+                p[i].x = (int)(pp[0].x);
+                p[i].y = (int)(pp[0].y);
+            }
+        }
+    
+        void draw()
+        {
+            for(int i=0;i&lt;points;i++)
+                line(c+p[i].x, c-p[i].y, c+p[(i+1)%points].x, c-p[(i+1)%points].y);
+            //c is added to represent points in shifted origin system
+        }
+    
+        void show()
+        {
+            cout&lt;&lt;endl;
+            for(int i=0;i&lt;points;i++)
+            cout&lt;&lt;p[i].x&lt;
+    </code></pre>
+    <pre><code>**Reference**
+    - https://www.tutorialsduniya.com/programs/du/csh/computer-graphics/program6
+    
+    
+    ## Program 7
+    &gt;Write a program to apply various 3D transformations on a 3D object and then apply parallel and perspective projection on it.
+    - [x] 
+    
+    ### Code
+    </code></pre>
+    <p>cpp    #include<iostream.h>
+        #include<dos.h>
+        #include<stdio.h>
+        #include<math.h>
+        #include<conio.h>
+        #include<graphics.h>
+        #include<process.h></p>
+    <pre><code>int gd=DETECT,gm;
+    double x1,x2,y1,y2;
+    
+    void show_message()
+    {
+        char *mess[]={"-","=","["," ","3","D","-","T","r","a","n","s","f","o","r","m","a","t","i","o","n"," ","]","=","-"};
+        int xx=28,xxx=52,i,j;
+        _setcursortype(_NOCURSOR);
+        for(i=0,j=24;i &lt; 15,j&gt;=12;i++,j--)
+            {
+                gotoxy(xx,1);
+                cout&lt;&lt;mess[i];
+                xx++;
+                gotoxy(xxx,1);
+                cout&lt;&lt;mess[j];
+                xxx--;
+                delay(50);
+            }
+        _setcursortype(_NORMALCURSOR);
+    }
+    
+    void draw_cube(double edge[20][3])
+    {
+        initgraph(&amp;gd,&amp;gm,"..\bgi");
+        int i;
+        clearviewport();
+        for(i=0;i &lt; 19;i++)
+        {
+            x1=edge[i][0]+edge[i][2]*(cos(2.3562));
+            y1=edge[i][1]-edge[i][2]*(sin(2.3562));
+            x2=edge[i+1][0]+edge[i+1][2]*(cos(2.3562));
+            y2=edge[i+1][1]-edge[i+1][2]*(sin(2.3562));
+            line(x1+320,240-y1,x2+320,240-y2);
+        }
+        line(320,240,320,25);
+        line(320,240,550,240);
+        line(320,240,150,410);
+        getch();
+        closegraph();
+    }
+    
+    void scale(double edge[20][3])
+    {
+        double a,b,c;
+        int i;
+        cout&lt;&gt;a&gt;&gt;b&gt;&gt;c;
+        initgraph(&amp;gd,&amp;gm,"..\bgi");
+        clearviewport();
+        for(i=0;i &lt; 20;i++)
+        {
+            edge[i][0]=edge[i][0]*a;
+            edge[i][1]=edge[i][1]*b;
+            edge[i][2]=edge[i][2]*c;
+        }
+        draw_cube(edge);
+        closegraph();
+    }
+    
+    void translate(double edge[20][3])
+    {
+        int a,b,c;
+        int i;
+        cout&lt;&gt;a&gt;&gt;b&gt;&gt;c;
+        initgraph(&amp;gd,&amp;gm,"..\bgi");
+        clearviewport();
+        for(i=0;i &lt; 20;i++)
+        {
+            edge[i][0]+=a;
+            edge[i][0]+=b;
+            edge[i][0]+=c;
+        }
+        draw_cube(edge);
+        closegraph();
+    }
+    
+    void rotate(double edge[20][3])
+    {
+        int ch;
+        int i;
+        double temp,theta,temp1;
+        clrscr();
+        cout&lt; X-Axis "&lt;&lt;endl;
+        cout&lt; Y-Axis"&lt;&lt;endl;
+        cout&lt; Z-Axis "&lt;&lt;endl;
+        cout&lt;&gt;ch;
+        switch(ch)
+        {
+            case 1:
+                        cout&lt;&gt;theta;
+                        theta=(theta*3.14)/180;
+                        for(i=0;i &lt; 20;i++)
+                        {
+                            edge[i][0]=edge[i][0];
+                            temp=edge[i][1];
+                            temp1=edge[i][2];
+                            edge[i][1]=temp*cos(theta)-temp1*sin(theta);
+                            edge[i][2]=temp*sin(theta)+temp1*cos(theta);
+                        }
+                        draw_cube(edge);
+                        break;
+    
+            case 2:
+                        cout&lt;&gt;theta;
+                        theta=(theta*3.14)/180;
+                        for(i=0;i &lt; 20;i++)
+                        {
+                            edge[i][1]=edge[i][1];
+                            temp=edge[i][0];
+                            temp1=edge[i][2];
+                            edge[i][0]=temp*cos(theta)+temp1*sin(theta);
+                            edge[i][2]=-temp*sin(theta)+temp1*cos(theta);
+                        }
+                        draw_cube(edge);
+                        break;
+    
+            case 3:
+                        cout&lt;&gt;theta;
+                        theta=(theta*3.14)/180;
+                        for(i=0;i &lt; 20;i++)
+                        {
+                            edge[i][2]=edge[i][2];
+                            temp=edge[i][0];
+                            temp1=edge[i][1];
+                            edge[i][0]=temp*cos(theta)-temp1*sin(theta);
+                            edge[i][1]=temp*sin(theta)+temp1*cos(theta);
+                        }
+                        draw_cube(edge);
+                        break;
+        }
+    }
+    
+    void reflect(double edge[20][3])
+    {
+        int ch;
+        int i;
+        clrscr();
+        cout&lt; X-Axis"&lt;&lt;endl;
+        cout&lt; Y-Axis "&lt;&lt;endl;
+        cout&lt; Z-Axis "&lt;&lt;endl;
+        cout&lt;&gt;ch;
+        switch(ch)
+        {
+            case 1:
+                        for(i=0;i &lt; 20;i++)
+                        {
+                            edge[i][0]=edge[i][0];
+                            edge[i][1]=-edge[i][1];
+                            edge[i][2]=-edge[i][2];
+                        }
+                        draw_cube(edge);
+                        break;
+    
+            case 2:
+                        for(i=0;i &lt; 20;i++)
+                        {
+                            edge[i][1]=edge[i][1];
+                            edge[i][0]=-edge[i][0];
+                            edge[i][2]=-edge[i][2];
+                        }
+                        draw_cube(edge);
+                        break;
+    
+            case 3:
+                        for(i=0;i &lt; 20;i++)
+                        {
+                            edge[i][2]=edge[i][2];
+                            edge[i][0]=-edge[i][0];
+                            edge[i][1]=-edge[i][1];
+                        }
+                        draw_cube(edge);
+                        break;
+        }
+    }
+    
+    void perspect(double edge[20][3])
+    {
+        int ch;
+        int i;
+        double p,q,r;
+        clrscr();
+        cout&lt; X-Axis "&lt;&lt;endl;
+        cout&lt; Y-Axis "&lt;&lt;endl;
+        cout&lt; Z-Axis"&lt;&lt;endl;
+        cout&lt;&gt;ch;
+        switch(ch)
+        {
+            case 1:
+                        cout&lt;&gt;p;
+                        for(i=0;i &lt; 20;i++)
+                        {
+                            edge[i][0]=edge[i][0]/(p*edge[i][0]+1);
+                            edge[i][1]=edge[i][1]/(p*edge[i][0]+1);
+                            edge[i][2]=edge[i][2]/(p*edge[i][0]+1);
+                        }
+                        draw_cube(edge);
+                        break;
+    
+            case 2:
+                        cout&lt;&gt;q;
+                        for(i=0;i &lt; 20;i++)
+                        {
+                            edge[i][1]=edge[i][1]/(edge[i][1]*q+1);
+                            edge[i][0]=edge[i][0]/(edge[i][1]*q+1);
+                            edge[i][2]=edge[i][2]/(edge[i][1]*q+1);
+                        }
+                        draw_cube(edge);
+                        break;
+    
+            case 3:
+                        cout&lt;&gt;r;
+                        for(i=0;i &lt; 20;i++)
+                        {
+                            edge[i][2]=edge[i][2]/(edge[i][2]*r+1);
+                            edge[i][0]=edge[i][0]/(edge[i][2]*r+1);
+                            edge[i][1]=edge[i][1]/(edge[i][2]*r+1);
+                        }
+                        draw_cube(edge);
+                        break;
+        }
+        closegraph();
+    }
+    
+    void main()
+    {
+        int choice;
+        double edge[20][3]={
+                                100,0,0,
+                                100,100,0,
+                                0,100,0,
+                                0,100,100,
+                                0,0,100,
+                                0,0,0,
+                                100,0,0,
+                                100,0,100,
+                                100,75,100,
+                                75,100,100,
+                                100,100,75,
+                                100,100,0,
+                                100,100,75,
+                                100,75,100,
+                                75,100,100,
+                                0,100,100,
+                                0,100,0,
+                                0,0,0,
+                                0,0,100,
+                                100,0,100
+                            };
+        while(1)
+        {
+            clrscr();
+            show_message();
+            cout&lt; Draw Cube "&lt;&lt;endl;
+            cout&lt; Scaling "&lt;&lt;endl;
+            cout&lt; Rotation "&lt;&lt;endl;
+            cout&lt; Reflection "&lt;&lt;endl;
+            cout&lt; Translation "&lt;&lt;endl;
+            cout&lt; Perspective Projection "&lt;&lt;endl;
+            cout&lt; Exit "&lt;&lt;endl;
+            cout&lt;&gt;choice;
+            switch(choice)
+            {
+                case 1:
+                        draw_cube(edge);
+                        break;
+    
+                case 2:
+                        scale(edge);
+                        break;
+    
+                case 3:
+                        rotate(edge);
+                        break;
+    
+                case 4:
+                        reflect(edge);
+                        break;
+    
+                case 5:
+                        translate(edge);
+                        break;
+    
+                case 6:
+                        perspect(edge);
+                        break;
+    
+                case 7:
+                        exit(0);
+    
+                default:
+                        cout&lt;
+    </code></pre>
+    <pre><code>### Alternative
+    </code></pre>
+    <p>cpp    #include<iostream>
+        #include<math.h>
+        #include<conio.h>
+        #include<graphics.h>
+        using namespace std;</p>
+    <pre><code>class matrix
+    {
+        int nodes[10][4];
+        float T[4][4];
+        int size;
+        public:
+        matrix(int s)
+        {
+            size = s;
+            cout &lt;&lt; "\nThe number of nodes are : \n" &lt;&lt; size; 
+            for(int i =0;i&lt;size;++i)
+            nodes[i][3] = 1;
+        }
+    
+        void input()
+        {
+            cout &lt;&lt; endl;
+            for(int i=0;i&lt;size;++i)
+            {
+                cout &lt;&lt; "Enter P" &lt;&lt; i&lt;&gt; nodes[i][j];
+            }
+            cout &lt;&lt; "\nBefore\n";
+            drawMy(nodes);
+            cout &lt;&lt; endl;
+        }
+    
+        void drawMy(int x[][4])
+        {
+            cout &lt;&lt; "\nTransformation"&lt;&lt;endl;
+            for(int i=0;i&lt;size;++i)
+            {
+                line(200 + x[i%size][0],200 +  x[i%size][1], 200 + x[(i+1)%size][0],200 +  x[(i+1)%size][1]);
+            }
+            cout &lt;&lt; endl;
+        }
+    
+        void rotation()
+        {
+            setcolor(RED);
+            for(int i=0;i&lt;size;++i)
+            {
+                for(int j=0;j&lt;4;++j)
+                {
+                    cout &lt;&lt; nodes[i][j] &lt;&lt; " ";
+                }
+                cout &lt;&lt; endl;
+            }
+    
+            int angle;
+            cout &lt;&lt; "Enter angle along x axis : ";
+            cin &gt;&gt; angle;
+            float r = angle*(3.14/180);
+            float T[4][4];
+            T[0][0] = 1;
+    
+            for (int i=1;i&lt;=3;++i) 
+                T[0][i] = 0;
+    
+            for(int i=1;i&lt;=3;++i) 
+                T[i][0] = 0;
+    
+            T[3][1] = 0;
+            T[3][2] = 0;
+            T[3][3] = 1;
+            T[0][3] = 0;
+            T[1][3] = 0;
+            T[2][3] = 0;
+    
+            T[1][1] = cos(r);
+            T[1][2] = sin(r);
+            T[2][1] = -1*sin(r);
+            T[2][2] = cos(r); 
+    
+            for(int i=0;i&lt;4;++i)
+            {
+                for(int j=0;j&lt;4;++j)
+                {
+                    cout &lt;&lt; T[i][j] &lt;&lt; " ";
+                }
+                cout &lt;&lt; endl;
+            }
+    
+            float rr[3][4];
+            int n = size;
+            cout &lt;&lt; "\nSize is : " &lt;&lt; n &lt;&lt; endl;
+            for(int i=0;i&lt;n;i++)
+            for(int j=0;j&lt;4;j++)
+            rr[i][j]=0;
+    
+            for(int i=0;i&lt;size;i++)
+            {
+                for(int j=0;j&lt;4;j++)
+                {
+                    rr[i][j] = 0;
+                    for(int k=0;k&lt;4;k++)
+                    rr[i][j] += nodes[i][k]*T[k][j];
+                }
+            }        
+    
+            cout &lt;&lt; endl;
+    
+            for(int i=0;i&lt;size;++i)    
+            {
+                for(int j=0;j&lt;4;++j)
+                    cout &lt;&lt; rr[i][j] &lt;&lt; " ";
+                cout &lt;&lt; endl;
+            }
+    
+            for(int i=0;i&lt;size;++i)
+            {
+                line(round(200 + rr[i%size][0]),round(200 +  rr[i%size][1]), round(200 + rr[(i+1)%size][0]),round(200 +  rr[(i+1)%size][1]));
+            }
+        }
+    };
+    
+    int main()
+    {
+        int gdriver = DETECT, gmode;
+        initgraph(&amp;gdriver, &amp;gmode, "");
+        matrix m(3);
+        m.input();
+        m.rotation();
+        getch();
+        return 0;
+    }
+    </code></pre>
+    <pre><code>**Reference**
+    - https://www.tutorialsduniya.com/programs/du/csh/computer-graphics/program7
+    
+    
+    ## Program 8
+    &gt;Write a program to draw Hermite/Bezier curve.
+    - [x] 
+    
+    ### Code
+    </code></pre>
+    <p>cpp    #include<stdio.h>
+        #include<graphics.h>
+        #include<iostream.h>
+        #include<conio.h>
+        #include<stdlib.h>
+        #include<math.h></p>
+    <pre><code>void bezier(int x[4], int y[4])
+    {
+        double t;
+        for(t=0.0;t &lt; 1.0;t+=0.0005)
+        {
+            double xt=pow(1-t,3)*x[0]+3*t*pow(1-t,2)*x[1]+3*pow(t,2)*(1-t)*x[2]+pow(t,3)*x[3];
+            double yt=pow(1-t,3)*y[0]+3*t*pow(1-t,2)*y[1]+3*pow(t,2)*(1-t)*y[2]+pow(t,3)*y[3];
+            putpixel(xt,yt,WHITE);
+        }
+    
+        for(int i=0;i &lt; 4;i++)
+        putpixel(x[i],y[i],YELLOW);
+        getch();
+        closegraph();
+        return;
+    }
+    
+    void main()
+    {
+        /* request auto detection */
+        int gdriver = DETECT, gmode, errorcode;
+    
+        /* initialize graphics and local variables */
+        initgraph(&amp;gdriver, &amp;gmode, "..\\bgi");
+    
+        /* read result of initialization */
+        errorcode = graphresult();
+    
+        /* an error occurred */
+        if (errorcode != grOk)
+        {
+            printf("Graphics error: %s\n", grapherrormsg(errorcode));
+            printf("Press any key to halt:");
+            getch();
+            exit(1);
+        }
+    
+        int x[4],y[4];
+        int i;
+        cout&lt;&gt;x[i];
+            cout&lt;&lt;endl;
+            cin&gt;&gt;y[i];
+        }
+        bezier(x,y);
+    }
+    </code></pre>
+    <pre><code>### Alternative
+    </code></pre>
+    <p>cpp    #include<iostream.h>
+        #include<graphics.h>
+        #include<conio.h>
+        #include<stdio.h>
+        #include<stdlib.h></p>
+    <pre><code>struct point
+    {
+        int x,y;
+    };
+    
+    void hermite(point p1,point p4,double r1,double r4)
+    {
+        float x,y,t;
+        for(t=0.0;t&lt;=1.0;t+=0.001)
+        {
+            x=(2*t*t*t-3*t*t+1)*p1.x+(-2*t*t*t+3*t*t)*p4.x+(t*t*t-2*t*t+t)*r1+(t*t*t-t*t)*r4;
+            y=(2*t*t*t-3*t*t+1)*p1.y+(-2*t*t*t+3*t*t)*p4.y+(t*t*t-2*t*t+1)*r1+(t*t*t-t*t)*r4;
+            putpixel(x,y,YELLOW);
+        }
+    }
+    
+    void main()
+    {
+        /* request auto detection */
+        int gdriver = DETECT, gmode, errorcode;
+    
+        /* initialize graphics and local variables */
+        initgraph(&amp;gdriver, &amp;gmode, "..\\bgi");
+    
+        /* read result of initialization */
+        errorcode = graphresult();
+    
+        /* an error occurred */
+        if (errorcode != grOk)
+        {
+            printf("Graphics error: %s\n", grapherrormsg(errorcode));
+            printf("Press any key to halt:");
+            getch();
+            exit(1);
+        }
+    
+        double r1,r4;
+        point p1,p2;
+        cout&lt;&gt;p1.x&gt;&gt;p1.y&gt;&gt;p2.x&gt;&gt;p2.y;
+        cout&lt;&gt;r1&gt;&gt;r4;
+        hermite(p1,p2,r1,r4);
+        putpixel(p1.x,p1.y,WHITE);
+        putpixel(p2.x,p2.y,WHITE);
+        getch();
+        closegraph();
+    }
+    </code></pre>
+    <pre><code>### Alternative
+    </code></pre>
+    <p>cpp    #include <stdio.h>
+        #include <stdlib.h>
+        #include <graphics.h>
+        #include <math.h>
+        #include <conio.h>
+        #include <iostream.h></p>
+    <pre><code>void bezier (int x[4], int y[4])
+    {
+        int gd = DETECT, gm;
+        int i;
+        double t;
+    
+        initgraph (&amp;gd, &amp;gm, "..\\bgi");
+    
+        for (t = 0.0; t &lt; 1.0; t += 0.0005)
+        {
+            double xt = pow (1-t, 3) * x[0] + 3 * t * pow (1-t, 2) * x[1] + 3 * pow (t, 2) * (1-t) * x[2] + pow (t, 3) * x[3];
+    
+            double yt = pow (1-t, 3) * y[0] + 3 * t * pow (1-t, 2) * y[1] + 3 * pow (t, 2) * (1-t) * y[2] + pow (t, 3) * y[3];
+    
+            putpixel (xt, yt, WHITE);
+        }
+    
+        for (i=0; i&lt;4; i++)
+            putpixel (x[i], y[i], YELLOW);
+    
+    }
+    
+    void main()
+    {
+        int x[4], y[4];
+        int i;
+    
+        printf ("Enter the x- and y-coordinates of the four control points.\n");
+        for (i=0; i&lt;4; i++)
+            cin&gt;&gt;x[i]&gt;&gt;y[i];
+    
+        bezier (x, y);
+    
+        getch();
+        closegraph();
+        return;
+    }
+    </code></pre>
+    <p>```</p>
+    <p><strong>Reference</strong></p>
+    <ul>
+    <li>https://www.tutorialsduniya.com/programs/du/csh/computer-graphics/program8</li>
+    </ul></div>
+</body>
+</html>
