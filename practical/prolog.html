@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cg Practicals</title>
+</head>
+<body>
+    <!-- directives:[] -->
+			<div id="content"><h2 id="bratko4theditionsolution">Bratko 4th Edition Solution</h2>
+                <ul>
+                <li>https://github.com/okanvk/Prolog-Exercises</li>
+                </ul>
+                <h2 id="program1">Program 1</h2>
+                <blockquote>
+                  <p>Write a prolog program to calculate the sum of two numbers.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">sum(X,Y):-
+                S is X+Y,
+                write(S).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_1.png" alt="" /></p>
+                <h2 id="program2">Program 2</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement max(X, Y, M) so that M is the maximum of two numbers X and Y.</p>
+                  <ul>
+                  <li>[x] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">max(X,Y,M):-
+                    (   X=Y-&gt;
+                    write('Both are equal');
+                    X&gt;Y-&gt;
+                    M is X;
+                    M is Y
+                    ).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_2.png" alt="" /></p>
+                <h2 id="program3">Program 3</h2>
+                <blockquote>
+                  <p>Write a program in PROLOG to implement factorial (N, F) where F represents the factorial of a number N.</p>
+                  <ul>
+                  <li>[x] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">factorial(0,1).
+                
+                factorial(N,F):-
+                N1 is N-1,
+                factorial(N1,X1),
+                F is X1*N.
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_3.png" alt="" /></p>
+                <h2 id="program4">Program 4</h2>
+                <blockquote>
+                  <p>Write a program in PROLOG to implement generate_fib(N,T) where T represents the Nth term of the fibonacci series.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">generate_fib(1,0):- !.
+                generate_fib(2,1):- !.
+                
+                generate_fib(N,T):-
+                    N&gt;=2-&gt;
+                    N1 is N-1,
+                    generate_fib(N1,T1),
+                    N2 is N-2,
+                    generate_fib(N2,T2),
+                    T is T1+T2.
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_4.png" alt="" /></p>
+                <h2 id="program5">Program 5</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement GCD of two numbers.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">go:-write('Enter first number: '),
+                    read(X),
+                    write('Enter second number: '),
+                    read(Y),
+                    gcd(X,Y,D),
+                    write('The GCD of two no.: '),
+                    write(D).
+                
+                
+                gcd(X,X,X).
+                gcd(X,Y,D):- X&lt;Y,
+                    gcd(Y,X,D).
+                gcd(X,Y,D):- X&gt;Y,
+                    Y1 is X-Y,
+                    gcd(Y,Y1,D),!.
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_5.png" alt="" /></p>
+                <h2 id="program6">Program 6</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement power (Num,Pow, Ans) : where Num is raised to the power Pow to get Ans.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">go:-write('Enter number: '),
+                    read(Num),
+                    write('Enter Power: '),
+                    read(Pow),
+                    power(Num,Pow,Ans),
+                    write('The resut is: '),
+                    write(Ans).
+                
+                
+                power(Num,1,Num).
+                power(Num,Pow,Ans):-Pow1 is Pow-1,
+                    power(Num,Pow1,Ans1),
+                    Ans is Ans1*Num,!.
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_6.png" alt="" /></p>
+                <h2 id="program7">Program 7</h2>
+                <blockquote>
+                  <p>Prolog program to implement multi (N1, N2, R) : where N1 and N2 denotes the numbers to be multiplied and R represents the result.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">multi(N1,1,N1).
+                
+                multi(N1,N2,R):- 
+                Temp is N2-1, 
+                multi(N1,Temp,R1),
+                R is R1+N1.
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_7.png" alt="" /></p>
+                <h2 id="program8">Program 8</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement memb(X, L): to check whether X is a member of L or not.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">memb(X,[X|Tail]).
+                memb(X,[Head|Tail]):-memb(X,Tail).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_8.png" alt="" /></p>
+                <h2 id="program9">Program 9</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement conc (L1, L2, L3) where L2 is the list to be appended with L1 to get the resulted list L3.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">conc([],L,L).
+                conc([X|L1],L2,[X|L3]):-conc(L1,L2,L3).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_9.png" alt="" /></p>
+                <h2 id="program10">Program 10</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement reverse (L, R) where List L is original and List R is reversed list.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">append([],L,L).
+                append([X|L1],L2,[X|L3]):- append(L1,L2,L3).
+                
+                reverse([],[]).
+                reverse([H|T],R):- reverse(T,L1),append(L1,[H],R).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_10.png" alt="" /></p>
+                <h2 id="program11">Program 11</h2>
+                <blockquote>
+                  <p>Write a program in PROLOG to implement palindrome (L) which checks whether a list L is a palindrome or not.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">app([],L,L).
+                app([X|L1],L2,[X|L3]):- app(L1,L2,L3).
+                palindrome([]).
+                palindrome([_]).
+                palindrome(Plist):-app([H|T],[H],Plist),palindrome(T).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_11.png" alt="" /></p>
+                <h2 id="program12">Program 12</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement sumlist(L, S) so that S is the sum of a given list L.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">sumlist([],0).
+                sumlist([H|T],S):-sumlist(T,S1),S is H+S1.
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_12.png" alt="" /></p>
+                <h2 id="program13">Program 13</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement two predicates evenlength(List) and oddlength(List) so that they are true if their argument is a list of even or odd length </p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">evenlen([]).
+                evenlen([_|[_|List]]):-evenlen(List).
+                oddlen([_]).
+                oddlen([_|[_|List]]):-oddlen(List).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_13.png" alt="" /></p>
+                <h2 id="program14">Program 14</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement nth_element (N, L, X) where N is the desired position, L is a list and X represents the Nth element of L.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">nth_element(1,[H|T],H).
+                nth_element(N,[H|T],X):-N1 is N-1,nth_element(N1,T,X).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_14.png" alt="" /></p>
+                <h2 id="program15">Program 15</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement maxlist(L, M) so that M is the maximum number in the list.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">max(X,Y,Z):- X&gt;Y,Z is X.
+                max(X,Y,Z):- X=&lt;Y,Z is Y.
+                maxlist([],0):-!.
+                maxlist([R],R):-!.
+                maxlist([H|T],R):-maxlist(T,R1),max(H,R1,R),!.
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_15.png" alt="" /></p>
+                <h2 id="program16">Program 16</h2>
+                <blockquote>
+                  <p>Write a prolog program to implement insert_nth (I, N, L, R) that inserts an item I into Nth position of list L to generate a list R.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">insert_nth(Item,1,List,[Item|List]).
+                insert_nth(Item,Pos,[H|List],[H|Result]):-Pos1 is Pos-1,insert_nth(Item,Pos1,List,Result).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_16.png" alt="" /></p>
+                <h2 id="program17">Program 17</h2>
+                <blockquote>
+                  <p>Write a Prolog program to implement delete_nth (N, L, R) that removes the element on Nth position from a list L to generate a list R.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">delete_nth(1,[_|List],List).
+                delete_nth(Pos,[H|List],[H|Result]):-Pos1 is Pos-1, delete_nth(Pos1,List,Result).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_17.png" alt="" /></p>
+                <h2 id="program18">Program 18</h2>
+                <blockquote>
+                  <p>Write a program in PROLOG to implement merge (L1, L2, L3) where L1 is first ordered list and L2 is second ordered list and L3 represents the merged list.</p>
+                  <ul>
+                  <li>[ ] </li>
+                  </ul>
+                </blockquote>
+                <pre><code class="prolog language-prolog">merge(X,[],X).
+                merge([],Y,Y).
+                merge([X|X1],[Y|Y1],[X|Z]):-X&lt;Y,!,merge(X1,[Y|Y1],Z).
+                merge([X|X1],[Y|Y1],[X,Y|Z]):-X=Y,!,merge(X1,Y1,Z).
+                merge([X|X1],[Y|Y1],[Y|Z]):-X&gt;Y,!,merge([X|X1],Y1,Z).
+                </code></pre>
+                <p><strong>Output</strong>
+                <img src="assets/AI_practical_18.png" alt="" /></p>
+                <h1 id="braktosolutions">Brakto Solutions</h1>
+                <h2 id="chapter1">Chapter 1</h2>
+                <pre><code class="prolog language-prolog">parent(pam,bob).
+                parent(tom,bob).
+                parent(tom,liz).
+                parent(bob,ann).
+                parent(bob,pat).
+                parent(pat,jim).
+                
+                
+                    /** Who is Pat's parent ? */
+                
+                    /** Answer:   parent(X,pat). (Bob) */
+                
+                    /** 2.Does Liz have a child ? */
+                
+                    /** Answer:  parent(liz,X). (False) */
+                
+                    /** 3.Who is Pat's grandparent ? */
+                
+                    /** Answer : parent(X,Y),parent(Y,pat). (X = Tom or X = Pam) (Y = Bob) */
+                
+                
+                
+                female(pam).
+                female(liz).
+                female(pat).
+                female(ann).
+                male(tom).
+                male(bob).
+                male(jim).
+                
+                parent(pam,bob).
+                parent(tom,bob).
+                parent(tom,liz).
+                parent(bob,ann).
+                parent(bob,pat).
+                parent(pat,jim).
+                
+                
+                mother(X,Y) :- parent(X,Y), female(X).
+                
+                grandparent(X,Z) :- 
+                        parent(X,Y),
+                        parent(Y,Z).
+                
+                sister(X,Y) :-  
+                          parent(Z,X),
+                          parent(Z,Y),
+                          female(X),
+                          X \= Y.
+                
+                
+                /** Exercises */
+                
+                /** 
+                  Everybody who has a child is happy
+                
+                  happy(berkay).
+                    True
+                
+                  happy(mert).
+                    False
+                
+                */
+                
+                hasachild(berkay).
+                hasachild(zulfu).
+                hasachild(merve).
+                
+                 happy(X) :- hasachild(X).
+                
+                /** 
+                  For all X, if X has a child who has a sister then X has two children.
+                
+                
+                  hastwochildren(bob). 
+                    True
+                
+                  hastwochildren(tom).
+                    True
+                
+                
+                
+                */
+                
+                
+                hastwochildren(X) :- parent(X,Y),
+                                     sister(Y,_).
+                
+                /**
+                
+                  Define the relation grandchild using the parent relation
+                
+                  grandchild(jim,pat).
+                    False
+                
+                  grandchild(jim,bob).
+                    True
+                
+                
+                */
+                
+                grandchild(X,Y) :- parent(Z,X),
+                                   parent(Y,Z).
+                
+                
+                
+                /**
+                
+                  Define the relation aunt(X,Y) in terms of the relations parent and sister
+                  aunt(ann,jim)
+                    True
+                
+                  aunt(bob,pam)
+                    False
+                
+                  aunt(liz,pat) Liz is aunt of Pat's
+                    True
+                
+                */
+                
+                    aunt(X,Y) :- parent(Z,Y),
+                               sister(X,Z).
+                
+                
+                
+                /* Consider the following alternative definition of the ancestor relation */
+                
+                
+                /* Answer */
+                ancestor(X,Y) :- parent(X,Y).
+                
+                ancestor(X,Y) :- parent(Z,Y),
+                                 ancestor(X,Z).
+                </code></pre>
+                <h2 id="chapter2">Chapter 2</h2>
+                <pre><code class="prolog language-prolog">/*
+                
+                  simple data objects(atoms,numbers,variables)
+                  structured objects
+                  matching
+                  declarative - meaning of a program
+                  procedural meaning of a program
+                  relation between declarative and procedural meanings of a program
+                
+                
+                */
+                
+                /*
+                    Atoms and Numbers
+                
+                    Atoms can take more complicated forms strings
+                
+                    Atoms can be constructed in three ways
+                
+                      1: 
+                        String Of Letters,digits,underscore_character
+                          anna, nil, x25, x_25, x_, x__y, miss_jones
+                      2:
+                        String of special characters
+                          &lt;---&gt;, +, ... , ::=
+                        Böyle kullanırken dikkatli olunması gerek önceden bazı ifadeler tanımlanmış olabilir(:-)
+                      3:
+                        String of characters enclosed in single quotes,this is useful if we want for example:
+                        to have an atom that starts with a capital letter.By enclosing it in quotes,
+                        we make it distinguishable from variables. 
+                        'Tom', 'Sarah Jones'
+                
+                    Numbers
+                      İşlem yaparken virgüllü sayıları yuvarlıyabilir dikkat et
+                
+                
+                */
+                
+                
+                /*
+                    Variables
+                
+                    Variables are strings of letters,digits and underscore characters.
+                    They  start with an upper-case letter or an underscore character
+                
+                    X, Result, Object2, _A, _x23,_23
+                
+                
+                  Bir ilişki kurduğumuzu varsayalım,
+                
+                  has_a_child(X) :- parent(X,Y).
+                
+                  Burada bulunan Y değişkeni başka clauselarda kullanmıyacaksak, anonymous variable olarak değiştirebiliriz.
+                
+                  has_a_child(X) :- parent(X,_).
+                
+                  has_a_child ilişkisi Y değişkenine bağlı olup sonradan kullanılmadığından anonymouse variable kullandık.
+                
+                  visible(Object) :- see(Object,_,_) as same as visible(Object) :- see(Object,X,Y)
+                  Eğer X ve Y alanları lazımsa sonda ki değilse, başta ki kullanılabilir.
+                
+                  If we interest who has children,but not interest names of children we can say;
+                  parent(X,_).
+                
+                */
+                
+                
+                /*
+                        Structures
+                
+                      Structures are objects that have several components.
+                
+                      Ex: Date can be viewed as a structures with three components.(day,month,year)
+                
+                      Yapılar çok içerik barındırmasına rağmen tek bir basit obje gibi davranır.
+                
+                      Functor -&gt; Bağımlı Yapı Biçimi 
+                      A suitable functor for our example is date
+                      Ex:
+                      1 May 2001
+                      date(1,may,2001).
+                      3 constants -&gt; 2 numbers,1 atom
+                
+                      Components can also be variables or other structures.
+                      Any day in May can be like this
+                      date(Day,may,2001).
+                
+                      Syntactically,all data objects in prolog are terms.
+                
+                
+                */
+                
+                /*
+                
+                  Each functor is defined by two things:
+                
+                  The Name : whose syntax is that of atoms.
+                  The Arity :  That is,number of arguments.
+                
+                  foo(a) and foo(a,b) have different functors, foo/1 and foo/2. 
+                  Programda verilen argüman sayısına göre functor'ın davranışını değiştirebiliriz.
+                  http://www.amzi.com/manuals/amzi/pro/ref_terms.htm#Structures
+                
+                  Prolog'da her bir (structure)yapı ağaç olarak gösterilebilir.
+                  In prolog every data object is a term.
+                
+                
+                
+                
+                
+                */
+                
+                
+                
+                /*
+                
+                Structures are used to represent data.
+                Following are some examples of a structure whose functor is 'likes' and whose arity is 2.
+                
+                likes(ella, biscuits)
+                likes(zeke, biscuits)
+                likes(Everyone, pizza)
+                
+                
+                Here are some more complex nested structures.
+                
+                file(foo, date(1993, 6, 15), size(43898))
+                tree(pam, left( tree( doyle, left(L2), right(R2) ) ), right(R1))
+                sentence( nounphrase( det( the ), noun( dog )), verbphrase( verb( sleeps )) )
+                
+                Structures are also the heads of Prolog clauses, and the goals of the bodies of those clauses. For example:
+                
+                friends(X, Y) :- likes(X, Something), likes(Y, Something).
+                All Prolog really does is match up structures with each other
+                
+                
+                
+                
+                
+                */
+                
+                parent('Bulent','Okan').
+                parent('Zamine','Okan').
+                
+                
+                a(b(deneme)).
+                /*
+                
+                parent(X,_).
+                
+                Anyone who has children.
+                
+                */
+                
+                
+                /*
+                
+                f(1,one).
+                f(s(1),two).
+                f(s(s(1)),three).
+                f(s(s(s(X))),N) :- f(X,N).
+                
+                
+                */
+                
+                
+                repr(1,bir).
+                repr(2,iki).
+                repr(3,uc).
+                
+                translate(Number,Word) :-
+                  repr(Number,Word).
+                
+                
+                
+                
+                /*
+                ancestor(pam,bob).
+                ancestor(tom,bob).
+                ancestor(tom,liz).
+                ancestor(bob,ann).
+                ancestor(bob,pat).
+                ancestor(pat,jim).
+                
+                relatives(X,Y) :- ancestor(X,Y);ancestor(Y,X).
+                
+                
+                relatives(X,Y) :- (ancestor(Z,X),ancestor(Z,Y));(ancestor(X,Z),ancestor(Y,Z)).
+                */
+                
+                /*
+                
+                num(1,one).
+                num(2,two).
+                num(3,three).
+                
+                
+                translate(Number,Word) :-
+                  num(Number,Word).
+                */
+                
+                /*
+                
+                a(X,Y) :- b(X,Y);c(X,Y).
+                
+                b(1,3).
+                c(1,2).
+                
+                */
+                
+                /*
+                
+                P :- (Q,R);(S,T,U).
+                
+                  P is true if:
+                    Q and R true
+                        OR
+                    S and T and U true
+                
+                
+                    it can be
+                
+                  P :- Q,R.
+                  P :- S,T,U.
+                
+                */
+                
+                %repr(1,one).
+                %repr(2,two).
+                %repr(3,three).
+                
+                
+                %translate(Number,Word) :-
+                %  repr(Number,Word).
+                
+                
+                /*
+                
+                date(D,M,2001) = date(D1,may,Y1).
+                
+                D = D1
+                M = may
+                Y1 = 2001
+                
+                can easily match
+                
+                otherwise
+                date(D,M,2001) = date(D1,M1,1444).
+                
+                don't match because third argument 2001 and 1444 don't match.
+                
+                date(X,Y,Z) = point(X,Y,Z)
+                
+                don't match because functor names are different.
+                
+                
+                date(D,M,2001) = date(D1,may,Y1),date(D,M,2001) = date(15,M,Y).
+                
+                D = D1, D1 = 15, M = may, Y1 = Y, Y = 2001
+                
+                
+                Matching Rules:
+                
+                  (Structure)
+                  If S and t ARE STRUCTURES THEN THEY MATCH ONLY İF:
+                    S and T have the same principal functor,
+                    All their corresponding components match.
+                
+                  (Constant)
+                  If S and T are constatns then S and T match only if they are the same object and 
+                
+                
+                  (Variable)
+                  If S variable and T is anything,then they match,and S is instantiated to T, or T variable , S is anything then vice-versa
+                
+                
+                */
+                
+                
+                /*
+                
+                
+                EX
+                
+                    triangle = triangle,point(1,1) = X,A = point(4,Y),point(2,3)=point(2,Z).
+                
+                    X = point(1,1) : At this point X instantiated to Structure.
+                
+                    A = point(4,Y) : At this point A instantiated to Structue
+                
+                    point(2,3) = point(2,Z) : They have same functor,and 2=2  AND 3 = Z so Z is 3.
+                
+                
+                */
+                
+                
+                vertical(seg(point(X1,Y1),point(X1,Y2))).
+                horizontal(seg(point(X1,Y1),point(X2,Y1))).
+                
+                
+                /*
+                vertical(seg(point(1,1),point(1,2))).
+                True : Because first point first argument and second point first argument satisfy
+                
+                
+                horizontal(seg(point(1,2),point(1,Z))).
+                Z should be 2 because Z instead of Y1 and first structure has Y1 value 2.
+                
+                Are there any vertical segments that start at the point (2,3) ?
+                
+                vertical(seg(point(2,3),P)).
+                
+                answer : point(2,_912). _912 means can be anything in second argument but first argument must 2.
+                
+                Is there a segment that is both vertical horizontal
+                
+                vertical(seg(point(X,Y),point(X,Y))).
+                
+                  True.
+                
+                
+                */
+                
+                
+                /*
+                    Exercises
+                
+                    point(A,B) = point(1,2).
+                A = 1,
+                B = 2.
+                
+                point(X,Y,Z) = point(A,B). (Arity count not equal)
+                
+                
+                +(2,D) = +(E,2).
+                D = E, E = 2.
+                
+                + can also be a functor name
+                
+                
+                triangle(point(-1,0),P2,P3) = triangle(P1,point(1,0),point(0,Y)).
+                
+                P2 = point(1, 0),
+                P3 = point(0, Y),
+                P1 = point(-1, 0).
+                
+                vertical(seg(point(5,Y1),point(5,Y2))). Write a term that represents any vertical line segment at x = 5
+                */
+                
+                
+                rectangle(regular(X,Y),regular(X,Y),regular(X,Y),regular(X,Y)). /* ? */
+                
+                
+                
+                
+                
+                /*
+                
+                    All the variations will clearly have the same declarative meaning,but not the same procedural meaning.
+                
+                    According to the declarative semantics of prolog we can, withouht affecting the declarative meaning,change.
+                
+                    1: The order of clauses in the program.
+                    2: The order of goals in the bodies of clauses.
+                
+                
+                      (Procedure OR Rule ?)
+                  The ancestor procedure consists of two clauses and one of them has two goals in the body.
+                
+                
+                    Burada clauseların yeri ve sırası değiştiğinde 4 farklı durum çıkıyor ortaya,bazı durumlarda infinte loopa gidip 
+                    patlıyabiliriz,bundan dolayı "Try simple things first" mantığı ile çalışmak daha doğru
+                    En başa body içinde clause az ve rahat bulunabilirlikleri bulmak daha iyi olacaktır.
+                */
+                
+                parent(pam,bob).
+                parent(tom,bob).
+                parent(tom,liz).
+                parent(bob,ann).
+                parent(bob,pat).
+                parent(pat,jim).
+                
+                ancestor(Parent,Child) :-
+                  parent(Parent,Child).
+                
+                ancestor(Ancestor,Successor) :-
+                    parent(Ancestor,Child),
+                    ancestor(Child,Successor).
+                
+                
+                
+                ancestor1(Parent,Child) :-
+                  parent(Parent,Child).
+                
+                ancestor1(Ancestor,Successor) :-
+                    parent(Ancestor,Child),
+                    ancestor1(Child,Successor).
+                
+                
+                
+                ancestor2(Parent,Child) :-
+                  parent(Parent,Child).
+                
+                ancestor2(Ancestor,Successor) :-
+                    parent(Ancestor,Child),
+                    ancestor2(Child,Successor).
+                
+                
+                
+                ancestor3(Parent,Child) :-
+                  parent(Parent,Child).
+                
+                ancestor3(Ancestor,Successor) :-
+                    parent(Ancestor,Child),
+                    ancestor3(Child,Successor).
+                
+                
+                
+                
+                /* Clauses */
+                wine(red).
+                wine(white).
+                wine(rose).
+                meat(beef).
+                meat(chicken).
+                meat(fish).
+                
+                big(bear).
+                big(elephant).
+                small(cat).
+                brown(bear).
+                black(cat).
+                gray(elephant).
+                
+                /* Rules */
+                
+                dark(Z) :- black(Z). /* Anything black is dark. Clause.7 */
+                
+                dark(Z) :- brown(Z). /* Anything brown is dark */
+                
+                
+                /*
+                
+                dark(X),big(X). Who is dark and big.
+                
+                
+                
+                
+                    EXECUTION TRACE
+                
+                    1:initial goal list : dark(X),big(X).
+                
+                    2: Scan the program from top to bottom looking for a clause whose head matches the first goal dark(X). 
+                    Clause 7 found
+                
+                    3:dark(Z) :- black(Z).
+                      Replace the first goal by  the instantiated body of clause 7, giving a new goal list.
+                        black(X),big(X).
+                          Scan the program to find a match with black(X). Clause 5 found black(cat). This clause has no body,
+                         4: So the goal list,properly instantiated shrinks to big(cat).
+                            Scan the program for the goal big(cat). No clause found. Therefore backtrack to step(3)
+                            and undo the instantiation X = cat, now the goal list is again
+                      Continue scanning the program below clause 5. No clause found. 
+                      Therefore backtrack to step 2 and contine scaning below clause 7, Clause 8 is found.
+                        dark(Z) :- brown(Z).
+                
+                        Replace the first goal in the goal list by brown(X), giving
+                          brown(X),big(X).
+                      5: Scan the program to match brown(X) finding brown(bear),
+                           this clause has no body,so the goal list shrinks to big(bear)
+                
+                      Scan the program and find clause big(bear), It has no body so the goal list shrinks empty.
+                      This indicates succesfull termination,and the corresponding variable X = bear
+                
+                
+                
+                
+                */
+                </code></pre>
+                <h2 id="chapter3">Chapter 3</h2>
+                <pre><code class="prolog language-prolog">append1([],L,L).
+                
+                append1([Head1|Rest1],Rest2,[Head1|L]) :- append(Rest1,Rest2,L).
+                
+                % Declarative'i görselleştirme ile yap.
+                
+                
+                
+                reverse1([],[]).
+                
+                reverse1([X|Xs],R) :- reverse(Xs,RXs),append1(RXs,[X],R).
+                
+                
+                list([]).
+                
+                list([X|Rest]) :- list(Rest).
+                
+                
+                %proc5(X,[],[X]).
+                
+                %proc5(X,[Y|R1],[Y|R]) :- proc5(X,R1,R).
+                
+                
+                
+                
+                add(X,L,[X|L]).
+                
+                del(X,[X|Tail],Tail).
+                
+                del(X,[Y|Tail],[Y|Tail1]) :- del(X,Tail,Tail1).
+                
+                
+                % del(b,[a,b,c],X).
+                % X = [a,c].
+                
+                % del(a,L,[1,2,3]).
+                % L = [a,1,2,3].
+                % L = [1,a,2,3].
+                % L = [1,2,a,3].
+                % L = [1,2,3,a].
+                
+                
+                insert(X,List,BiggerList) :- del(X,BiggerList,List).
+                
+                
+                
+                bas([]).
+                
+                bas([Head|List]) :-
+                  writeln(Head),
+                  bas(List).
+                
+                
+                
+                
+                member(X,[X|Tail]).
+                
+                member(X,[Head|Tail]) :- member(X,Tail).
+                
+                % member(X,[a,b,c]) X  ne olabilir ?
+                % X = a
+                % X = b
+                % X = c
+                
+                % member(apple,L) apple L'nin içinde nasıl bulunabilir ?
+                %L = [apple|_3908] ;
+                %L = [_3906, apple|_3914] ;
+                %L = [_3906, _3912, apple|_3920] ;
+                %L = [_3906, _3912, _3918, apple|_3926]
+                
+                
+                % Concatenation
+                
+                
+                concat([],L3,L3).
+                
+                concat([X|L1],L2,[X|L3]) :- concat(L1,L2,L3).
+                
+                
+                % conc([1,2,3],[4,5],L) L = [1,2,3,4,5]
+                
+                % conc(L1,L2,[a,b,c])
+                % Ne gibi olasılıklar olabilir
+                %L1 = [],
+                %L2 = [a, b, c] ;
+                %L1 = [a],
+                %L2 = [b, c] ;
+                %L1 = [a, b],
+                %L2 = [c] ;
+                %L1 = [a, b, c],
+                %L2 = [] ;
+                
+                
+                
+                % concat(X,[c|After],[a,b,c,d,e]).
+                % X = [a, b],
+                % After = [d, e]
+                
+                
+                %?- concat(_,[X1,c,X2|After],[a,b,c,d,e]).
+                
+                %X1 = b,
+                %X2 = d,
+                
+                %After = [e] ;
+                
+                another_member(X,L) :- concat(_,[X|_],L).
+                
+                %without conc
+                last(X,[X|[]]).
+                
+                last(X,[Head|Tail]) :- last(X,Tail).
+                
+                %with conc ?
+                
+                
+                
+                % add item
+                add(X,L,[X|L]).
+                
+                
+                
+                
+                
+                
+                
+                female(canan).
+                female(elcin).
+                female(merve).
+                female(meltem).
+                
+                male(cuneyt).
+                male(mert).
+                male(murat).
+                male(cenk).
+                male(mahmut).
+                
+                
+                /*
+                  FOL sorularına bak
+                
+                  ? grandparent(X,Y).
+                
+                  (Ters E)x(Ters E)y grandparent(x,y).
+                */
+                
+                parent(mert,murat).
+                parent(mert,elcin).
+                parent(mert,cuneyt).
+                parent(canan,murat).
+                parent(canan,elcin).
+                parent(canan,cuneyt).
+                parent(merve,cenk).
+                parent(murat,cenk).
+                parent(meltem,mahmut).
+                parent(cuneyt,mahmut).
+                
+                
+                
+                mother(X,Y) :- parent(X,Y), female(X).
+                
+                father(X,Y) :- parent(X,Y), male(X).
+                
+                
+                sister(X,Y) :-  
+                          parent(Z,X),
+                          parent(Z,Y),
+                          female(X),
+                          X \= Y.
+                
+                brother(X,Y) :-  
+                          parent(Z,X),
+                          parent(Z,Y),
+                          male(X),
+                          X \= Y.
+                
+                sister_in_law(X,Y) :- mother(Y,N),father(M,N),sister(X,M). 
+                
+                
+                elti(X,Y) :- mother(Y,N),father(M,N),brother(M,Z),parent(Z,L),parent(X,L).
+                
+                
+                list([]).
+                
+                list([_|Rest]) :- list(Rest).
+                
+                
+                member2(X,[X|_]).
+                
+                member2(X,[_|Tail]) :- member2(X,Tail). 
+                
+                
+                prefix([],L) :- list(L).
+                
+                prefix([X|Rest1],[X|Rest2]) :- prefix(Rest1,Rest2).
+                
+                %?- prefix([a,b,c,d,e],[a,b,c,d]).
+                %false.
+                
+                %?- prefix([a,b,c,d],[a,b,c,d]).
+                %true.
+                
+                
+                
+                suffix(L,L).
+                
+                suffix(L,[_|Rest2]) :- suffix(L,Rest2).
+                
+                sublist1(Xs,Ys) :- prefix(Ps,Ys),suffix(Xs,Ps).
+                
+                
+                
+                append1([],L,L).
+                
+                append1([Head1|Rest1],Rest2,[Head1|L]) :- append(Rest1,Rest2,L).
+                
+                % Declarative'i görselleştirme ile yap.
+                
+                
+                
+                reverse1([],[]).
+                
+                reverse1([X|Xs],R) :- reverse(Xs,RXs),append(RXs,[X],R).
+                
+                
+                
+                % Reverse with accumulator.
+                
+                
+                
+                
+                reverse2([],[]).
+                
+                reverse2([Head|Tail],R) :- reverse(Tail,L),append(L,[Head],R). 
+                
+                
+                decrease([],[]).
+                
+                decrease([A|Rest1],[A|Rest2]) :- decrease(Rest1,Rest2).
+                
+                palindrome(A,B) :- reverse(A,X),decrease(B,X).
+                
+                
+                % Substract Division
+                % Towers of hanoi
+                % Fibonacci
+                
+                
+                %Base Clause
+                natural_number(0).
+                
+                %Recursive Clause
+                natural_number(N) :- M is N-1,natural_number(M).
+                
+                % 
+                
+                
+                %add(X,0) :- writeln(X).
+                
+                %add(X,Y) :- M is Y-1, Z is X+1 ,add(Z,M).
+                
+                %
+                %   Exponential (Üs alma)
+                %   Ackermann Function Prolog procedure
+                %
+                
+                
+                add2(0,X,X).
+                
+                add2(X,Y,Z) :- X&gt;0,M is X-1,N is Z-1,add2(M,Y,N).
+                
+                
+                
+                add(0,N,N).
+                
+                add(X,Y,R) :- M is X -1,
+                              add(M,Y,P),
+                              R is P+1.
+                
+                
+                
+                
+                %%%Natural Number
+                %Base Clause
+                natural_number(0).
+                
+                %Recursive Clause
+                natural_number(N) :- N &gt;0,
+                                     M is N-1, 
+                                     natural_number(M).
+                
+                %%%Addition
+                %base
+                
+                add(0,N,N) :- natural_number(N).
+                
+                %recursion
+                add(N,M,K) :- natural_number(N),
+                            T is N-1,
+                            add(T,M,P),
+                            K is P+1.
+                
+                %Multiplication
+                %base
+                mult(1,N,N) :- natural_number(N).
+                mult(0,N,0) :- natural_number(N).
+                
+                %recursion
+                mult(N,M,R) :-
+                            natural_number(N),
+                            T is N-1,
+                            mult(T,M,K),
+                            add(K,M,R).
+                
+                % üst alma 20 puan
+                
+                exp(N,1,N) :- natural_number(N).
+                
+                exp(0,N,0) :- natural_number(N).
+                
+                %exp(N,0,1) :- natural_number(N).
+                
+                
+                
+                
+                exp(X,Y,R) :-
+                          M is Y -1,
+                          exp(X,M,L),
+                          mult(X,L,R).
+                
+                        % Declarative olarak belirtmek için
+                        % X'in üssü Y  R' olması için Öyle bir sayı vardır ki Y  nin 1 eksiği gibi vs.
+                        % Amsterdam üniversitesine türkçe karakter sorunun bildirelim.
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                member(X,[X|Tail]).
+                
+                member(X,[Head|Tail]) :-
+                          member(X,Tail). 
+                
+                % Dict = [p(one,uno),p(two,dos),p(three,tres)],member(p(two,Sp),Dict). %
+                
+                
+                % Concatenation
+                
+                conc([],L,L).
+                
+                conc([X|L1],L2,[X|L3]) :- conc(L1,L2,L3).
+                
+                % conc([1,2],[a,b],R). R -&gt; [1,2,a,b]
+                
+                
+                % conc(Before,[may|After],[jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec]).
+                % Before = [jan, feb, mar, apr],
+                % After = [jun, jul, aug, sep, oct, nov, dec] .
+                
+                % Tail Liste olması zorunluyken
+                % Head herhangi bir şey olabilir Structure,Atom,List
+                
+                
+                %conc(_,[Month1,may,Month2|_],[jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec]).
+                % Month1 = apr Month2 = jun
+                
+                
+                %conc(L1,[c,d,e],[a,b,c,d,e]). Delete Last Three Elements from a list
+                
+                
+                % Delete First and Last 3 elements from a list L ?
+                
+                % Last Relation
+                last(Last,[Last|[]]).
+                
+                last(Last,[Head|Tail]) :- last(Last,Tail).
+                
+                
+                
+                
+                
+                
+                
+                hanoi(1,A,_,C,[A-&gt;C]).
+                
+                hanoi(N,A,B,C,Moves) :-
+                  N &gt; 1,
+                  M is N -1,
+                  hanoi(M,A,C,B,Moves1),
+                  append(Moves1,[A-&gt;C],Moves2),
+                  hanoi(M,B,A,C,Moves3),
+                  append(Moves2,Moves3,Moves).
+                </code></pre>
+                <h2 id="chapter4">Chapter 4</h2>
+                <pre><code class="prolog language-prolog">link(a,b).
+                link(b,d).
+                link(d,e).
+                link(c,f).
+                link(d,f).
+                link(a,c).
+                link(c,d).
+                link(f,a).
+                
+                list([]).
+                
+                list([_|Rest]) :- list(Rest).
+                
+                conc([],L,L).
+                
+                conc([X|Rest1],Y,[X|Rest2]) :- conc(Rest1,Y,Rest2).
+                
+                
+                % Depth First Search
+                path(Node,Node,[Node]).
+                
+                path(StartNode,EndNode,[StartNode|Rest]) :- link(StartNode,NextNode),path(NextNode,EndNode,Rest). 
+                
+                
+                
+                %Breadth First Search
+                
+                % conc(Path,_,_),path(a,c,Path).
+                % ask
+                % list(Path),path(a,c,Path)
+                % same as
+                % path(a,c,[_,_]).
+                
+                
+                
+                
+                % State of the robot's world = state(RobotLocation,BasketLocation,RubbishLocation)
+                % action(State,Action,NewState) Action in State produces NewState
+                % We assume robot never drops rubbish to flor,and never pushes rubbish arround
+                
+                
+                action(state(Pos1,Pos2,floor(Pos1)), % Robot and rubbish both at Pos1 
+                                            pickup, % Pic up rubbish from floor
+                                            state(Pos1,Pos2,held)). % Rubbuish now held by robot
+                
+                action(state(Pos,Pos,held), % Robot and Basket both at Pos
+                                    drop, % Drop rubbish to basket
+                                    state(Pos,Pos,in_basket)). % Rubbish now in basket
+                
+                action(state(Pos,Pos,Loc), % Robot and Basket both pos
+                              push(Pos,NewPos), % Push basket from Pos to NewPos
+                              state(NewPos,NewPos,Loc)). % Robot and basket now at NewPos
+                
+                action(state(Pos1,Pos2,Loc),
+                                  go(Pos1,NewPos1), % Go from Pos1 to NewPos1
+                                  state(NewPos1,Pos2,Loc)).
+                
+                
+                
+                
+                
+                % plan(StartState,FinalState,[])
+                
+                plan(State,State,[]). % To achieve State from State itself,do nothing.
+                
+                plan(State1,GoalState,[Action1|RestOfPlan]) :-
+                                          action(State1,Action1,State2),
+                                          plan(State2,GoalState,RestOfPlan).
+                </code></pre>
+                <h2 id="nlp">NLP</h2>
+                <pre><code class="prolog language-prolog">initial(q0).
+                final(q3).
+                final(q4).
+                
+                t(q0,a,q1).
+                t(q0,ı,q1).
+                t(q0,o,q1).
+                t(q0,u,q1).
+                
+                t(q0,e,q2).
+                t(q0,i,q2).
+                t(q0,ö,q2).
+                t(q0,ü,q2).
+                
+                t(q1,a,q3).
+                t(q1,ı,q3).
+                t(q1,o,q3).
+                t(q1,u,q3).
+                
+                t(q1,e,qf).
+                t(q1,i,qf).
+                t(q1,ö,qf).
+                t(q1,ü,qf).
+                
+                t(q2,a,qf).
+                t(q2,ı,qf).
+                t(q2,o,qf).
+                t(q2,u,qf).
+                
+                t(q2,e,q4).
+                t(q2,i,q4).
+                t(q2,ö,q4).
+                t(q2,ü,q4).
+                
+                t(q3,a,q3).
+                t(q3,ı,q3).
+                t(q3,o,q3).
+                t(q3,u,q3).
+                
+                t(q3,e,qf).
+                t(q3,i,qf).
+                t(q3,ü,qf).
+                t(q3,ö,qf).
+                
+                t(q4,a,qf).
+                t(q4,ı,qf).
+                t(q4,o,qf).
+                t(q4,u,qf).
+                
+                t(q4,e,q4).
+                t(q4,i,q4).
+                t(q4,ö,q4).
+                t(q4,ü,q4).
+                
+                t(qf,a,qf).
+                t(qf,ı,qf).
+                t(qf,o,qf).
+                t(qf,u,qf).
+                t(qf,e,qf).
+                t(qf,i,qf).
+                t(qf,ö,qf).
+                t(qf,ü,qf).
+                
+                t(X,A,X) :- consonant(A).
+                
+                consonant(b).
+                consonant(c).
+                consonant(ç).
+                consonant(d).
+                consonant(f).
+                consonant(g).
+                consonant(ğ).
+                consonant(h).
+                consonant(j).
+                consonant(k).
+                consonant(l).
+                consonant(m).
+                consonant(n).
+                consonant(p).
+                consonant(r).
+                consonant(s).
+                consonant(ş).
+                consonant(t).
+                consonant(v).
+                consonant(y).
+                consonant(z).
+                
+                traverse(String):- initial(State),
+                                   traverse(String,State).
+                
+                traverse('', State):- final(State).
+                
+                traverse(String, CurrentState) :- 
+                                                  concat(First,Rest,String),
+                                                  t(CurrentState, First, NextState),
+                                                  traverse(Rest,NextState).
+                
+                consonant(b).
+                consonant(c).
+                consonant(ç).
+                consonant(d).
+                consonant(f).
+                consonant(g).
+                consonant(ğ).
+                consonant(h).
+                consonant(j).
+                consonant(k).
+                consonant(l).
+                consonant(m).
+                consonant(n).
+                consonant(p).
+                consonant(r).
+                consonant(s).
+                consonant(ş).
+                consonant(t).
+                consonant(v).
+                consonant(y).
+                consonant(z).
+                
+                initial(q0).
+                final(q0).
+                final(q1).
+                final(q2).
+                final(q3).
+                final(q4).
+                final(q5).
+                final(q6).
+                final(q7).
+                final(q8).
+                
+                
+                t(q0,a,q1).
+                t(q0,e,q2).
+                t(q0,ı,q3).
+                t(q0,i,q4).
+                t(q0,o,q5).
+                t(q0,ö,q6).
+                t(q0,u,q7).
+                t(q0,ü,q8).
+                t(q1,a,q1).
+                t(q1,ı,q3).
+                t(q3,ı,q3).
+                t(q3,a,q1).
+                t(q5,a,q1).
+                t(q5,u,q7).
+                t(q7,u,q7).
+                t(q7,a,q1).
+                t(q2,e,q2).
+                t(q2,i,q4).
+                t(q4,i,q4).
+                t(q4,e,q2).
+                t(q6,e,q2).
+                t(q6,ü,q8).
+                t(q8,ü,q8).
+                t(q8,e,q2).
+                t(X,A,X) :- consonant(A).
+                
+                % start
+                
+                check_vowel_harmony(String) :- initial(State),check_vowel_harmony(String,State).
+                
+                
+                % end
+                
+                check_vowel_harmony('',State) :- final(State).
+                
+                % in-between
+                
+                check_vowel_harmony(String,State) :- 
+                    concat(First,Rest,String),
+                    t(State,First,NextState),
+                    check_vowel_harmony(Rest,NextState).
+                
+                
+                :- op(1100,xfy,'==&gt;').
+                :- op(1100,xfy,'=&gt;').
+                
+                %%% Grammar
+                % Lexicon
+                n =&gt; [dogs].
+                n =&gt; [bones].
+                adj =&gt; [black].
+                adj =&gt; [big].
+                adj =&gt; [furry].
+                v =&gt; [bark].
+                v =&gt; [eat].
+                v =&gt; [eating].
+                adv =&gt; [loudly].
+                adv =&gt; [quickly].
+                d =&gt; [the].
+                d =&gt; [a].
+                t =&gt; [are].
+                t =&gt; [do].
+                
+                % Phrase Structure Rules
+                tp ==&gt; dp, t1.
+                t1 ==&gt; t, vp.
+                t1 ==&gt; t, adjP.
+                t1 ==&gt; t, dp.
+                t1 ==&gt; vp.
+                np ==&gt; n.
+                np ==&gt; adjP,np.
+                vp ==&gt; v.
+                vp ==&gt; v, dp.
+                vp ==&gt; vp, advP.
+                vp ==&gt; advP,vp.
+                advP ==&gt; adv.
+                adjP ==&gt; adj.
+                dp ==&gt; d, np.
+                dp ==&gt; np.
+                
+                
+                % Shift-Reduce Parser
+                % Base
+                sr_parser([tp],[]).
+                
+                % Shift Phase
+                sr_parser(Stack,[Word|Rest]) :-
+                    (Cat =&gt; [Word]),
+                    sr_parser([Cat|Stack],Rest).
+                
+                % Reduce Phase
+                
+                sr_parser([X|Rest_Of_Stack],String) :-
+                    (Y ==&gt; X),
+                    sr_parser([Y|Rest_Of_Stack],String).
+                
+                sr_parser([Y,X|Rest_Of_Stack],String) :-
+                    (Z ==&gt; X,Y),
+                    sr_parser([Z|Rest_Of_Stack],String).
+                initial(q0).
+                final(q0).
+                final(q1).
+                final(q2).
+                final(q3).
+                final(q4a).
+                final(q4b).
+                
+                t(q0,noun,q1).
+                t(q1,plur,q2).
+                t(q1,poss,q3).
+                t(q1,acc,q4a).
+                t(q1,dat,q4a).
+                t(q1,abl,q4a).
+                t(q1,inst,q4a).
+                t(q1,loc,q4b).
+                t(q1,gen,q4b).
+                t(q2,poss,q3).
+                t(q2,acc,q4a).
+                t(q2,dat,q4a).
+                t(q2,abl,q4a).
+                t(q2,inst,q4a).
+                t(q2,loc,q4b).
+                t(q2,gen,q4b).
+                t(q3,acc,q4a).
+                t(q3,dat,q4a).
+                t(q3,loc,q4b).
+                t(q3,abl,q4a).
+                t(q3,inst,q4a).
+                t(q3,gen,q4b).
+                t(q4b,rel,q1).
+                
+                morpheme(noun,köpek).
+                morpheme(noun,kedi).
+                morpheme(plur,ler).
+                morpheme(plur,lar).
+                morpheme(poss,i).
+                morpheme(poss,imiz).
+                morpheme(acc,i).
+                morpheme(acc,ı).
+                morpheme(acc,ni).
+                morpheme(acc,nı).
+                morpheme(dat,e).
+                morpheme(dat,a).
+                morpheme(dat,ye).
+                morpheme(dat,ya).
+                morpheme(dat,ne).
+                morpheme(dat,na).
+                morpheme(abl,ten).
+                morpheme(abl,tan).
+                morpheme(abl,nden).
+                morpheme(abl,ndan).
+                morpheme(inst,le).
+                morpheme(inst,la).
+                morpheme(inst,yle).
+                morpheme(inst,yla).
+                morpheme(loc,de).
+                morpheme(loc,da).
+                morpheme(loc,te).
+                morpheme(loc,ta).
+                morpheme(loc,nde).
+                morpheme(loc,nda).
+                morpheme(gen,in).
+                morpheme(gen,ın).
+                morpheme(gen,un).
+                morpheme(gen,ün).
+                morpheme(gen,nin).
+                morpheme(gen,nün).
+                morpheme(gen,nun).
+                morpheme(gen,nın).
+                morpheme(rel,ki).
+                
+                % nominal isim soylu
+                % verbal fiil soylu
+                
+                word_inflection(String,Morphemes) :- 
+                                            initial(State),
+                                            word_inflection(String,State,Morphemes).
+                word_inflection('',State,[]) :-
+                                            final(State).
+                
+                word_inflection(String,State,[Morpheme|Rest_Of_Morphemes]) :-
+                       concat(Allomorph,Rest,String),
+                       morpheme(Morpheme,Allomorph),
+                       t(State,Morpheme,NextState),
+                       word_inflection(Rest,NextState,Rest_Of_Morphemes).
+                
+                :- op(1100,xfy,'==&gt;'). % direktif tanımlıyoruz
+                :- op(1100,xfy,'=&gt;'). 
+                
+                d =&gt; [fido].
+                d =&gt; [pumpkin].
+                v =&gt; [barks].
+                v =&gt; [chases].
+                
+                
+                tp ==&gt; dp, tbar.
+                tbar ==&gt; t,vp.
+                tbar ==&gt; t,adjP.
+                tbar ==&gt; t,dp.
+                tbar ==&gt; vp.
+                np ==&gt; n.
+                np ==&gt; adjP,np.
+                vp ==&gt; v.
+                vp ==&gt; v,dp.
+                vp ==&gt; vp,advP.
+                vp ==&gt; advP,vp.
+                advP ==&gt; adv.
+                adjP ==&gt; adj.
+                dp ==&gt; d,np.
+                dp ==&gt; np.
+                dp ==&gt; d.
+                
+                
+                
+                
+                % Base Condition
+                sr_parser([tp],[]).
+                
+                % Shift Phase
+                sr_parser(Stack,[Word|Rest]) :-
+                    (Cat =&gt; [Word]),
+                    sr_parser([Cat|Stack],Rest).
+                
+                % Reduce Phase
+                
+                sr_parser([X|Rest_Of_Stack],String) :-
+                    (Y ==&gt; X),
+                    sr_parser([Y|Rest_Of_Stack],String).
+                
+                sr_parser([Y,X|Rest_Of_Stack],String) :-
+                    (Z ==&gt; X,Y),
+                    sr_parser([Z|Rest_Of_Stack],String).
+                
+                
+                :- op(1100,xfy,'==&gt;').
+                :- op(1100,xfy,'=&gt;').
+                
+                %%% Grammar
+                % Lexicon
+                d(f) =&gt; [fido].
+                d(p) =&gt; [pumpkin].
+                v(X^bark(X)) =&gt; [barks].
+                v(Y^X^(chase(X,Y))) =&gt; [chases].
+                
+                
+                % Phrase Structure Rules
+                tp(SEM) ==&gt; dp(X), t1(X^SEM).
+                t1(SEM) ==&gt; vp(SEM).
+                vp(SEM) ==&gt; v(SEM).
+                vp(SEM) ==&gt; v(Y^SEM), dp(Y).
+                dp(SEM) ==&gt; d(SEM).
+                
+                
+                % Shift-Reduce Parser
+                % Base
+                sr_parse([C],[],SEM):- C =.. [_|[SEM]].
+                
+                % Shift
+                sr_parse(Stack,[Word|Words],C):-
+                  (Cat =&gt; [Word]),
+                  sr_parse([Cat|Stack],Words,C).
+                
+                % Reduce
+                sr_parse([X|Rest],String,C):-
+                  (Y ==&gt; X),
+                  sr_parse([Y|Rest],String,C).
+                
+                sr_parse([Y,X|Rest],String,C):-
+                  (Z ==&gt; X, Y),
+                  sr_parse([Z|Rest],String,C).
+                
+                :- op(1100,xfy,'==&gt;'). % direktif tanımlıyoruz
+                :- op(1100,xfy,'=&gt;'). 
+                
+                n =&gt; [dogs].
+                n =&gt; [bones].
+                adj =&gt; [black].
+                adj =&gt; [big].
+                adj =&gt; [furry].
+                v =&gt; [bark].
+                v =&gt; [eat].
+                v =&gt; [eating].
+                adv =&gt; [loudly].
+                adv =&gt; [quickly].
+                d =&gt; [the].
+                d =&gt; [a].
+                t =&gt; [are].
+                t =&gt; [do].
+                
+                tp ==&gt; dp, tbar.
+                tbar ==&gt; t,vp.
+                tbar ==&gt; t,adjP.
+                tbar ==&gt; t,dp.
+                tbar ==&gt; vp.
+                np ==&gt; n.
+                np ==&gt; adjP,np.
+                vp ==&gt; v.
+                vp ==&gt; v,dp.
+                vp ==&gt; vp,advP.
+                vp ==&gt; advP,vp.
+                advP ==&gt; adv.
+                adjP ==&gt; adj.
+                dp ==&gt; d,np.
+                dp ==&gt; np.
+                
+                
+                
+                
+                % Base Condition
+                sr_parser([tp],[]).
+                
+                % Shift Phase
+                sr_parser(Stack,[Word|Rest]) :-
+                    (Cat =&gt; [Word]),
+                    sr_parser([Cat|Stack],Rest).
+                
+                % Reduce Phase
+                
+                sr_parser([X|Rest_Of_Stack],String) :-
+                    (Y ==&gt; X),
+                    sr_parser([Y|Rest_Of_Stack],String).
+                
+                sr_parser([Y,X|Rest_Of_Stack],String) :-
+                    (Z ==&gt; X,Y),
+                    sr_parser([Z|Rest_Of_Stack],String).
+                
+                :- op(1100,xfy,'==&gt;'). % direktif tanımlıyoruz
+                :- op(1100,xfy,'=&gt;'). 
+                
+                n =&gt; [dogs].
+                n =&gt; [bones].
+                adj =&gt; [black].
+                adj =&gt; [big].
+                adj =&gt; [furry].
+                v =&gt; [bark].
+                v =&gt; [eat].
+                v =&gt; [eating].
+                adv =&gt; [loudly].
+                adv =&gt; [quickly].
+                d =&gt; [the].
+                d =&gt; [a].
+                t =&gt; [are].
+                t =&gt; [do].
+                
+                tp ==&gt; dp, tbar.
+                tbar ==&gt; t,vp.
+                tbar ==&gt; t,adjP.
+                tbar ==&gt; t,dp.
+                tbar ==&gt; vp.
+                np ==&gt; n.
+                np ==&gt; adjP,np.
+                vp ==&gt; v.
+                vp ==&gt; v,dp.
+                vp ==&gt; vp,advP.
+                vp ==&gt; advP,vp.
+                advP ==&gt; adv.
+                adjP ==&gt; adj.
+                dp ==&gt; d,np.
+                dp ==&gt; np.
+                
+                
+                
+                
+                % Base Condition
+                sr_parser([tp],[]).
+                
+                % Shift Phase
+                sr_parser(Stack,[Word|Rest]) :-
+                    (Cat =&gt; [Word]),
+                    sr_parser([Cat|Stack],Rest).
+                
+                % Reduce Phase
+                
+                sr_parser([X|Rest_Of_Stack],String) :-
+                    (Y ==&gt; X),
+                    sr_parser([Y|Rest_Of_Stack],String).
+                
+                sr_parser([Y,X|Rest_Of_Stack],String) :-
+                    (Z ==&gt; X,Y),
+                    sr_parser([Z|Rest_Of_Stack],String).
+                </code></pre></div>
+</body>
+</html>
