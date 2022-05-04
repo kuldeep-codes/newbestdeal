@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 3</title>
+</head>
+<body>
+
+<pre>
+
+    1.
+
+................................Linear Regression OLS Model......................................
+
+#Simple Linear regression
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt 
+import seaborn as sns
+
+Dframe = pd.DataFrame(pd.read_csv("C:/Users/user2/Downloads/Salary_Data - Salary_Data.csv"))
+Dframe
+x = Dframe['YearsExperience']
+y = Dframe['Salary']
+from sklearn.model_selection import train_test_split
+x_train , x_test , y_train , y_test = train_test_split(Dframe["YearsExperience"],Dframe["Salary"],test_size=0.3)
+N = len(x)
+x_mean = x.mean()
+y_mean = y.mean()
+B1_num = ((x - x_mean)*(y - y_mean)).sum()
+B1_den = ((x - x_mean)**2).sum()
+B1 = B1_num / B1_den
+B0 = y_mean - (B1*x_mean)
+print(B0)
+print(B1)
+class OLS:
+    def _init_(self):
+        self.B0 = 0
+        self.B1 = 0
+    def train(self,x_train,y_train):
+        x_mean = x_train.mean()
+        y_mean = y_train.mean()
+        num = 0
+        den = 0
+        for (x,y) in zip(x_train, y_train):
+            num = num + (x - x_mean)*(y - y_mean)
+            den = den + (x-x_mean)**2
+        self.B1 = num/den
+        self.B0 = y_mean - (self.B1*x_mean)
+    def predict(self , x_test):
+        y_predict = []
+        for x in x_test:
+            y_predict.append((self.B0 + self.B1*x))
+        return y_predict
+model = OLS()
+model.train(x_train, y_train)
+y_testing_data = model.predict(x_test)
+y_trainingPredict = model.predict(x_train)
+
+plt.scatter(Dframe["YearsExperience"], Dframe["Salary"])
+plt.scatter(x_train,y_train,color="green")
+plt.plot(x_test, y_testing_data)
+plt.plot(x_train, y_trainingPredict)
+plt.show()
+
+
+..........OLS Model direct with library...........
+
+import warnings
+warnings.filterwarnings('ignore')
+
+import numpy as np
+import pandas as pd
+
+import statsmodels.api as sm
+
+import matplotlib.pyplot as plt 
+import seaborn as sns
+
+DFrame = pd.DataFrame(pd.read_csv("C:/Users/prave/Desktop/advertising.csv"))
+DFrame.head()
+sns.heatmap(DFrame.corr(), cmap="YlGnBu", annot = True)
+plt.show()
+X = DFrame['TV']
+Y = DFrame['Sales']
+from sklearn.model_selection import train_test_split
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, train_size = 0.7, test_size = 0.3, random_state = 100)
+X_train_sm = sm.add_constant(X_train)
+
+lr = sm.OLS(Y_train, X_train_sm).fit()
+lr.params
+print(lr.summary())
+plt.scatter(X_train, Y_train)
+plt.plot(X_train, 6.989 + 0.046*X_train, 'r')
+plt.show()
+Y_train_pre = lr.predict(X_train_sm)
+res = (Y_train - Y_train_pre)
+fig = plt.figure()
+sns.distplot(res, bins = 15)
+fig.suptitle('Error Terms', fontsize = 15)
+plt.xlabel('Y_train - Y_train_pre', fontsize = 15)
+plt.show()
+
+............Linear Regression with gradient descent.........
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+plt.rcParams['figure.figsize'] = (12.0, 9.0)
+
+# Preprocessing Input data
+data = pd.read_csv('data.csv')
+X = data.iloc[:, 0]
+Y = data.iloc[:, 1]
+plt.scatter(X, Y)
+plt.show()
+
+# Building the model
+m = 0
+c = 0
+
+L = 0.0001  # The learning Rate
+epochs = 1000  # The number of iterations to perform gradient descent
+
+n = float(len(X)) # Number of elements in X
+
+# Performing Gradient Descent 
+for i in range(epochs): 
+    Y_pred = m*X + c  # The current predicted value of Y
+    D_m = (-2/n) * sum(X * (Y - Y_pred))  # Derivative wrt m
+    D_c = (-2/n) * sum(Y - Y_pred)  # Derivative wrt c
+    m = m - L * D_m  # Update m
+    c = c - L * D_c  # Update c
+    
+print (m, c)
+# Making predictions
+Y_pred = m*X + c
+
+plt.scatter(X, Y) 
+plt.plot([min(X), max(X)], [min(Y_pred), max(Y_pred)], color='red')  # regression line
+plt.show()
+
+2.
+.......................LOGISTIC REGRESSION...........................
+#With Gradient Descent
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+import seaborn as sns
+from math import exp
+from sklearn.metrics import confusion_matrix
+
+data = pd.read_csv( "C://Users//prave//Desktop//Social_Network_Ads.csv" )
+data.head()
+plt.scatter(data['Age'], data['Purchased'])
+plt.show()
+x_train, x_test, y_train, y_test = train_test_split(data['Age'], data['Purchased'], test_size = 0.3)
+b0_ls = []
+b1_ls = []
+def normalize(X):
+    return X - X.mean()
+
+def predict(X, b0, b1):
+    return np.array([1 / (1 + exp(-1 + b0 + -1*b1 * x)) for x in X])
+
+def logistic_regression(X, Y):
+    X = normalize(X)
+    b0 = 0
+    b1 = 0
+    L = 0.001
+    epochs = 150
+    
+    for epoch in range(epochs):
+        y_pred = predict(X, b0, b1)
+        D_b0 = -2 * sum((Y - y_pred) * y_pred * (1 - y_pred))
+        D_b1 = -2 * sum((Y - y_pred) * y_pred * (1 - y_pred) * X)
+        b0 = b0 - L * D_b0
+        b1 = b1 - L * D_b1
+        b0_ls.append(b0)
+        b1_ls.append(b1)
+acrcy = 0
+for i in range(len(y_pred)):
+    if y_pred[i] == y_test.iloc[i]:
+        accuracy +=1
+        
+print(f"Accuracy = {acrcy / len(y_pred)}")
+rf_cm = confusion_matrix(y_test, y_pred)
+f, ax = plt.subplots(figsize=(5,5))
+sns.heatmap(rf_cm, annot=True, linewidth=0.7, linecolor='black', fmt='g', ax=ax, cmap="BuPu")
+plt.title('Social Network Ads - Confusion Matrix')
+plt.xlabel('Y predict')
+plt.ylabel('Y test')
+plt.show()
+TP = 48
+TN = 31
+FP = 38
+FN = 6
+
+FPR = FP / (FP + TN)
+
+TPR = TP / (TP + FN)
+print(f"Sensitivity = ", TPR)
+TNR = TN / (TN + FP)
+print(f"Specificity = ", TNR)
+testAccuracy = []
+trainAccuracy = []
+def calculateAccuracy(accuracyList, pred, test):
+    accuracy = 0
+    for i in range(len(pred)):
+        if pred[i] == test.iloc[i]:
+            accuracy +=1
+        accuracyList.append(accuracy)
+    return accuracy
+
+accuracy = calculateAccuracy(testAccuracy, y_pred, y_test)
+
+accuracyTrain = calculateAccuracy(trainAccuracy, y_pred, y_train)
+iter = [x for x in range(0,len(y_pred))]
+print(f"Accuracy = {accuracy / len(y_pred)}")
+plt.plot(iter, testAccuracy, label="testAccuracy")
+plt.plot(iter, trainAccuracy, label="trainAccuracy")
+plt.legend()
+plt.show()
+sensitivity = []
+specificity = []
+
+logistic_regression(x_train, y_train)
+
+x_test_normal = normalize(x_test)
+x_train_normal = normalize(x_train)
+for i in range(150):
+    y_pred = predict(x_test_normal, b0_ls[i], b1_ls[i])
+    y_train_pred = predict(x_train_normal,b0_ls[i], b1_ls[i])
+    y_pred = [1 if y>=0.5 else 0 for y in y_pred]
+    y_train_pred = [1 if y>=0.5 else 0 for y in y_train_pred]
+
+    rfcla_cm = confusion_matrix(y_test, y_pred)
+    sensitivity.append( rfcla_cm[1][1]/(rfcla_cm[1][0]+rfcla_cm[1][1]))
+    specificity.append( 1 - (rfcla_cm[0][0]/(rfcla_cm[0][0]+rfcla_cm[0][1])))
+    testAccuracy.append((rfcla_cm[0][0]+rfcla_cm[1][1])/(rfcla_cm[0][0]+rfcla_cm[0][1]+rfcla_cm[1][0]+rfcla_cm[1][1]))
+    cm = confusion_matrix(y_train, y_train_pred)
+    trainAccuracy.append((cm[0][0]+cm[1][1])/(cm[0][0]+cm[0][1]+cm[1][0]+cm[1][1]))
+plt.plot(specificity, sensitivity)
+plt.xlabel("1-Specificity")
+plt.ylabel("Sensitivity")
+plt.show()
+
+3. .......................NAIVE BAYES...........................................
+import numpy as np
+import pandas as pd
+from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn import metrics
+from sklearn.preprocessing import StandardScaler
+data = load_wine()
+x = data.data
+y = data.target
+#Splitting the data into training and test series.
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 1)
+gnb = GaussianNB()
+gnb.fit(x_train, y_train)
+y_pred = gnb.predict(x_test)
+print('Gaussian Naive Bayes model accuracy (%) :', metrics.accuracy_score(y_test, y_pred)*100)
+
+#WITHOUT NORMALIZING
+scaler = StandardScaler()
+scaler.fit(x)
+x_train = scaler.transform(x_train)
+x_test = scaler.transform(x_test)
+
+gnb.fit(x_train, y_train)
+y_pred = gnb.predict(x_test)
+print('Gaussian Naive Bayes model accuracy (%) :', metrics.accuracy_score(y_test, y_pred)*100)
+
+4.......................KNN........................................................
+# importing libraries  
+import numpy as nm  
+import matplotlib.pyplot as mtp  
+import pandas as pd  
+  
+#importing datasets  
+data_set= pd.read_csv('user_data.csv')  
+  
+#Extracting Independent and dependent Variable  
+x= data_set.iloc[:, [2,3]].values  
+y= data_set.iloc[:, 4].values  
+  
+# Splitting the dataset into training and test set.  
+from sklearn.model_selection import train_test_split  
+x_train, x_test, y_train, y_test= train_test_split(x, y, test_size= 0.25, random_state=0)  
+  
+#feature Scaling  
+from sklearn.preprocessing import StandardScaler    
+st_x= StandardScaler()    
+x_train= st_x.fit_transform(x_train)    
+x_test= st_x.transform(x_test)
+
+#Fitting K-NN classifier to the training set  
+from sklearn.neighbors import KNeighborsClassifier  
+classifier= KNeighborsClassifier(n_neighbors=5, metric='minkowski', p=2 )  
+classifier.fit(x_train, y_train)  
+
+#Predicting the test set result  
+y_pred= classifier.predict(x_test) 
+
+#Creating the Confusion matrix  
+    from sklearn.metrics import confusion_matrix  
+    cm= confusion_matrix(y_test, y_pred)
+
+5.........................DECISION TREE....................................................
+import sklearn.datasets as skD
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split,cross_val_score
+from sklearn.metrics import confusion_matrix,accuracy_score,ConfusionMatrixDisplay
+irisData,irisTarget = skD.load_iris(return_X_y=True, as_frame = True)
+xTrain, xTest, yTrain, yTest = train_test_split(irisData,irisTarget,test_size=0.3)
+xTrain, xValidate, yTrain, yValidate = train_test_split(xTrain,yTrain,test_size=0.1)
+decisionModel= DecisionTreeClassifier(criterion="gini",min_samples_split=2)
+decisionModel.fit(xTrain,yTrain)
+tree.plot_tree(decisionModel,max_depth=900)
+print("Train Accuracy: ", cross_val_score(decisionModel,xTrain,yTrain,cv=3,scoring='accuracy').mean())
+yPred = decisionModel.predict(xValidate)
+print("Validation accuracy: ",accuracy_score(yValidate,yPred))
+yTestPred = decisionModel.predict(xTest)
+print("Testing accuracy: ",accuracy_score(yTest,yTestPred))
+cfM = confusion_matrix(yTest, yTestPred)
+matrix = ConfusionMatrixDisplay(cfM)
+matrix.plot()
+plt.show()
+
+
+6.............................ANN..........................................
+#on a dataset
+#Importing necessary Libraries
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+#Loading Dataset
+data = pd.read_csv("Churn_Modelling.csv")
+#Generating Matrix of Features
+X = data.iloc[:,3:-1].values
+#Generating Dependent Variable Vectors
+Y = data.iloc[:,-1].values
+#Encoding Categorical Variable Gender
+from sklearn.preprocessing import LabelEncoder
+LE1 = LabelEncoder()
+X[:,2] = np.array(LE1.fit_transform(X[:,2]))
+#Encoding Categorical variable Geography
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+ct =ColumnTransformer(transformers=[('encoder',OneHotEncoder(),[1])],remainder="passthrough")
+X = np.array(ct.fit_transform(X))
+#Splitting dataset into training and testing dataset
+from sklearn.model_selection import train_test_split
+X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,random_state=0)
+#Performing Feature Scaling
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+#Initialising ANN
+ann = tf.keras.models.Sequential()
+#Adding First Hidden Layer
+ann.add(tf.keras.layers.Dense(units=6,activation="relu"))
+ #Adding Second Hidden Layer
+ann.add(tf.keras.layers.Dense(units=6,activation="relu"))
+ #Adding Output Layer
+ann.add(tf.keras.layers.Dense(units=1,activation="sigmoid"))
+#Compiling ANN
+ann.compile(optimizer="adam",loss="binary_crossentropy",metrics=['accuracy'])
+#Fitting ANN
+ann.fit(X_train,Y_train,batch_size=32,epochs = 100)
+
+............PERCEPTRON FOR AND FUNCTION.......................
+import numpy as np
+def sigmoid(model,type="sigmoid"):
+  return{
+      "sigmoid":1/(1+np.exp(-model))
+  }[type]
+def perceptronModel(weights,inputs,bias):
+  model = np.add(np.dot(inputs,weights),bias)
+  logic=sigmoid(model,type="sigmoid")
+  return np.round(logic)
+def compute(data, logicGate, weights, bias):
+  weights = np.array(weights)
+  output = np.array([perceptronModel(weights,datum,bias) for datum in data])
+  return output
+
+def display(dataset, name, data):
+  print("Logic Function: AND")
+  print("X1\tX2\tX3\tY")
+  toPrint = ["{1}\t{2}\t{3}\t{0}".format(output, *datas)  
+              for datas, output in zip(dataset, data)]
+  for i in toPrint:
+       print(i)
+def input():
+  dataset=np.array([
+     [0, 0, 0],
+     [0, 0, 1],
+     [0, 1, 0],
+     [0, 1, 1],
+     [1, 0, 0],
+     [1, 0, 1],
+     [1, 1, 0],
+     [1, 1, 1]
+   ])
+
+  logicGate = {
+       "and": compute(dataset, "and", [1, 1, 1], -2),
+      }
+  
+  display(dataset, "and", logicGate['and'])
+  
+if __name__ == '__main__':
+   input()
+.........................PERCEPTRON FOR OR FUNCTION....................
+
+# importing Python library
+import numpy as np
+  
+# define Unit Step Function
+def unitStep(v):
+    if v >= 0:
+        return 1
+    else:
+        return 0
+  
+# design Perceptron Model
+def perceptronModel(x, w, b):
+    v = np.dot(w, x) + b
+    y = unitStep(v)
+    return y
+  
+# OR Logic Function
+# w1 = 1, w2 = 1, b = -0.5
+def OR_logicFunction(x):
+    w = np.array([1, 1])
+    b = -0.5
+    return perceptronModel(x, w, b)
+  
+# testing the Perceptron Model
+test1 = np.array([0, 1])
+test2 = np.array([1, 1])
+test3 = np.array([0, 0])
+test4 = np.array([1, 0])
+  
+print("OR({}, {}) = {}".format(0, 1, OR_logicFunction(test1)))
+print("OR({}, {}) = {}".format(1, 1, OR_logicFunction(test2)))
+print("OR({}, {}) = {}".format(0, 0, OR_logicFunction(test3)))
+print("OR({}, {}) = {}".format(1, 0, OR_logicFunction(test4)))
+
+7..........................SVM...........................................
+#Data Pre-processing Step  
+# importing libraries  
+import numpy as nm  
+import matplotlib.pyplot as mtp  
+import pandas as pd  
+  
+#importing datasets  
+data_set= pd.read_csv('user_data.csv')  
+  
+#Extracting Independent and dependent Variable  
+x= data_set.iloc[:, [2,3]].values  
+y= data_set.iloc[:, 4].values  
+  
+# Splitting the dataset into training and test set.  
+from sklearn.model_selection import train_test_split  
+x_train, x_test, y_train, y_test= train_test_split(x, y, test_size= 0.25, random_state=0)  
+#feature Scaling  
+from sklearn.preprocessing import StandardScaler    
+st_x= StandardScaler()    
+x_train= st_x.fit_transform(x_train)    
+x_test= st_x.transform(x_test) 
+
+from sklearn.svm import SVC # "Support vector classifier"  
+classifier = SVC(kernel='linear', random_state=0)  
+classifier.fit(x_train, y_train)
+
+#Predicting the test set result  
+y_pred= classifier.predict(x_test)  
+#Creating the Confusion matrix  
+from sklearn.metrics import confusion_matrix  
+cm= confusion_matrix(y_test, y_pred)
+
+8............................Heirarchical Clusterring Agglomerative...................................
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+#from sklearn.cluster import hierarchical
+from sklearn.cluster import DBSCAN
+import pandas as pd
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.datasets import load_iris
+iris = pd.read_csv('iris.csv')
+iris
+sep_l = iris.values[:,0]
+pet_l = iris.values[:,1]
+for i in range(150):
+    if i<=49:
+        plt.plot(iris.values[i:,1],iris.values[i:,2],'ro')
+    if i>49 and i<=99:
+        plt.plot(iris.values[i:,1],iris.values[i:,2],'bo')
+    if i>99:
+        plt.plot(iris.values[i:,1],iris.values[i:,2],'go')        
+plt.show()        
+plt.plot(iris.values[:,1],iris.values[:,2],'ro')
+plt.show()
+estimator2 = AgglomerativeClustering(n_clusters=3)
+estimator2.fit(iris.values[:,1:3])
+for i in range(150):
+    if estimator2.labels_[i]==0:
+        plt.plot(iris.values[i:,1],iris.values[i:,2],'go')
+    elif estimator2.labels_[i]==1:
+        plt.plot(iris.values[i:,1],iris.values[i:,2],'ro')
+    elif estimator2.labels_[i]==2:
+        plt.plot(iris.values[i:,1],iris.values[i:,2],'bo')
+plt.show()  
+
+...............KMEANS CLUSSTERING...................
+
+estimator1 = KMeans(n_clusters=3)
+estimator1.fit(iris.values[:,1:3])
+for i in range(150):
+    if estimator1.labels_[i]==0:
+        plt.plot(iris.values[i:,1],iris.values[i:,2],'go')
+        plt.plot(estimator1.cluster_centers_[:,0],estimator1.cluster_centers_[:,1],'o',c='black')
+    elif estimator1.labels_[i]==1:
+        plt.plot(iris.values[i:,1],iris.values[i:,2],'ro')
+        plt.plot(estimator1.cluster_centers_[:,0],estimator1.cluster_centers_[:,1],'o',c='black')
+    elif estimator1.labels_[i]==2:
+        plt.plot(iris.values[i:,1],iris.values[i:,2],'bo')
+        plt.plot(estimator1.cluster_centers_[:,0],estimator1.cluster_centers_[:,1],'o',c='black')
+plt.show()        
+#Black points are centroids
+
+9........................PCA...............................
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+# Here we are using inbuilt dataset of scikit learn
+from sklearn.datasets import load_breast_cancer
+  
+# instantiating
+cancer = load_breast_cancer()
+  
+# creating dataframe
+df = pd.DataFrame(cancer['data'], columns = cancer['feature_names'])
+  
+# checking head of dataframe
+df.head()
+
+# Importing standardscalar module 
+from sklearn.preprocessing import StandardScaler
+  
+scalar = StandardScaler()
+  
+# fitting
+scalar.fit(df)
+scaled_data = scalar.transform(df)
+  
+# Importing PCA
+from sklearn.decomposition import PCA
+  
+# Let's say, components = 2
+pca = PCA(n_components = 2)
+pca.fit(scaled_data)
+x_pca = pca.transform(scaled_data)
+  
+x_pca.shape
+# giving a larger plot
+plt.figure(figsize =(8, 6))
+  
+plt.scatter(x_pca[:, 0], x_pca[:, 1], c = cancer['target'], cmap ='plasma')
+  
+# labeling x and y axes
+plt.xlabel('First Principal Component')
+plt.ylabel('Second Principal Component')
+
+# components
+pca.components_
+
+df_comp = pd.DataFrame(pca.components_, columns = cancer['feature_names'])
+  
+plt.figure(figsize =(14, 6))
+  
+# plotting heatmap
+sns.heatmap(df_comp)
+close
+</pre>
+
+</body>
+</html>
