@@ -1,0 +1,1690 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explanations</title>
+
+    <style>
+        body {
+  background-color: black;
+  color: white;
+  margin-left: 25%;
+  margin-right: 25%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+img{
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 80%;
+
+}
+
+p{
+  font-size: large;
+}
+
+li{
+font-size: large;
+}
+
+    </style>
+
+</head>
+<body>
+<p>
+You should use Solutions to transport customizations. Solutions are the way components and apps are exported from one environment and imported into other environments. Solutions only contain components that have been customized and do not contain any data.
+
+You should use the Configuration Migration tool to transport reference data. The Configuration Migration Tool is part of the SDK tools and was created to enable the copying of reference data from one environment to another. This tool maintains the GUIDs of the rows, which is important for reference data because it is often used in workflows and templates. The Configuration Migration Tool only handles data, not customizations.
+
+You should use Package Deployer to combine solutions and the data exported by the Configuration Migration Tool. The Package Deployer is part of the SDK tools and was created to combine both customizations from solutions, and reference data from the Configuration Migration Tool. You can create a package that contains both customizations and data and deploy them together. 
+
+You can use Export to Excel to export data and the Import Data Wizard to import data, but these options will only work for simple data with no relationships and will only import rows with new IDs. The other tools will import new rows and update existing rows, as well as maintaining IDs.
+
+Row 1 would not cause an error that would stop the row from being imported. When running the Import Data Wizard as an administrator, single line of text fields will have their length extended, with no warning or prompt, to the largest field in the file.
+
+Row 2 would not cause an error that would stop the row from being imported. Email address is a single line of text field. The Data Import Wizard does not validate the format, and the email address will be imported.
+
+Row 3 would cause an error that would stop the row from being imported. Company name is a lookup field, and the value in the file must exactly match an existing account row.
+
+Row 4 would not cause an error that would stop the row from being imported. Although last name is a system required field, the Data Import Wizard allows you to import blank values.
+
+Row 5 would not cause an error that would stop the row from being imported. When running the Import Data Wizard as an administrator, option sets will, with no warning or prompt, add any value in the file to the options in the option set.
+
+Row 6 would cause an error that would stop the row from being imported. The Import Data Wizard is set to not allow duplicates by default, and default duplicate detection rules check for the contact email address.
+
+Row 7 would not cause an error that would stop the row from being imported. The Import Data Wizard will prompt to map Yes to either Allow or Do Not Allow.
+
+Row 8 would cause an error that would stop the row from being imported. The Data Import Wizard validates each row in turn, so if a row already exists in the file, the second row will be rejected as a duplicate. This only applies if there is an email address for the rows.
+
+Row 9 would cause an error that would stop the row from being imported. Company name is a lookup field, and the value in the file must uniquely match an existing account row.
+
+You should download a Template for Data Import for the results table. This spreadsheet will have its columns defined with the correct data types. The spreadsheet will also contain any choices as drop-downs. Copying data into this spreadsheet will be pre-validated and will reduce errors when importing.
+
+You should not use Data Map. The mapping will assist in mapping columns and choices, but you will need to run the import multiple times to find and fix the errors. Mapping will not resolve any issues with incorrect data types. It is better to cleanse the data before importing.
+
+You should not use Power Automate. Flows could be used to transfer data from the SharePoint list, but it would require a lot of validation logic, so the effort to create the flow would be significant.
+
+You should not use SharePoint integration. This integration is for SharePoint document locations, not SharePoint lists.
+
+You should download a Template for Data Import for the results table. This spreadsheet will have its columns defined with the correct data types. The spreadsheet will also contain any choices as drop-downs. Copying data into this spreadsheet will be pre-validated and will reduce errors when importing.
+
+You should not use Data Map. The mapping will assist in mapping columns and choices, but you will need to run the import multiple times to find and fix the errors. Mapping will not resolve any issues with incorrect data types. It is better to cleanse the data before importing.
+
+You should not use Power Automate. Flows could be used to transfer data from the SharePoint list, but it would require a lot of validation logic, so the effort to create the flow would be significant.
+
+You should not use SharePoint integration. This integration is for SharePoint document locations, not SharePoint lists.
+
+You should exclude inactive matching records so that deactivated contacts are excluded from matching to meet Requirement 1. Ignore blank values just excludes fields from matching. If the duplicate detection rule contains only one condition, blank values are ignored anyway. A rule criteria adds a field to the matching. It does not include or exclude records.
+
+You should add a detection rule criteria to the existing email address duplicate detection rule to meet Requirement 2. Adding a rule criteria adds a field to the matching conditions. Records are matched using all rule criteria.
+
+You should create a new duplicate detection rule to match on mobile number to meet Requirement 3. There is a default rule for the contact business phone number. Adding a new duplicate detection rule to the mobile phone number means that each separate rule is evaluated, and any rule can find a match.
+
+You should create a duplicate detection job to find all existing duplicate records to meet Requirement 4.
+
+You should perform the following steps in order:
+Enable the quality assurance table for duplicate detection.
+Create a new duplicate detection rule.
+Set the base record type to the quality assurance table.
+Select the id column in the base record column.
+Select Exact match as the operator in the matching criteria column.
+Publish the duplicate detection rule.
+You should first enable the quality assurance table for duplicate detection. The table must be enabled for duplication detection before it can be selected as a table in a duplicate detection rule.
+
+Then, you should create a new duplicate detection rule.
+
+Next, you should select the quality assurance table as the base record type. The matching record type will default to the table selected.
+
+Then, you should select a column from the base record type table. You need to select the id column. The matching column will default to the id column.
+
+Next, you should select the matching criteria. You need to select Exact match.
+
+The final step is to publish the duplicate detection rule.
+
+You should not add detection rule criteria. When a duplicate detection rule is created and a table selected, a blank duplicate rule criteria is automatically included, so there is no need to add another rule criteria.
+
+You should not create a new duplicate detection job. Duplicate detection jobs are used to find existing duplicate records.
+
+You should not activate the duplicate detection rule. Activate is not used with duplicate detection rules.
+
+You should create an alternate key in the ID column. Alternate keys enforce uniqueness in the column(s) included in the alternate key.
+
+You should not create an autonumber column. An autonumber column will be unique, but it is essentially a sequential value and cannot use the date in its sequence.
+
+You should not use a real-time classic workflow. A classic workflow cannot query existing records to look for duplicate values.
+
+You should not schedule the duplicate detection rule. A duplicate detection job cannot prevent duplicate values from being created.
+
+You should add the columns in the rule to the form. If a business rule references a column that is not on the form, the business rule will not run and no errors will be raised.
+
+You should change the scope of the business rule to table. Business rules do not apply to portal pages. To perform the validation, the scope must be set to table. The validation in the rule will be performed when the record is saved to Microsoft Dataverse.
+
+You should add an action to the business rule. Business rules consist of conditions and actions. Actions include showing or hiding columns.
+
+This solution does not meet the goal. The privacy preferences in the environment show the privacy policy for the organization and determine whether error reports are sent to Microsoft. Privacy preferences are not used by the audit functionality.
+
+This solution does not meet the goal. Dataverse search is a richer search experience for users that sorts search results by relevance. Dataverse search is not used by the audit functionality.
+
+This solution does not meet the goal. Auditing must be enabled at three levels in order for audit records to be created. Auditing must be enabled for the environment, the table, and the columns. Columns are enabled by default, but tables are not.
+
+This solution meets the goal. Auditing must be enabled at three levels in order for audit records to be created. Auditing must be enabled for the environment, the table, and the columns. Columns are enabled by default, but tables are not. You have already enabled auditing for the environment, so enabling auditing on the table fulfills the criteria for audit records to be logged.
+
+This solution meets the goal. Personal charts can be shared with users and teams. The default team is an owner team created automatically for each business unit containing the users assigned to the business unit. Sharing a chart with a default team for a business unit shares the chart with all users in that business unit.
+
+This solution meets the goal. System charts are visible to all users by default. You can control the visibility of a chart component by editing the model-driven app and including and excluding forms, charts, views, and dashboards for each table in the app. In the apps for DepartmentB and DepartmentC, you can exclude the chart from their model-driven apps.
+
+This solution does not meet the goal. System charts are visible to all users by default. The User Chart table stores personal charts. The Read privilege in a security role for the User Chart table defaults to User access level, which means that a user can only see the personal charts they create. Changing the access level to Business Unit will allow users to see all personal charts created by other users in the same business unit. It does not control which personal charts are visible for users in a specific business unit.
+
+This solution meets the goal. A personal chart can be exported. Exporting a chart creates an XML file containing the definition of the chart. You can provide the XML file to users and they can import the XML file to create their own version of a personal chart.
+
+You should use the Check box control for the survey questions. Survey questions are yes/no answers and check boxes allow for only two options: true or false. This control takes up little space on the screen.
+
+You should not use the Combo box control. This control allows for more than two options and also allows the user to search for the options. The Combo box control can take longer to render on the screen.
+
+You should not use the Slider control. This control is for numeric values and allows the user to drag the slider between a minimum and maximum value.
+
+You should not use the Text input control. This control allows free format text to be entered.
+
+You should use the OnSelect property on the Next button to move to the question screen. The OnSelect property contains the action that will be performed when the button is clicked.
+
+You should not use the OnChange property. This property is used when a user changes the value of a control. It does not apply to button controls.
+
+You should not use the OnStart property. This property is used when the app starts. It does not apply when a new screen is navigated to.
+
+You should not use the OnVisible property. This property is used when a user navigates to a screen. It does not apply when a button is clicked.
+
+You should use the Combo box control for the preference questions. This control can allow for more than one option to be selected by the user.
+
+You should not use the Check box control. This control only allows for one of two values to be selected.
+
+You should not use the Drop down control. This control only allows a single value to be selected. 
+
+You should not use the Slider control. This control is for numeric values and allows the user to drag the slider between a minimum and maximum value.
+
+You should create a component library. Component libraries are used to create reusable components that can be shared by many canvas apps. A good example of such a component is an app header containing the organization logo and colors. The Power Platform tracks dependencies between apps that use component libraries. When updates are made to the components in a library, the apps that use those components can be easily updated to use the latest version of the components without having to export and import the components.
+
+You should not create components in Canvas app. Components in an app allow you to reuse the component with an app, but to use them in other apps requires the component to be exported and imported. The export/import functionality has been superseded by component libraries.
+
+You should not create code components. Code components are created using the Power Apps Component Framework (PCF) with TypeScript, HTML, and CSS. PCF components require a developer and are used to create complex user interface controls. Using PCF components for logos would create significant overhead, and therefore component libraries are a better solution.
+
+You should not create a template. Templates are complete apps that you can copy to create and customize apps. Templates cannot be used for reusable components in an app.
+
+You should not create a web resource. Web resources are used for images and JavaScript files in model-driven apps.
+
+You could set the Reset property on the checkbox to a variable. Then when the button is clicked, set the variable to False when the button is clicked. This will clear the checkbox in the gallery.
+
+You could also use a collection and use the Oncheck() function on the checkbox to add ThisItem to a collection named ChosenItems. You would then use the Clear(ChosenItems) function when the button is clicked. Setting the Default property for the checkbox to ThisItem in ChosenItems will cause the checkbox to be cleared in the gallery. 
+
+You should not use the Reset(ItemList) function. You cannot reset controls that are within a gallery control from outside those controls. Using the Reset() function on a gallery control from a button will not clear the checkboxes in the gallery.
+
+You should not use the Revert(Purchases) function. The Revert() function on a gallery control refreshes the gallery from its data source. This will not clear the checkboxes since these are not populated from the data source.
+
+You should not use the ForAll(ItemList) function and use the Reset() function on the checkbox for each row in the gallery. You cannot use the ForAll function to change the control in rows in the gallery.
+
+You should use the expression Set(DiscountcodeVariable,GetCustomerDiscount.Run(customerid)). This will call the GetCustomerDiscount flow by passing the customerid to the flow as an input parameter. The output parameter from the flow will be set in the DiscountcodeVariable variable. You can then display the content of the variable to the customer.
+
+You should not use GetCustomerDiscount.Run(customerid));Set(DiscountcodeVariable,GetCustomerDiscount.result);. This would generate the offer code, but each statement is separated by a semi-colon and so the offer code will not be available in the app.
+
+You should not use GetCustomerDiscount.Run(customerid). This would generate the offer code, but it would not be passed back to the app.
+
+You should not use GetCustomerDiscount.Run(customerid,DiscountcodeVariable). You do not specify output parameters in the parameter list for a flow. 
+
+This solution meets the goal. Open registration is the least restrictive sign-up configuration where the portal allows a user account to be registered by providing their user identity.
+
+This solution meets the goal. The user can redeem the invitation code when signing into the portal. The invitation code is unique for each contact and is typically sent out by email.
+
+This solution does not meet the goal. Azure AD is not used to grant guest users access to the portal. You should use Azure B2B or Azure B2C to allow external guests to access the portal.
+
+To run a Power Automate desktop flow, you need to install the Power Automate Desktop app.
+
+A pre-requisite for the Power Automate Desktop is either the latest version of Google Chrome, the latest version of Microsoft Edge, or the latest version of Mozilla Firefox.
+
+You should not install the on-premises data gateway. Power Automate desktop now supports direct connection to the cloud with machines which is required to run desktop flow in unattended mode for the batch processing of bookings. You can still install and use the on-premises data gateway for connecting desktop flows to the cloud, but using machines is the recommended option.
+
+You should not install Selenium IDE. Selenium IDE was used for automating web applications before Power Automate Desktop was released.
+
+You should not install Windows Recorder. Windows Recorder was used for automating desktop applications before Power Automate Desktop was released.
+
+You must sign out of all user sessions on the users' computers. When running an unattended desktop flow, Power Automate automatically signs into the computer. Power Automate cannot run unattended if there are any active or locked Windows user sessions present.
+
+You should not enable Remote Desktop on the users' computers. Power Automate Desktop flows do not require a remote connection. They require the on-premises data gateway to be installed.
+
+You should not sign into the computer as the BatchUser account and leave the user session active. An active session will prevent Power Automate unattended desktop flows from running.
+
+You should not sign into the computer as the BatchUser account and lock the user session. A locked session will prevent Power Automate unattended desktop flows from running.
+
+You should perform the following steps in order:
+Use a UI automation action to extract the booking number.
+Create a variable of type output.
+Use the Set variable action.
+First, you should use a UI automation action to extract the booking number. You must extract the booking number from the booking application app form. UI automation actions allow you to set focus to a field and extract data from a field.
+
+Next, you should create a variable of type output. You need to pass the booking number to the Power Automate cloud flow that initiates the desktop flow. You need to create an output variable to pass data back to the cloud flow.
+
+Finally, you should use the Set variable action in order to set the output variable. This copies the extracted booking number to the output variable and the booking number will then be available in the cloud flow.
+
+You should not create a flow variable. Flow variables are used internally within the desktop flow and will not be available when control returns to the calling cloud flow.
+
+You should not use the Send email action. This sends an email via an SMTP email server, it does not send the email from a cloud flow.
+
+You should not use the Send email through Outlook action. This sends an email using the copy of Microsoft Outlook installed on the user's computer, it does not send the email from a cloud flow.
+
+You should not use the Get clipboard text action. The booking number will not be in the clipboard, you need to extract the booking number from the booking application form with a UI automation action.
+
+This solution meets the goal. The Escalation Rate Drivers chart shows the topics in order of their impact on the escalation rate. By focusing on improving topics with above-average escalation rates (shown in red), you will improve the overall escalation rate.
+
+This solution does not meet the goal. The Billing tab in Analytics shows how much of your session capacity has been used. It does not include metrics on escalations.
+
+This solution does not meet the goal. The Customer Satisfaction Drivers chart uses artificial intelligence (AI) to group related support cases as topics. It does not include metrics on escalations.
+
+This solution meets the goal. The Sessions tab in Analytics allows you to download and view conversation transcripts. The transcript contains the outcome of each session (Resolved, Escalated, Abandoned, and Unengaged). You can analyze the Escalated sessions to determine how to improve your bot.
+
+You should use the prediction model type to forecast the volume of packages. Prediction can forecast a value within a range, for example a numeric value such as the number of packages. Prediction uses historical values to predict new values.
+
+You should use the object detection model type to identify oversized packages. Object detection uses Computer Vision to identify objects from images taken with a camera. Object detection returns the location and coordinates of the packages. From this information, the size of the package can be calculated.
+
+You should use the text recognition prebuilt model to read handwritten labels automatically. Test recognition can read both printed and handwritten text in an image. This will prevent these packages from being delayed to enter their destination information and missing their dispatch time slot.
+
+You should not use form processing. This reads and extracts information from documents such as invoices and purchase orders.
+
+You should not use entity extraction. Entity extraction recognizes specific data in text data. Entity extraction transforms unstructured text into structured data that can be used in apps and flows.
+
+You should not use sentiment analysis. Sentiment analysis is a prebuilt AI Builder model that detects whether the message in a piece of text has a positive or negative emotional sentiment.
+
+You must share a model for other users to be able to use the model in their apps and flows. After you publish your AI Builder model, only you can use it in your apps and flows. To make your model available to other makers, you must share your model.
+
+You should not edit your model. There are no properties or settings in the model that allow other users to access the model.
+
+You should not publish your model. The model is already published. If the model had not been published, you could not have used the model in your own Power Automate cloud flow.
+
+You should not train the model. The model is already trained. If the model had not been trained, it could not have been published.
+
+You should install the on-premises data gateway and create a dataflow. A model will degrade over time if it is not retrained with the latest data. AI Builder requires that the data used to train a model be stored in Dataverse. You must regularly import the data from the on-premises SQL Server into Dataverse and schedule the model to be retrained. You use Dataflows to extract, transform, and load the data into Dataverse from SQL Server. Dataflows can be scheduled. As SQL Server is on-premises, you also need the on-premises data gateway to be installed to allow Dataflows to access the SQL Server data.
+
+You should not create a virtual table. Virtual tables require a data provider. Only the OData v4 and Azure Cosmos DB data providers are provided with Dataverse. You cannot connect a virtual table to an on-premises SQL Server.
+
+You should not create an Azure DevOps pipeline. Azure DevOps pipelines are used to deploy customization changes from one environment to another. DevOps cannot be used to migrate data.
+
+You should not create an alternate key. Alternate keys are used for integrating systems, allowing external systems to identify unique rows in Dataverse tables, so that the row can be updated.
+
+This solution meets the goal. The Predict action in a Power Automate flow is a generic action that can be used with any of the AI Builder models.
+
+This solution meets the goal. You can add the object detection control to analyze images taken by the camera in a canvas app.
+
+This solution does not meet the goal. The object detection model uses a control, not the formula bar. Only some model types can use the formula bar in a canvas app.
+
+This solution does not meet the goal. You should set the privilege for the document template table, but having Read privileges is necessary but not sufficient. Enabling read makes all Word and Excel templates available to all users rather than to a subset because you can only set the access level to None or Organization.
+
+This solution meets the goal. You should create an organizational template and assign the security role to the template. If you upload a Word template into settings, it will be an organizational template. You then enable the security role(s), which will restrict the template to only the users who have that role.
+
+This solution meets the goal. A personal Word template can be shared with users or teams.
+
+This solution does not meet the goal. Article templates refer to knowledge base articles and are not related to Word templates.
+
+This solution does not meet the goal. Deleting an unmanaged solution does not affect the components and leaves all the components in the default solution with their changes.
+
+This solution does not meet the goal. Importing the previous version of the solution will overwrite any component in the previous version of the solution, but it does not remove any component from the latest version of the solution. This may leave the customizations in an inconsistent state.
+
+This solution does not meet the goal. Although customization changes will have been undone, all data entered since the backup will have been lost and workflows may run again, sending duplicated emails.
+
+This solution meets the goal. With unmanaged solutions, this is the only method by which you can undo customizations.
+
+This solution does not meet the goal. You cannot distribute a component from a managed solution using an unmanaged solution. The import of the solution into the production environment will fail.
+
+This solution meets the goal. You can set the Build and Revision elements of the version number when cloning a patch. The Build and Revision numbers must be higher than the existing version number.
+
+This solution meets the goal. You can set the Major or Minor elements of the version number when cloning a solution. The Minor element must be higher than the existing version. You should not set the Build and Revision elements, which are automatically set to zero.
+
+This solution does not meet the goal. The solution that contains the global choice is already managed since only managed solutions can be deployed via Microsoft AppSource. A component also cannot be imported if it exists in another managed solution. A component that is part of a managed solution can still be added to an unmanaged solution and edited unless the developer has set the managed properties to prevent changes.
+
+This solution meets the goal. The managed properties on a component control whether a component that was deployed in a managed solution can be changed when the component is added to an unmanaged solution. For a choice component, there is one property, Allow customizations, which is on by default. Setting this to off will prevent customers from changing the items in the choice component.
+
+This solution does not meet the goal. This action will remove the items in the choice component that were changed by the customer but it will not prevent the customer from making the changes again.
+
+You should use a business rule if you want to create a dynamically visible column. When the business rule condition is met, in this case, when the pet type is Other, the business rule action shows the column on the form.
+
+You should not use a classic workflow to create a dynamically visible column. A classic workflow handles business logic without the user’s interaction and is not responsible for visibility of the columns on the form.
+
+You should not use a business process flow. You would use business process flows to define a set of steps for people to follow to take them to a desired outcome.
+
+You should not use column visibility on the form to create a dynamically visible column. You can use this to set the visibility of the column by default.
+
+You should use a business rule. A business rule provides a simple interface and works in real-time, so the action is performed once a specific condition has been met.
+
+You should not use a classic workflow. A classic workflow runs only when the form is saved.
+
+You should not use a process action. An action works only with business operations you need to run. They are not applicable when you need to hide or show a user interface element.
+
+You should not use a security role. A security role it is used to limit access to different types of records and user interface elements.
+
+To capture the Recipient value, you should use a business rule because it allows you to add a real-time interaction to a form. The other options do not allow real-time changes on a form.
+
+To send the email, you should use classic workflows because they allow you to set actions (send an email) and conditions under which the actions should be performed (when the Email type is selected).
+
+You should not use business rules. Business rules do not support sending emails.
+
+You should not use scheduled flows. Scheduled flows are triggered upon a predefined schedule and not when a certain field becomes updated.
+
+You should not use button flows. Button flows are triggered manually by pressing a specific button on a mobile device or from a portal and not when a certain field becomes updated.
+
+You should create a business rule with the table scope. Business rules allow you to apply business logic to forms (during user input) as well as to tables (during background operations such as data import).
+
+You should not apply a duplicate detection rule with the During data import option selected for the whole organization. Duplicate detection rules are used to identify duplicate rows. They cannot add conditional logic to forms.
+
+You should not use a background classic workflow. A background classic workflow does not support real-time changes on forms.
+
+You can use a business rule to set a column to a specific lookup value.
+
+You can use a business rule to make a column item required in a canvas app. In order to achieve this, you need to ensure that the business rule scope is set to Table.
+
+You can use a business rule to show and hide columns. It is possible to do so based on other criteria in the form (such as a different column having a specific value in it).
+
+You cannot use a business rule to start a Power Automate Flow. Business rules are not able to interact with Power Automate Flows.
+
+You cannot use a business rule to hide a section on a model-driven app form. Business rules are only able to hide columns, not sections.
+
+You should select the table named TableA when creating an automation with a classic workflow. By using a real-time classic workflow, the phone call is created synchronously as part of the creation of the record and the user will see the phone call in the timeline when the record is created.
+
+You should enable Workflow Log Retention in order to monitor failures in the automation. You need to enable Workflow Log Retention to log failures for real-time classic workflows.
+
+You should select Execute As and change the owner of the workflow to show the phone call as created by the system. By default, a real-time classic workflow runs as the user who triggers the workflow. You can select Execute As to be an administrator and the owner of the workflow.
+
+You should not use Power Automate. Power Automate can only run asynchronously in the background so it cannot create and display the phone call in the timeline when the record is created. If Power Automate was used, the phone call would be created after the save and the user would need to refresh the form after the save to see the phone call in the timeline.
+
+You should not use Run in the background. You need the phone call to be created as part of the same transaction, so that the user can see the phone call in the timeline when the record is created. This requires the classic workflow to be configured to run as a real-time workflow, not to run in the background. If you used Run in the background, the phone call would be added to the timeline at some later point and the user would need to refresh the timeline in order to see it.
+
+You should not use System jobs. System jobs are not created for real-time classic workflows.
+
+You should not use Trigger. You do not need to choose a trigger when creating a real-time classic workflow. The default trigger for a real-time classic workflow is used when a record is created.
+
+To detect duplicated rows during import into the system, you should create a duplicate detection rule for contacts and set the Allow Duplicates during import value to No.
+
+You should not set the Allow Duplicates during import value to Yes. When Allow Duplicates is set to Yes, the system will allow duplicate records to be created in the system, even when the duplicate detection job is up and running.
+
+You should not set the Allow Duplicates option value when the record is created or updated manually. You will not see the dialog during the import process.
+
+You should not create a duplicate detection job. Duplicate detection jobs do not prevent duplicate rows from being created, they can only find existing duplicate rows.
+
+You need to perform the following steps in order:
+Run the Import Data wizard. 
+Select the CSV file.
+Specify the column and data delimiter settings. 
+Select Contacts as the record type. 
+Map the columns. 
+Specify the data map name. 
+You should first run the Import Data wizard. The Import Data wizard allows the import of simple flat files into the Dataverse database and creates a mapping file for re-use.
+
+Then, you should browse to the CSV file of contacts you want to import and select it. This file will need to be on your local computer or accessible from it.
+
+Next, you should specify the column and data delimiter settings to match the delimiters in the file.
+
+Next, you should choose the record type, which is the table to import into, in this case Contacts.
+
+Next, you should map each column in the file to a column in the selected table.
+
+Finally, you should specify the name of the data map that will be used for future imports. This map holds the table and column mappings so that future imports will be less error prone and speedier to configure.
+
+You should not use the Configuration Migration Tool. This tool is used to copy data from one Common Data Service environment to another, not to import files from external sources.
+
+You should not set the job to run every seven days. This option is not available for the Import Data wizard, but it is available for the Bulk Delete wizard.
+
+You should not send an email when this job is finished. This option is not available for the Import Data wizard, but it is available for the Bulk Delete wizard.
+
+Columns can be mapped automatically by the Import Data wizard. The system recommends importing data automatically using the Import Data wizard if the columns are mapped correctly.
+
+Contacts can be imported using generic contact and account data from the file. Generic contact and account data is used when the data has contacts in the file.
+
+You cannot import several *.csv files in parallel. You should create a single zip file to import into Microsoft Dataverse.
+
+You cannot import contacts from the Oracle business application using Data Maps for Outlook Business Contact Manager. This data map should contain only data from Microsoft Outlook.
+
+You cannot import contacts from the Oracle Sales application using Data Maps for Salesforce. The Oracle Sales application is a third party CRM system.
+
+You should use Export to an Excel static worksheet when you need to see the data for a certain time period without a dynamic refresh of the data.
+
+You should use Export to an Excel dynamic worksheet when you need to have the data updated continuously but do not want to generate a new file every time you need to view the required data. Your Power Platform credentials will be used automatically to provide you with data you have access to.
+
+You should use Export to an Excel PivotTable when you need to view and analyze the data graphically to define patterns and trends.
+
+You should not use Excel with a macro for any of these scenarios. This export type is not supported by the Power Platform.
+
+You should implement a combination of one-to-many and many-to-one relationships with an intersect table. This reflects the possibility that a team might work on several orders, and that an order might have several teams working on it. Additionally, this option allows you to capture required information about each team-order interaction in the intersect table.
+
+You should not implement a hierarchical self-referential relationship. A hierarchical self-referential relationship can be established only within one table.
+
+You should not use a one-to-many relationship. This does not meet the requirement because a team can work on several orders and an order can have several teams.
+
+You should not use a many-to-one relationship. This does not meet the requirement because a team can work on several orders and an order can have several teams.
+
+You should delete the oldest audit log. This is the only option that will reduce the amount of storage used.
+
+You should not delete all audit logs. You cannot delete the latest audit log.
+
+You should not create a bulk delete job to delete audit entries over three months old. Bulk delete cannot access audit details.
+
+You should not turn off auditing. Turning off auditing leaves the audit logs untouched and still uses storage space.
+
+You should create a bulk delete job to delete the completed system jobs and schedule this to run regularly.
+
+You should turn off the duplicate detection rules. Duplicate detection rules create a separate matchcode row for each row in the table. Turning off unnecessary duplicate detection rules will reduce the size of the matchcode tables.
+
+You should create a bulk delete job to delete emails over N months old. Emails, and their attachments, are a major contributor to database storage, so you should not store emails for longer than necessary. You will need to agree how many months to keep them based on your organization's data retention policies, but 12 or 24 months may be appropriate. You should schedule this job to run regularly. 
+
+You should not configure the Data Export Service. This does not reduce the amount of data storage used in the Dataverse.
+
+You should not delete large email attachments. Deleting email attachments does not reduce the data storage in Dataverse. Files have a separate storage allowance.
+
+You should not delete the audit logs. Deleting audit logs does not reduce the data storage in Dataverse. Logs have a separate storage allowance.
+
+Your user should have the BulkDelete privilege assigned to the security role in addition to the standard Delete privilege. The BulkDelete privilege allows users to create bulk deletion jobs. All users who have Delete and BulkDelete privileges to their security roles, not just admins, are able to create bulk deletion jobs.
+
+You should not assign the BatchDelete or ClearData privilege to the security role for a user. Both privileges are not Dataverse privileges and cannot be used for this purpose.
+
+You should not add the Notes entity to Categorized (multi-table Quick Find) search. It will not search the contents of documents.
+
+You should not enable quick find record limits. This simply restricts the number of records retrieved in the Quick Find view.
+
+You should enable Dataverse search, formerly named Relevance search. This searches all fields and also the contents of attached notes and documents. Dataverse search leverages the capabilities of Azure Search.
+
+You should configure Dataverse search, formerly named Relevance search. Dataverse search performs a search across several tables at once and returns results that include rows from the tables sorted by relevance.
+
+You should not use Quick Find views. These views cannot return results from several tables at the same time. You would have a separate list of results for each table.
+
+You should not use Advanced Find views. These views cannot return results from several tables at the same time. You would have a separate list of results for each table.
+
+You should perform the following actions in order:
+Enable Dataverse search.
+Select the tables to index.
+Customize the Quick Find views.
+Add the tables to the model-driven app.
+First, you should enable Dataverse search in the Power Platform admin center. Dataverse search must be enabled for users to have the superior search experience with search results ranked and ordered by relevance.
+
+Next, you need to select the tables to index for Dataverse search in the Power Apps Maker portal.
+
+Then, you should customize the Quick Find views for the tables configured for Dataverse search. The searchable fields and filters for a table enabled for Dataverse search are driven by the table's Quick Find view. You should select the columns that will be searched using Find Columns, the columns that will be displayed using View Columns, and the filter conditions that will be applied by the search.
+
+Finally, you should add the tables enabled for Dataverse search to the model-driven app. To appear in the search results in a model-driven app, the table must be included in the model-driven app.
+
+You should not select tables for Quick Find search. Multi-table Quick Find search, formerly named categorized search, is able to search across multi-tables and columns but does not rank the results by relevance.
+
+You should not configure facets and filters. Facets and filters are defined by the end-user to restrict the results of Dataverse search.
+
+You should not assign a Search admin in Microsoft Search. Currently, Dataverse search searches your data in Microsoft Dataverse only. SharePoint files and documents, including the names of the files and the content in the files, are not searched. Setting up a Search admin is only required for searching Microsoft 365 applications such as SharePoint.
+
+You should create the table as a virtual table. Model-driven apps can only display data from Microsoft Dataverse. Virtual tables work with virtual data providers to access data from external data sources such as Azure SQL and CosmosDB, and present the data as it if were stored natively in the Dataverse. This is the only option that will allow data to be read from an external data source.
+
+You should not create the table as an activity table. Activity tables are used to capture interactions with customers and cannot display external data.
+
+You should not set the ownership of the table to user or team owned. Virtual tables are always organization owned.
+
+You should not create an alternate key. Alternate keys are useful for external systems integrating with the Dataverse and writing into your table, as the alternate key allows records to be updated without knowing the Globally Unique Identifier (GUID) of the record.
+
+You should use security roles. You can quickly change security roles to remove privileges for tables such as account and contact. If a user does not have read privilege for a table, it will not be visible anywhere in the user interface. This meets the goal of minimal configuration.
+
+You should not use the SiteMap. Using the SiteMap will allow you to remove the tables from the app's navigation, but the tables will still be available from Advanced Find.
+
+You should not use a classic workflow. Workflows cannot alter the user interface. Workflows act at the row level.
+
+You should not use business rules. Business rules cannot prevent tables from being visible in the user interface. Business rules act on columns on forms.
+
+You should use a security role to control access to rows. Security roles contain the Create, Read, Write, and Delete privileges for tables. You set the access level for each privilege in a security role and assign roles to users and teams. The security roles define which rows a user can read and write, as well as other actions. Security roles only permit access to rows and do not control access to columns within a row. Hierarchical security provides read privilege on rows but only provides write privilege on rows to one level below in the hierarchy.
+
+You should use column security to restrict access to individual columns and create a column security profile to give read and update rights to these columns to users. Column security operates at the individual column level. You need to create and assign a column security profile to users and teams to enable access to secured columns. None of the other options control access to columns.
+
+You should use position hierarchy to allow users to read and write rows for their direct reports across business units. Position hierarchy provides read privilege to rows for users beneath the user's position and provides write privilege to rows one level beneath the user's position. Position hierarchy ignores the business unit hierarchy, while the manager hierarchy observes the business unit organization structure.
+
+You should use an access team to allow users to easily share a row with other users. Access teams work with access team templates to provide shared access to rows. You should add a user sub-grid on the form. When a user is added to this sub-grid, an access team is automatically created, and the row is shared with the user. None of the other options is used for sharing rows.
+
+You should not use business units. Business units are used along with security roles to control access to rows by defining the hierarchy of the organization, but they do not in themselves control access to rows.
+
+You should not use business rules. Business rules do not control access to a row's columns through security. Business rules can hide columns on forms, but only on values within the row, and not based on any user or security configuration.
+
+You should not use the manager hierarchy. The manager hierarchy works within the business unit hierarchy, with the manager having to be in the same business unit or in a parent business unit. The manager hierarchy cannot be used where the user reports to another user in a different part of the business unit structure.
+
+You should use a position hierarchy. This allows specialist managers to view rows that are owned by users in the specialist area in any store in the business unit hierarchy.
+
+You should not use a manager hierarchy. This only allows a user to view the rows that are owned by users who are the direct reports in the same business unit hierarchy.
+
+You should not use the organization hierarchy. This is used in Dynamics 365 Finance and Operations.
+
+You should not use the product hierarchy. This is used to configure products in Dynamics 365 applications.
+
+You should select the Microsoft 365 Global administrator role to create environments. Once the governance settings are enabled for specific admins, only the Global administrator, Delegated admins, Power Platform admins, and the Dynamics 365 admin roles can create new environments.
+
+You should select the Environment admin role for managing an environment without a database.
+
+You should select the Basic User role to import data. This is the least privileged security role with read/write to tables and to run the Import Wizard.
+
+You should not select Compliance Administrator. This role is used with the Microsoft 365 Security & Compliance Center, not with Power Platform environments.
+
+You should not select System Administrator. This role is used to manage settings within an environment and has no privileges to create or manage environments.
+
+You should not select Environment Maker. This role can only create resources such as connections, apps, and flows in an environment and has no privileges to create or manage environments.
+
+To access a new environment, a user account must be assigned a security role in the environment, even if the user belongs to a security group already associated with the environment.
+
+Users do not need to be included in the Manager hierarchy. The Manager hierarchy is used to access rows and create reports within the environment based on the direct reporting structure. It cannot be used to set up access to environments.
+
+Users do not need to be included in the Position hierarchy. The Position hierarchy is used to access rows and create reports within an environment without a direct reporting structure. It cannot be used to set up access to environments.
+
+Users do not need to be included in an Access team. Access teams are used to share rows in an environment, not the environment itself.
+
+System Administrator is a user role with full access to the system. A user assigned the System Administrator role can customize and access all the data within the environment.
+
+System Customizer is a user role with full permission to customize the environment. A user assigned the System Customizer role can view and modify only the rows created by this user.
+
+Environment Maker is a user role with the ability to administer all aspects of environment, but an Environment Maker cannot access the data.
+
+Basic User is a user role with the ability to perform operations with data rows that have been created by this user.
+
+The most likely cause of the issue is that users do not have permissions to work with the table. If a canvas app works with Dataverse tables, app users need to have the appropriate permissions for these tables.
+
+A canvas app can work with data from Dataverse, SharePoint, Excel, SQL databases, and third-party databases.
+
+The canvas app does not need to have at least one business process flow for users to follow. Business process flows are components of a model-driven app, not a canvas app.
+
+The canvas app does not need to have a site map. Site maps are components of a model-driven app, not a canvas app.
+
+You should use a license to control access to all environments. Without a license, a user cannot access any environment.
+
+You should use a security group to restrict access to individual environments. Security groups are created in Microsoft 365 and can be associated with an environment. If a security group is associated with an environment, only users in that security group can access that environment.
+
+You should use a security role to control access to data and functionality. Security roles are assigned to users and teams and define what data the user can view and the actions that a user can perform on data.
+
+You should use a Microsoft 365 role to manage the environments in your tenant. The two Microsoft 365 admin roles (Global admin and Power Platform administrator) permit the management of environments in the tenant.
+
+You should not use a user. A user in both Microsoft 365 and Dataverse is required. Users are assigned licenses, Microsoft 365 roles, security groups, and security roles.
+
+You should not use a team. Teams in Dataverse have users added as members and can be associated with security roles.
+
+You should not use an access team. Access teams are used to easily share records with other users.
+
+You should install the Power Apps mobile app. Although the Power Apps app can run canvas apps, the Power Apps mobile app also run model-driven apps. 
+
+You should use a model-driven app. Model-driven apps can run on the Power Apps mobile app.
+
+You should enable the Dynamics 365 for mobile privilege in the user’s security role. This privilege is required to access apps on a mobile device.
+
+You should not install the Dynamics 365 Sales mobile app. This mobile app is required to run the Dynamics 365 Sales app and cannot run other apps.
+
+You should not necessarily supply an Android device. The mobile apps run on Android, Apple iOS, and Windows devices.
+
+You should not set up mobile offline synchronization. Offline access is not required for users to be able to access apps on their mobile device.
+
+You should use a Dataverse owner team when you know the number of teams when you create a system structure, and you need to report progress based on the team owned records.
+
+You should not use an Office 365 group. An Office 365 group cannot manage records and is used for collaborating on documents and attachments.
+
+You should not use a Dataverse access team. You would use this type of team when teams are dynamically formed and dissolved.
+
+You should not use a Microsoft Team. A Microsoft team cannot manage records and is mostly used for communication.
+
+You should perform the following actions in order:
+Enable column security on Col1.
+Create a column security profile.
+Set permissions for Col1.
+Add the team to the column security profile
+First, you should enable column security on Col1 in the Power Apps Maker portal. You need to enable column security before you can add Col1 to a column security profile.
+
+Next, you should create a column security profile. The column security profile will include all columns enabled for column security, including Col1, and allows you to set the create, read, and update permissions for secured columns.
+
+Then, you should set all permissions to Yes for Col1.
+
+Finally, you should add the team to the column security profile. This gives the users in the team the permissions defined on the secured column.
+
+You should not create an access team. Access teams are used to share records with other users. Access teams do not give permissions on secured columns.
+
+You should not share the secured column. Sharing secured columns enables users who have not been added to the column security profile to access a secured column. Sharing a secured column requires additional privileges in the security. You should add the user to the column security profile instead.
+
+You should not enable hierarchical security. Hierarchical security provides access to records owned by the users in the hierarchy below the current user. It does not give permissions on secured columns.
+
+You should create Azure Active Directory (AD) group teams in your Dataverse environments. Azure AD group teams are associated to an Azure AD group. You can assign a security role to these group teams. The members of the group are automatically added as users to the Dataverse environment and assigned the security role. Users can access apps and data automatically based on their membership of the Azure AD groups. You can create Azure AD group teams for both Security groups and Office 365 groups.
+
+You should not use access teams. Access teams are used to share records with other users. Access teams do not enable users to automatically access to apps and data.
+
+You should not use owner teams. Owner teams are used to own and share records with other users. Owner teams do not enable users to automatically access apps and data.
+
+You should not use Azure AD conditional access. Conditional access is used to block users from accessing apps and data based on policies around the device they are using and their location.
+
+Each user cannot be assigned to multiple business units. A user can only be associated with a single business unit. If a user is assigned to a different business unit, they will then only be associated with the new business unit.
+
+Users cannot be added to the default teams for other business units. The default team for a business unit is managed automatically and only contains the users that belong to the business unit. You cannot change the membership of a default team.
+
+You can delete a business unit. However, before you do so you must first reassign users and teams to other business units. You can only delete child business units; you cannot delete the root business unit.
+
+You should use the Privilege property to control the visibility of a table in the site map. When no Privilege property is specified, a user requires the read privilege from their security role to see the table in the app navigation. You can add privilege(s) such as create or update to the Privilege property to restrict visibility to just the users with the ability to create or update rows, not just read rows.
+
+You should use the SKU property to control the visibility of a table in the site map based on the version or deployment of Dynamics 365 or Power Platform.
+
+You should use the Client property to control the visibility of a table in the site map based on the client the user is running, for example Web or Outlook.
+
+You should not use the Offline Availability property to control visibility of a table. This is only used when offline in the Outlook add-in client.
+
+You should use the following form types:
+
+Customer: Main form
+Warranty: Quick create form
+
+While the main form allows you to display the most information about a table row, the quick create form makes it possible to quickly capture basic information for new table rows.
+
+You should not use the quick view form. The quick view form displays additional data about a lookup referenced table row but it does not allow you to create new rows.
+
+You should not use the card form. The card form displays information about rows in a mobile suitable format but it does not allow you to create new rows.
+
+You should add a new quick view form. A quick view form can display information from a parent row within the form of a child row.
+
+You should not create a new business rule. Business rules cannot access fields from related entities.
+
+You should not add two new rollup columns. Rollup columns are used to retrieve and aggregate data from related child rows, while the goal is to get data from a parent row.
+
+You should not create two new column mappings. These mappings will be applicable only for new rows, and mappings do not maintain changes in the mapped columns.
+
+The most likely cause of the problem is that the Appears in global filter in interactive experience option is not enabled for the column. This option allows you to use the column as a filter condition in interactive experience dashboards.
+
+Yes/No columns are supported for this type of dashboard. As long as the Appears in global filter in interactive experience option is enabled for a column, the column will be available for filtering conditions regardless of the column's data type.
+
+Using a multi-stream dashboard is not the most likely cause of the problem. The single-stream or multi-stream designation defines the number of data streams used in a dashboard. It does not apply to the filter settings.
+
+Column security not being enabled for the column is not the most probable cause of the issue. Column security manages access to specific columns on table rows but it is not involved in interactive experience dashboard filtering.
+
+You should perform the following actions in order:
+Create a custom security role.
+Assign users to the custom security role.
+Assign the security role to the app.
+A model-driven app uses the role-based security model for sharing. So, in order to share a new app, a new role must exist, and then the app can be shared among the users who have this security role. Finally, the security role should be assigned to the app.
+
+You do not need to use an owner team. Owner teams are used for accessing specific rows in the system but not for app sharing configuration.
+
+You should use personal views. You can create a filter inside the view to list items that belong to each of the teams and then you can specify what users and/or teams can access the view.
+
+You should not use quick find view. This is the default view used for Quick Find searches, and modifying this view might return irrelevant results.
+
+You should not use system view. A system view can be accessed by all organization users and teams. Additionally, system views have specific purposes, and modifying the views affects all the users that use them.
+
+You should not use public views. Public views are available for all system users that have the appropriate table permissions and cannot be limited for use by a specific team only.
+
+You should create a quick create form. A quick create form is not created automatically when a table is created, so you must create a quick create form. 
+
+You should also set enable quick create on the table properties. This is a necessary step for using quick create.
+
+You should not create a quick view form. Quick view forms are used to display data from a table related in an N:1 relationship within the main form.
+
+You should not assign a security role to the form. Quick create forms cannot be assigned security roles.
+
+You should not add the timeline control to the form. Only columns and spacers can be added to a quick create form.
+
+The form is probably loading slowly because it contains too many columns. You should keep the number of columns to a minimum. The more columns a form has, the more data there is that needs to be retrieved and transferred over the network. Consequently, the form takes longer to load.
+
+You should not move the columns into a single section. This will have little effect on the form's load speed. Reducing the number of columns will have much greater effect.
+
+You should not move the columns onto a single tab. This will have little effect on the form's load speed. Multiple tabs will improve form load speed as tabs (apart from the first tab) are only rendered when clicked on.
+
+You should not create a business rule to hide columns. Instead, you should have columns hidden by default and then use Business Rules/JavaScript to show columns when they are required. Having columns visible by default and then hiding them with business rules will slow down the load speed because the rule will run as part of form load processing.
+
+You should create an entity relationship diagram. This is the only option that will show a visual representation of the tables and their relationships.
+
+You should not create a document with tables, columns, and relationships. Although useful, this does not enable another functional consultant to visualize the data model and to see how entities are related to each other.
+
+You should not create a document with screenshots of the relationships for each table. This will not enable a functional consultant to visualize the data model and to see how tables are related to each other.
+
+You should not create a document with snapshots of the business process flows. Business process flows do not show how tables are related to each other.
+
+Users will be able to edit rows in the Active Buildings view. The editable grid has been configured for the table. The editable grid will be enabled for all views when accessing the table from application-level navigation in the web client. Users will not be able to use the editable grid in the mobile clients.
+
+Users will not be able to edit rows in sub grids of the Building table. The editable grid has been configured only for the table. Each sub grid needs to be separately configured in each form that contains sub grids of the Building table.
+
+The business rule will not work in the dashboard. Business rules require all columns to be contained in the view to operate. However, business rules do not trigger in dashboards.
+
+You should add the custom table to the sitemap for the model-driven app. In order for tables to be shown in the navigation menu for users, they need to be added to the sitemap for the model-app.
+
+You should not publish the view for the custom table in the model-driven app. This would publish the view, but will not add it to the navigation menu.
+
+You should not republish the custom table. Republishing the table allows the latest development changes to be visible and accessible to users, but it does not affect the navigation menus, since these are set up within the sitemap only.
+
+You should not create a business rule to show the users the table. Business rules are not able to affect the navigation menus in model-driven apps. They are usually used for showing/hiding columns on forms and configuring columns as being required to have data entered. In this case, creating a business rule would not address the issue.
+
+You should perform the following actions in order:
+Create a web resource.
+Upload the logo file.
+Add the web resource to the theme.
+Publish the theme.
+First, you should create a web resource. The themes for model-driven apps require any image to be created as a web resource.
+
+Next, you should upload the logo file to the web resource.
+
+Then, you should select the web resource in the currently published theme. You could optionally create a new theme or clone the existing theme.
+
+Finally, you should publish the theme. This will apply the logo to the theme and the logo will appear in the top-left corner of the model-driven app's user interface.
+
+You should not upload the logo directly to the theme. Instead, you must create a web resource and upload the logo to the web resource.
+
+You should not edit the bootstrap css file. Bootstrap is used for the design of portal apps and not model-driven apps.
+
+You should create a choice column on the Complaint table. You should use a choice column because the severity is a set of predefined options that do not change.
+
+You should not create another table because new types of severity are not expected to be added to the system on a daily basis. You would add complaints, not new types of severity.
+
+You also would not use any kind of many-to-many relationship between Complaint and Complaint Severity because a complaint can have only one severity value at once, while the same severity can be assigned to numerous complaints.
+
+The expression handles the loss of connection to Dataverse. The if expression checks for Connection.Connected, which returns true or false. If true, the expression uses Patch to save to Dataverse. If false, it stores the data locally using SaveData.
+
+The expression will not save the data to Dataverse after the network connection is re-established. The expression does not handle the reconnection. A separate Timer control is required to check if the network connection has been re-established. When a network connection is available, the data stored locally will need to be read from LocalData and then saved to Dataverse.
+
+The expression will not update existing inspections in Dataverse. Using Patch with the Defaults function always creates records, but does not update records.
+
+You should use Test Studio to automate the regression testing of canvas apps. Test Studio allows you to create test steps and cases that you can re-run when your app is updated or changed. This is regression testing. You can automate the testing by integrating Test Studio with Azure DevOps pipelines.
+
+You should use Monitor to debug canvas apps to see how events and formulas in your app work. Monitor allows you to view the events that occur in an app in real-time. Monitor also shows formulas and how they are evaluated. Monitor provides a deep view into how your app is working.
+
+You should use Application Insights to collect information on how users are using canvas apps. Application Insights is an Azure service that allows you to collect information on how users actually use your apps. You can use this information to create better apps.
+
+You should not use Easy Repro. Easy Repro is a tool for regression testing of model-driven apps.
+
+You should not use Fiddler. Fiddler is a tool that is used to debug JavaScript and Power App Component Framework (PCF) code components.
+
+The technicians should have an Android/iOS device and access the canvas app through the Power Apps Player app. Canvas app offline functionality only works in the Power Apps Player app, not through the Dynamics 365 app or a browser.
+
+The technicians should not have an Android/iOS device and access the canvas app through their mobile browser. This is because browsers do not support offline functionality within canvas apps.
+
+The technicians should not have a Windows device and access the canvas app through the browser. This is because browsers do not support offline functionality within canvas apps.
+
+The technicians should not have a Windows device and access the canvas app through the Dynamics 365 app. This is because the Dynamics 365 app does not work with canvas apps.
+
+You need to enable server-based integration and configure the integration with SharePoint before you can fully integrate model-driven apps with Microsoft Teams. Server-based integration must be enabled and configured before enabling Basic Teams integration.
+
+You should not configure server-side synchronization. Integration with email is not required to integrate with Microsoft Teams.
+
+You should not configure OneDrive for Business. Integration with Microsoft Teams uses SharePoint, so you do not need to configure the integration with OneDrive for Business.
+
+You should not configure Office 365 Groups connector. Office 365 Groups integration has been superseded by Microsoft Teams integration. You do not need to configure the Office 365 Groups connector.
+
+You need to edit the Global App Setup policy and enable the Upload custom apps option in the Teams admin center to be able to add canvas apps for all users to the left-hand rail in Microsoft Teams.
+
+You should not share the app with all Teams members. Sharing the app will not allow you to add the app to Teams.
+
+You should not enable the embedding of model-driven apps within Microsoft Teams. First-party model-driven apps can be added as tabs in Microsoft Teams. The Embed model-driven apps in Microsoft Teams option extends this to custom model-driven apps. This option does not enable canvas apps to be added to Microsoft Teams
+
+You should not enable Enhanced Teams integration. The basic and enhanced Microsoft Teams integration allow model-driven apps to share files with Microsoft Teams and is not used for canvas apps.
+
+You should use the Azure portal to create an Application Insights resource. Application Insights is an Azure service that collects telemetry in your app.
+
+You should use the Power Apps maker portal to include Application Insights in the app. In the Power Apps Studio, you add the Application Insights instrumentation key to the canvas app. You can then add trace events to your app, which will be captured in Application Insights.
+
+You should use the Azure portal to monitor the analytics data for the app. Application Insights is part of Azure Monitor and it provides the ability to view and query the trace as well as other telemetry data for the app.
+
+You should not use the Power Platform admin center for any of the requirements. The Power Platform admin center provides some telemetry for the use of the app, but only for when, where, and on which device the app is run. The analytics in the Power Platform admin center does not show the information captured by Application Insights.
+
+You should use the Power Apps Studio to check for accessibility issues in canvas apps. The Power Apps Studio contains the app checker, which allows you to validate if there are any accessibility issues in the app.
+
+You could also use the Solution checker to validate accessibility issues in any canvas app included in the solution.
+
+You should not use the ISV Studio. ISV Studio is used by independent solution vendors (ISVs) to monitor the usage of their apps that have been deployed to customer through AppSource.
+
+You should not use Object checker. Object checker is used to validate issues with component metadata in solutions. It does not evaluate accessibility.
+
+You should not use the Power Platform admin center. The Power Platform admin center is used to manage and monitor environments for the Power Platform. It does not validate accessibility.
+
+You should use a global variable to contain a record that can be accessed anywhere in the app. Global variables are accessible anywhere in the app. A global variable can be a single value or a single record.
+
+You should use a context variable to contain a value that can be accessed from only one screen. Context variables are defined either in a screen or passed as a parameter to a screen. They cannot be accessed outside of that screen.
+
+You should use a collection to hold a table of records that can be easily modified anywhere in the app. Individual records can be added, removed, and modified in a collection.
+
+You should assign a web role to authenticated users to allow them to access pages and data. Authenticated portal users must have a web role to access data.
+
+You should not assign web pages, table lists, or table permissions to users. You associate these with web roles, and users gain access to these components through their web role.
+
+You should set the Authenticated Users Role option on a web role. The web role with Authenticated Users Role set to True is the default web role for authenticated users that have not been explicitly assigned a web role. All newly created portal users will therefore use this role and will automatically be able to access the data on current offers. There should only be one web role with the Authenticated Users Role option set to True for a portal site.
+
+You should not create an access control rule. Access control rules allow users to modify pages.
+
+You should not set the account scope. Scope controls the records a portal user has access to. Users need access to all current offer records, not those associated with their Account record.
+
+You should not set the Anonymous Users Role option on a web role. This is the web role non authenticated users will use. Anonymous users should not have access to the data on current offers.
+
+You should enable the table permissions option on a page to prevent access by anonymous users. This option requires that users have a web role and that the web role has table permissions on the page to be able to view the page. Enabling the table permissions option on a page means that unauthenticated users and authenticated users without the correct table permissions cannot access the page.
+
+You should use Organization-owned. This type of table ownership is used when all rows of the table must be available for all users.
+
+You should not use Business-owned. This ownership type cannot be selected while creating a table and is applicable only to specific tables created by the system.
+
+You should not use None. Tables with None ownership are not owned by another table. Most of the tables with None ownership were created to support many-to-many relationships.
+
+You should not use User or Team Owned. This type of table ownership is used when rows need to be assigned to specific users or teams.
+
+The customers should use the invitation code. The email contains an invitation code that portal users enter when registering on the portal. The invitation code is unique and linked to the contact record in Dataverse. The portal can then access the name and email address of the contact and will automatically associate a web role with the portal contact if configured.
+
+You should use a basic form to create a new record. Basic forms expose fields from Dataverse and allow a user to enter and submit data.
+
+You should use a list to display the customer records. Lists contain definitions of Dataverse views and are used to display the columns for a Dataverse table. The view can also filter the records that will be displayed.
+
+You should use table permissions to control access to records. Table permissions are added to web roles. The web role provides user access to pages and data. In the web role, you set the access type for the table. The access type determines which records a user can see on the portal. You should use either the Account or Contact access type to control access to a customer's records.
+
+You should not use security roles. Security roles are for users within the organization accessing with canvas and model-driven apps. Security roles use the security model in Dataverse that is centered around the user and ownership of records. Portal users are external to the organization and need to have access to records that are linked to their account and/or contact record.
+
+You should not use an advanced form. Advanced forms are used when you require interaction with the user and to step through a set of sections, such as in a wizard.
+
+You should not use charts. A chart is a read-only visualization of data and does not display customer records.
+
+You should select a page template when creating a new web page. The page template defines the structure of the page and is mandatory when creating a new page in the portal app.
+
+You should not select a web template. Web templates consist of html and css and control the layout of a component on a page. Web templates are added to page templates and are not selected when creating a web page.
+
+You should not select a Dataverse environment. A portal is created for a single Dataverse environment. Web pages can only show data from the Dataverse environment the portal was created for.
+
+You should not select a form. You can add a form after the web page has been created, but it is not selected when you create a page.
+
+You should convert to production. All portals are created as trials. You cannot add a custom domain name to a trial portal. You need to convert the portal to production before you can add a custom domain.
+
+You should not upload an SSL certificate. You cannot upload an SSL certificate until you have converted a trial portal to production. Adding an SSL certificate is not a pre-requisite for adding a custom domain name to the portal.
+
+You should not run the portal checker. The portal checker is a diagnostic tool used to identify common issues in the portal. The portal checker will detect issues with website bindings to custom domain names, but it will not enable a custom domain name to be added while the portal is in a trial state.
+
+You should not change the portal state to off. This option disables the portal and prevents users from accessing the portal. It will not enable a custom domain name to be added.
+
+You should select Run history to see the list of cloud flow runs. You can filter by Successful and Failed runs. You can then examine the failed runs.
+
+You should select Resubmit to run a cloud flow again. You can open a failed run. There is a Resubmit button to run the cloud flow again with the same data. The cloud flow will start from the beginning. You need to evaluate if this is the correct thing to do because the flow may have failed lower down in the processing.
+
+You should select Test to run a cloud flow in the editor. When you edit a flow, you can click on the test button and select a previous flow’s data run to use.
+
+You should not select Resume. Resume is an option for classic workflows, not cloud flows.
+
+You should not select Submit. Submit is used to publish your flow to the template gallery.
+
+You should not select Save & Run. When you save a flow for the first time, it is run automatically.
+
+To create a Power Automate cloud flow in a proper way, you should add a trigger when the row is created. This trigger is a feature that allows you to run the functionality only when a specific event happens. In this case, a Power Automate cloud flow must be triggered when a new row in Dataverse is created. Once a Power Automate cloud flow is triggered, you should add an action to retrieve all information about the document before processing.
+
+You should also connect to the SFTP server and send the file you received.
+
+Finally, if the connection was established and the file was sent, you should change the status in Dataverse to Succeeded. Otherwise, set the status to Failure.
+
+You should not add a recurrence trigger that checks if the record is created once per hour and add an action to get the record from Dataverse. If you add a recurrent trigger that checks if the record is created once an hour, you will add extra complexity to your system. Power Automate will unnecessarily call the system. Even if the document was successfully sent to the SFTP server, Power Automate would continue to make calls to Dataverse.
+
+If the file was sent, you should not change the status in Dataverse to Succeeded or set the Failure status if the file was not sent. The Succeeded status should include a successful connection as well.
+
+You should use the Microsoft Dataverse connector to automatically run a Power Automate cloud flow when a row is created or updated. The Microsoft Dataverse connector has a trigger that can be applied when a row is created or updated. The Microsoft Dataverse (legacy) connector has separate triggers for create and update, which would mean creating two cloud flows, one for create and one for update.
+
+You should use the Microsoft Dataverse (legacy) connector to manually run a Power Automate cloud flow from within a model-driven app form. The When a record is selected trigger is only available in the Microsoft Dataverse (legacy) connector, it is not available in the Microsoft Dataverse connector.
+
+You should use the Power Apps connector to manually run a Power Automate flow from within a canvas app screen. A flow that uses the Power Apps connector can be run from the press of a button in a canvas app.
+
+You should not use the Dynamics 365 Customer Engagement connector. This connector is deprecated.
+
+You should not use a custom connector. The prebuilt connectors can meet the requirements.
+
+You should not use the Flow button for mobile connector. This connector is used to manually start button flows from a mobile device.
+
+You should use the Apply to each action to loop through all the rows from the output of a List records action. The Apply to each action is a for-each style loop that iterates through each row in the dataset passed into it.
+
+You should use the Initialize variable action to define a variable to use as a counter in a loop. All variables in a flow must be initialized before they can be used. The Initialize variable action defines the data type of the variable and can set its initial value.
+
+You should use the Compose action to concatenate email addresses into a comma separated list. The Compose action creates a single output from multiple inputs. A simple way to use Compose is to create a string of values separated by a delimiter, such as a comma.
+
+You should not use the Do until action. Do until will loop for a number of iterations or until an expression is true. Do until loops have limits on the number of iterations they will process. With a result from List records, the number of iterations required is unknown in advance and using Do until could leave some rows unprocessed.
+
+You should not use Scope. Scope is used to visually group actions in a flow together to make it easier to read and edit a flow.
+
+You should not use Switch. Switch is used to branch between different values. Switch operates like a case statement.
+
+You should not use the Set variable action. You must initialize a variable before you can set a variable.
+
+You should not use Join. Join combines an array or set of values separated with a delimiter.
+
+You should not use Select. Select transforms or reshapes an array of values.
+
+You should use the Microsoft Dataverse connector to call a custom action. The Microsoft Dataverse connector has many actions other than standard data record operations, including calling custom process actions.
+
+You should not use the Microsoft Dataverse (legacy) connector. This connector can only perform standard CRUD data operations.
+
+You should not create a custom connector. The prebuilt Microsoft Dataverse connector can meet the requirement.
+
+You should not use the Data Operations connector. The actions in the Data Operations connector are for manipulating data within the flow and cannot initiate a custom action.
+
+You should select perform an unbound action to call a custom action defined as global with no table associated to the custom action.
+
+You should not select perform a bound action to call a custom action defined as global. Perform a bound action is used for custom actions associated with a table.
+
+You should not select perform a compose action. A compose action creates a single output from multiple inputs for example, creating an array of values.
+
+You can see the flow run history for every user on the Power Automate mobile app. As the creator and owner of the button flow, you can see the flow run history for all users.
+
+All of the run history, including the runs initiated by users with which the button is shared, appears in the button creator's Power Automate mobile app.
+
+Not all users can see the flow run history for every user. Only the creator of the button flow can see the flow run history.
+
+Environment admins cannot see the flow run history in the Power Automate portal. The button flow history is not available in the Power Automate portal.
+
+Users cannot see their own flow run history on the Power Automate mobile app. Only the creator of the button flow can see the flow run history.
+
+You can use Power Automate cloud flows to automate the management of Microsoft Teams. The Microsoft Teams connectors include the Create a channel action. This action creates a channel for a team. You can use this action to create a channel when a new retail store record is added to your system.
+
+You can use adaptive cards to capture feedback from job interviews. You can post adaptive cards to a Microsoft Teams channel using a Power Automate cloud flow.
+
+You should not use a classic workflow. Classic workflows only operate within Dataverse and cannot perform actions in Microsoft Teams.
+
+You should not use the Microsoft 365 Groups solution. This solution enables collaboration with non-Dynamics 365 licensed users. It does not integrate with Microsoft Teams.
+
+You should not use a Power Automate desktop flow. Desktop flows automate the tasks performed by a user at a computer. Power Automate desktop flows cannot create adaptive cards in a channel.
+
+You should not use a Customer Voice survey. Customer Voice does not integrate with a Teams channel.
+
+You need to add a parallel branch after the step that fails. On the new branch you should use the Configure run after option and uncheck "is successful" and check "has failed". The flow will continue on the original actions if the step succeeds but will take the new branch if it fails.
+
+You should not set a retry policy on the step. The retry policy determines the number of times the flow will attempt a step. It does not control sending a notification if the flow step fails.
+
+You should not add a condition after the step. The condition will never be reached if the step fails as by default the flow stops at the step with the error.
+
+You should not share the flow. Adding owners to the flow enables more robust administration, but does not affect what happens when an error occurs within a flow step.
+
+You should add Col1 eq 8 to Filter rows in the trigger. Adding an OData filter expression to the Filter rows parameter in the trigger will cause the flow to only run when the value of Col1 has a value of 8, but it will not restrict the flow to run only when Col1 is updated.
+
+You should also add Col1 to Select columns in the trigger. Adding Col1 to this parameter in the trigger will restrict the flow to only run when Col1 is modified. The combination of these two parameters will cause the flow to only run when Col1 is updated and is set to 8.
+
+You should not set the Scope to User. Setting the scope to user will mean that the flow will run only if the owner of the flow updates the record in the table.
+
+You should not add a condition step with the expression equals(triggerBody()?['Col1'],8) is true. This will not prevent the flow from running every time the table is updated. Adding a condition step to a flow will not stop the flow from being triggered as it is after the trigger step. The expression will cause the flow to follow the If Yes path when Col1 has a value of 8.
+
+You should not enable Concurrency control in the trigger and set degrees of parallelism to 8. This controls how many flows will run at the same time. This will allow 8 flows to be run in parallel.
+
+The classic workflow can either be real-time or background. If the workflow is real-time, the user will see the changes made by the workflow when the form is refreshed after the save.
+
+For a classic workflow to be used in a business process flow, the workflow must have the On-Demand trigger set.
+
+Other triggers can be defined for the workflow, for example Create. However, this does not affect whether the workflow can be used with a business process flow.
+
+There are two different ways workflows are run in business process flows. Workflows can be run in a stage, either on entry or exit of the stage. A workflow used in a stage must be for the table for the first stage, which in this situation is Building.
+
+A workflow set in stage exit on the final stage of a business process flow is never triggered because stage transition never takes place. Instead, the Process Completed option in global workflows must be used to run a workflow when the business process flow is completed.
+
+When the user clicks on Finish, this completes the business process flow, so the workflow that runs is the global workflow set for Process Completed. As a global workflow, this is a Building workflow.
+
+You should perform the following actions in order to create the business process flow:
+Create the business process flow and add needed steps and stages.
+Add the conditional branch.
+Add an action step.
+Enable the business process flow for managers. 
+First you should create the business process flow and add the necessary steps and stages.
+
+Next, you should add the conditional branch for entering the additional required info and executing additional logic if the budget is more than 20,000.
+
+Then, you should add an action step to execute the additional logic and return execution results to pass them to next stage. A workflow cannot be used for this purpose because it does not return execution results.
+
+Finally, you should enable the business process flow for managers. Only managers should be able to process the lead to an opportunity.
+
+You should not select use Power Automate to create the business process flow. Power Automate is a cloud-based workflow service that automates actions across common apps and services. You do not need to synchronize the logic between common apps and services; you need to convert one record into another in Dataverse.
+
+You should not use a classic workflow to execute additional logic. You need to pass the results of execution to the next stage of the business process flow, and a workflow does not return execution results.
+
+You should not enable the business process flow for all users. Only managers are allowed to process leads to opportunities.
+
+You should use a business process flow. This allows you to create a user interface component that will lead the user through the stages and steps to input all the needed data.
+
+You should not use a dialog. Dialogs have been deprecated by Microsoft and must be replaced by a business process flow or a canvas app.
+
+You should not use a process action. A process action is used to create a custom operation that is not pre-installed in the Power Platform. For example, you can use a process action to combine a set of steps into one operation.
+
+You should not use a desktop flow. Desktop flows are used to automate with legacy applications using the mouse and keyboard. They do not create a user interface for users.
+
+You should not use a classic workflow. A classic workflow is used to automate a real-world business process that is required to be run in the background or when a certain condition is met.
+
+You should update the security roles and set the privileges on the table created for the business process flow in order to enable users to use the business process flow. When a business process flow is created, a table (Onboarding table) is automatically created with the same name as the business process flow. By default, only the system administrator and the system customizer security roles have privileges on the Onboarding table. You need to add privileges to the Onboarding table to allow other users to use the business process flow.
+
+You should not share the business process flow. Business process flows are not shared like cloud flows. Instead, access to business process flows is controlled by security roles.
+
+You should not set the business process flow order. There is only one business process flow and so you do not need to set the order of the flows.
+
+You should not validate the business process flow. Validation is performed automatically when a business process flow is activated.
+
+You should create the chart using the Onboarding table. This is a custom table that is automatically created with the same name as the business process flow when that flow is created. Each time a business process flow is started, a record is added to this table. This record holds the details of when the business process flow was started and which stage the flow is currently in. You can use these records to create a chart showing the number of business process flows by their current stage.
+
+You should not use the Account, Contract, Device, or Plan tables, because they do not hold the details of the business process flow or current stage.
+
+You should use the Onboarding table in the trigger for the cloud flow. The cloud flow runs in the context of the business process flow table (Onboarding) and so the id of the row passed from the flow step to the cloud flow is the id of the Onboarding row. The Onboarding table holds the id of the account row in a lookup column, and the cloud flow can access the account details using this id.
+
+You should not use the Account, Contract, Device, or Plan tables in the trigger for the cloud flow.
+
+You should perform the following steps in order:
+Create a new business process flow.
+Choose table as None (Immersive Business Process).
+Add columns and forms to table.
+Add columns as steps.
+First, you should create a new business process flow. An immersive business process runs standalone and does not require a model-driven app. An immersive business process creates the table it will use for its data.
+
+Then, you should choose the table as None (Immersive Business Process). This option creates the business process flow to use its own table for data and does not require another custom table.
+
+Next, you should add columns and forms to the table. This option is only available in the business process flow editor for immersive business processes. 
+
+Finally, you should add the columns as steps in the business process flow.
+
+You should not create a custom table. An immersive business process creates its own custom table for data.
+
+You should not choose the custom table for the table for the business process flow. An immersive business process creates its own custom table for data.
+
+You should perform the following steps in order:
+Create an instant cloud flow in a solution.
+Select the Microsoft Dataverse (legacy) connector.
+Select the When a record is selected trigger.
+Select the Check In table.
+First, you should create an instant cloud flow in a solution. You must create the flow inside a solution in order to be able to add it as a flow step in a business process flow.
+
+Then, you should select the Microsoft Dataverse (legacy) connector. This connector contains the When a record is selected trigger, which is required when calling a flow in a flow step.
+
+Next, you should select the When a record is selected trigger. This trigger allows the id of the business process flow to be passed to the flow so it can perform the necessary processing on the event.
+
+Finally, you should select the Check In table. This table is created when the business process flow is created. It is also named after the business process flow. The id passed to the flow is the id of the business process flow row, not the id of the event row.
+
+You should not create an instant cloud flow in the Power Automate portal. Only flows created inside a solution can be used as flow steps.
+
+You should not select the Microsoft Dataverse connector. This connector does not contain the When a record is selected trigger.
+
+You should not select the Manually trigger a flow trigger. This trigger is used for button flows. You could use this trigger, but it would not contain the id of the row and so would limit the ability of the flow to perform relevant processing.
+
+You should not select the Event table. The id passed from the flow step is the id of the row on the business process flow table, not the row on the event table.
+
+Setting the value of a column in a business rule sets the value of the corresponding step in a business process flow. If you have a column on the form and also as a step in a business process flow, changes made to the data in the column by the business rule are applied to the corresponding step in the business process flow automatically.
+
+Hiding a column in a business rule hides the corresponding step in a business process flow. If you have a column on the form and also as a step in a business process flow, changes made to visibility of the column by the business rule are applied to the corresponding step in the business process flow automatically.
+
+Setting a column to not required in a business rule does not set the corresponding step in a business process flow to not be required for the stage. If a step is marked as required in the business process flow, a business rule cannot override this and set it to not required.
+
+For proper configuration, you need to use the following combinations:
+A professor with departments – many-to-one
+Students and courses – many-to-many
+One professor can be assigned to one department, and one department can have a lot of professors, so you should use many-to-one.
+
+One student can attend multiple courses, and one course can be attended by multiple students, so you should use a many-to-many relationship.
+
+A one-to-many relationship is not applicable to either scenario.
+
+For instance, when you need to connect classrooms and the tables that are in the classrooms, you should use a one-to-many relationship. One classroom can consist of a lot of tables, but one table can be only in one classroom at a specific moment of time.
+
+You should create an unattended desktop flow. Legacy applications, like the marketing system, will not have an API so you will need to use a Power Automate desktop flow to enter the data into the application. As there are many entries, you need to have computers dedicated to this task and scale the number of computers being used. The entry of the promotion responses needs to be initiated automatically. This requires the use of unattended desktop flows.
+
+You should not create an attended desktop flow. Attended desktop flows are initiated manually by the user. Customers require their entries to be processed immediately and this is not possible with manual attended desktop flows.
+
+You should not create a business process flow. Business process flows guide a user through entering data into an application. Business process flows operate within a model-driven app and are not able to access legacy applications.
+
+You should not create an instant Power Automate cloud flow. A legacy application will not have an API, so you cannot use a connector. Therefore, you cannot use Power Automate cloud flows.
+
+You should perform the following actions in order:
+Register the user's computer as a new machine.
+Record the steps in Power Automate Desktop.
+Add the Run a flow built with Power Automate Desktop action to the cloud flow.
+Connect to the machine.
+Select the desktop flow.
+First, you should register the computer as a machine. This will connect Power Automate Desktop to the Dataverse environment and allow the cloud flow to connect to the desktop computer.
+
+Next, you should record the series of steps using Power Automate Desktop. The desktop flow is then saved to Dataverse.
+
+Then you should edit the cloud flow, select the Desktop flows connector, and choose the Run a flow built with Power Automate Desktop action.
+
+Next, you should connect directly to the machine and select the machine created earlier. You must connect to a local computer before you can select a desktop flow.
+
+Finally, you should select the desktop flow.
+
+You should not export the desktop flow. The desktop flow is stored in Dataverse and is downloaded to the local computer automatically.
+
+You should not create a process. Processes are used with Process advisor to analyze how user perform their work. You do not need a process to create and run a desktop flow.
+
+Variables in Power Automate Desktop use the % notation. You should refer to the variable with %Var1%.
+
+You should not use brackets, underscore, or asterisks when referring to variables in Power Automate Desktop.
+
+You should perform the following actions in order:
+Group activities.
+Remove personally identifiable information.
+Mark the recordings as Ready to analyze.
+Analyze the process.
+First, you should group the actions in each recording into activities. The recorded actions have typically too much detail. You should group them into activities so that the analysis can be performed more easily, and the process map generated will be more understandable.
+
+Next, you should remove any personally identifiable information (PII). This will include deletion of screenshots and clearing any sensitive text captured. You must perform these steps before analyzing the process.
+
+Then, you should mark the recordings as Ready to analyze. If you do not mark the recordings as ready, they will not be included when the process is analyzed.
+
+Finally, you should analyze the process. This will generate the process maps and recommendations.
+
+You should not share the processes with a co-owner. You do not need to share the processes with another owner in order to analyze the process recordings.
+
+You should not export the processes. Exporting processes is used to transport the process from one Dataverse environment to another. You do not need to export a process in order to analyze the process.
+
+You should use Submit your bot for approval from the Teams channel. This option will list the bot in the Teams Admin portal for a Teams admin to approve. When approved, the bot will be available for all users.
+
+You should not use Open bot from the Teams channel. This option adds the bot to Microsoft Teams, but only for your user. The bot will not be available for all users.
+
+You should not share the bot. Sharing a bot allows other users to edit and collaborate on the bot. It is not necessary to share a chatbot with other users for them to chat with the bot.
+
+You should not add the Power Apps app. This app only allows canvas apps to be added to Teams.
+
+Target column and source column must be of the same type and the same format. If the formats or types differ, the system will not be able to work with these columns, and this will lead to an error.
+
+The length of the target column must be equal to or greater than the source column. If the length of the source column is shorter, the system will not be able to use a longer value from the target column.
+
+The source column must be visible on the form. If you map to, or from, a column that is not displayed on a form, the mapping will not be done until the column is added to a form. The system takes the mapping values from the columns that are present on a form.
+
+The system must allow a user to enter data in the target column. A user needs to have permission to create and modify rows for the target table.
+
+The Address ID values cannot be mapped. An Address ID is an attribute with a unique value. The system does not allow having several rows with the same ID.
+
+You should use the Custom website channel to extract the URL of the chatbot from the snippet. You can then add an IFrame component to the portal using the chatbot's URL. This will embed the bot in the portal app.
+
+You should not use the demo website URL. This is a standalone web page used to test a chatbot with users who are not licensed for Power Virtual Agents. The demo website is a full-page website and is not designed to work in an IFrame.
+
+You should not use the URL of the chatbot as a shortcut in the portal navigation. A shortcut requires the user to navigate to the bot away from the portal app. A shortcut does not embed the bot in the portal app.
+
+You should not use the Bot ID. The Bot ID is used for some channels such as Slack or when using Direct Line for custom apps.
+
+You should not use a manifest file. The manifest file is an option used to deploy a bot to Microsoft Teams.
+
+To create and set up the Power Virtual Agent you should perform the following actions in order:
+Create a new Power Virtual Agent and give it a name.
+Create a topic to use.
+Create trigger phrases.
+Set up questions and responses.
+Set up options.
+Publish Power Virtual Agent.
+First you should create a new Power Virtual Agent and give it a name. You do this by going to the Microsoft Power Virtual Agents homepage on the Microsoft website, and then clicking the Start free button. You should then enter a name for your bot.
+
+Second, you should create a topic to use. A topic is a dialog tree which will allow you to specify how your bot responds to a user's question. You do this by selecting Topics in the side navigation pane, and then selecting New topic at the top of the page, which will create a topic. Once the topic has been created, you can give a name to it.
+
+Then you should input trigger phrases for the topic. Trigger phrases are examples of the types of user questions that help teach the bot when to respond with the appropriate dialogue. You then save the topic to continue.
+
+Next you should set up questions and responses. To do this you should click on the Go to authoring canvas option, which takes you to the graphical dialog tree editor that allows you to define bot responses. You need to enter an initial message into the first message node, and then click the + beneath the message node to be able to select the Ask a question node. Then enter the question text, and save the bot.
+
+After setting up the question, you should set up options by clicking the + New Option button. You then can enter the options that you wish to present your users with as possible responses to the question you have set up. These can include multiple choice options, a number, or a specific text entry.
+
+Finally, once you have set up all the questions and options, you should publish the Power Virtual Agent bot by going to the Publish tab in the side navigation pane, and clicking the Publish button in the main window.
+
+You should not configure the system fallback topic. This is because the fallback topic is used when the bot cannot find an appropriate topic or response, or does not understand the user input. Appropriate questions and options should be set up first for the chatbot to work.
+
+You should not export the Power Virtual Agent. Exporting the Power Virtual Agent would be used for moving it between environments using a solution. The scenario does not call for this.
+
+You should perform the following actions in order:
+Install the Power Virtual Agents app in Teams.
+Create a chatbot and select a Team.
+Add topics and conversation steps.
+Publish the chatbot.
+Make the chatbot available to others.
+First, you need to install the Power Virtual Agents app in Microsoft Teams. This Teams app allows you to create a chatbot in Microsoft Teams.
+
+Next, you create a chatbot and select a Team to create the chatbot in. This automatically creates a Dataverse for Teams environment for the selected team.
+
+Then, once the environment and chatbot have been created, you can add your topics and conversation steps to the chatbot.
+
+Next, you need to Publish the chatbot. You need to publish after making changes to the chatbot to be able to share the chatbot with other users.
+
+Finally, you need to share the chatbot and make the chatbot available to others. You can either generate a link, submit to the Teams admin for approval, or show the chatbot in the Teams app store. Showing in the Teams app store will list the chatbot under the Built by your colleagues section in the store.
+
+You should not open the chatbot in Teams. This option only makes the chatbot available to yourself and not to other users.
+
+You should not create an environment for Teams in the Power Platform admin center. The Dataverse for Teams environment is created automatically when you create the chatbot in the team.
+
+You should not download the bot manifest. Downloading the bot manifest enables you to submit the chatbot to the Microsoft Teams administrator or to publish the bot to the entire organization.
+
+A chatbot created inside Microsoft Teams will be automatically authenticated and signed in but is only authenticated with Azure Active Directory (Azure AD). To be able to sign into other systems that use Oauth2 for identity management, you need to set the Authentication option to Manual.
+
+You also need to add an Authenticate node to the conversations in your topics. This allows you to create the AuthToken to be used with the API of the external system.
+
+You should not set Authentication to Only for Teams. This option is set by default when you create a chatbot inside Microsoft Teams and automatically signs in the user to Azure AD. It does not allow external authentication with OAuth2. You also cannot add the Authenticate node to your topics when Only for Teams is selected.
+
+You should not manage the allowlist for the chatbot. The allowlist is used with bot skills to allow other bots to call your bot as a skill. It is not used for authentication of the user.
+
+You should not configure secrets in Web channel security. Web channel security is used to generate the keys used by the chatbot for communicating over the Direct Line channel. It is not used for authentication of the user.
+
+You should share the chatbot with an individual user to enable the user to edit the chatbot's topics. Sharing the chatbot with a user allows the user to collaborate on the chatbot, make changes to the chatbot's topics and conversations, and test the chatbot.
+
+You should not share the chatbot with a security group that the user belongs to in order to enable the user to edit the chatbot's topics. Sharing a chatbot with a security group allows the users in the group who have a license to use the chatbot but does not allow editing of the topics in the chatbot.
+
+You should not add the Bot Contributor security role to the user. A user requires the Environment Maker role to edit a chatbot. This role is added automatically when a chatbot is shared with an individual user.
+
+You should publish the chatbot to enable end users without a license in your organization to test the chatbot. Publishing the chatbot makes it available on the demo website. You can share the URL for the demo website with the end users.
+
+You should not share the chatbot with the individual users to enable end users without a license in your organization to test the chatbot. Sharing the chatbot with a licensed user allows the user to collaborate on the chatbot, make changes to the chatbot's topics and conversations, and test the chatbot. Unlicensed users will not be able to test the chatbot.
+
+You should not share the chatbot with a security group that the users belong to in order to enable end users without a license in your organization to test the chatbot. Sharing a chatbot with a security group allows the users in the group who have a license to use the chatbot. Unlicensed users will not be able to test the chatbot.
+
+You should use the custom website channel and copy the embed code to the organization website to expose the chatbot to customers on your organization's website.
+
+You should not download the chatbot manifest. The manifest is used to add the chatbot to Microsoft Teams.
+
+You should not configure secrets in Web channel security. Web channel security is used to generate the keys used by the chatbot for communicating over the Direct Line channel.
+
+You should use the Suggest topics option on the Topics page to extract content from the existing information. Suggest topics uses artificial intelligence (AI) to analyze the information in web pages or online files such as that held in SharePoint Online or OneDrive for Business. Suggest topics creates the topics and inserts trigger phrases.
+
+You should not create a custom entity. Entities in chatbots allow the bot to identify objects and terminology in the phrases entered by users. There is a set of prebuilt entities for common objects, and you can create custom entities to help your bot understand your organization or industry.
+
+You should not add synonyms. Synonyms are used with entities to help match and identify entities.
+
+You should not use QnA Maker. QnA Maker creates a knowledge base from your support content in a similar manner to Suggest topics. You would then need to create a chatbot that uses this knowledge base.
+
+You should perform the following steps in order:
+Edit the Power Virtual Agent bot.
+Create the system fallback topic.
+Add a Power Automate flow action.
+Use the Generate answer using QnA Maker knowledge base template.
+First, you should edit the Power Virtual Agent bot. You configure the integration with QnA Maker from within Power Virtual Agents.
+
+Next, you should create the system fallback topic. If you do not add a fallback topic, the bot will prompt the user twice if it does not understand, before escalating. If the chatbot cannot determine which topic to use, the chatbot will use the Escalate system topic. You can change this behavior by adding a fallback topic. Adding a fallback topic allows the bot to ask further questions to determine the user's intent.
+
+Then, you should add an action to the fallback topic and select the Power Automate flow action. Power Virtual Agents does not have native integration with QnA Maker knowledge bases and you must use Power Automate cloud flows to query the knowledge base.
+
+Finally, you should use the Generate answer using QnA Maker knowledge base template from the Power Virtual Agents flow template. The flow will use the QnA Maker knowledge base to return answers to your chatbot.
+
+You should not create an FAQ bot with Azure Bot Service. An FAQ bot uses the QnA Maker knowledge base. The FAQ bot will answer questions. You can use the FAQ bot as an action in your chatbot, but first you would need to add the FAQ bot as a skill.
+
+You should not create a bot with Bot Composer. The composer bot can connect to a QnA Maker knowledge base. You can use the composer bot as an action in your chatbot, but first you would need to add the composer bot as a skill.
+
+You should not add a Connect to QnA KnowledgeBase action. This action is used in Bot Composer to connect to a QnA Maker knowledge base. This action is not available in Power Virtual Agents.
+
+You should edit the Escalate topic. If the bot cannot determine the user's intent, it prompts the user again. After two prompts, the bot uses the Escalate topic.
+
+You should not use the Confirmed Failure topic. This topic is used to ask the user if they want to rephrase or to escalate to a human agent.
+
+You should not use the Greeting topic. This topic is used at the beginning of the conversation.
+
+You should not use the End of Conversation topic. This topic is used to prompt for a survey.
+
+You should configure the system Fallback topic. If you need to change the default behavior for invalid inputs you need to add the system Fallback topic. This topic shows a single message and then redirects to the Escalate topic. You will need to add messages and question nodes to the Fallback topic to meet the requirements.
+
+You also need to add a Transfer to Agent node to the Escalate topic optionally to the system Fallback topic. The default final action in the Escalate topic is to show the message to connect to a person but it does not actually perform the transfer. Adding the Transfer to Agent node will initiate the transfer to the engagement hub you have configured.
+
+You should not edit the End of Conversation topic. This topic is used to prompt for a survey when the conversation has been completed. The End of Conversation topic is not called when an unknown phrase is used.
+
+You should not create a new topic for unknown phrases. The system Fallback topic handles all unknown trigger phrases. A custom topic would need to have all possible unknown phrases added.
+
+You should not Open in Bot Framework Composer. Bot Composer allows you to extend your bot with custom dialogs. It will not change how unrecognized phrases are processed by the bot.
+
+You should use the Suggest topics option on the Topics page to extract content from the existing information. Suggest topics uses artificial intelligence (AI) to analyze the information in existing documents,  creates the topics and adds the trigger phrases.
+
+You should also upload the existing documents to OneDrive for Business. Suggest topics can only use documents stored on web pages or online files held in cloud services such as OneDrive for Business.
+
+You should not create custom entities. Entities in chatbots allow the bot to identify objects and terminology in the phrases entered by users. There is a set of prebuilt entities for common objects, and you can create custom entities to help your bot understand your organization or industry.
+
+You should not configure file upload. You can customize the bot canvas to allow users to upload files. You cannot upload files directly for use with Suggest topics. Suggest topics can only use files accessible using an https URL.
+
+You should not add a skill. Skills allow bots to call other bots.
+
+You should create a custom entity for products. Entities are not tables in Dataverse. Entities in chatbots allow the bot to identify objects and terminology in the phrases entered by users. There is a set of prebuilt entities for common objects. You can create custom entities for your own organization that hold information about products, their synonyms, and stock codes.
+
+You should not add variables for each product. Variables are used to hold a user's response to questions in bot topics.
+
+You should not create a topic for each product. Topics determine the conversations that a user has with a bot. A topic will prompt the user to choose a product. Bots use trigger phrases to determine what issue the user is asking about and then chooses the appropriate topic. Topics are based around a user's issue, not the product. For instance, ordering or returning a product. The conversation will be the same for most products.
+
+You should not create an action and use Power Automate cloud flow to query the product catalog. You use actions and Power Automate to interact with Dataverse data and other systems. You can use a cloud flow to retrieve more information about a product or a customer's history with a product, but you cannot use flow to understand products. A cloud flow cannot return a list of products to a topic.
+
+You should not add a skill. A skill is a bot that can be used by another bot. The Microsoft Bot Framework allows your bot to be linked with other bots created using Microsoft Bot Framework, including QnA Maker and Bot Composer.
+
+You should use bot variables. By default, variables are used only within a topic. You can use variables to skip questions based on previous responses. Setting a variable as a Bot variable means that the variable can be used by all topics in the bot. Thus, the bot can skip questions already asked in other topics.
+
+You should not add a skill. A skill is a bot that can be used by another bot. The Microsoft Bot Framework allows your bot to be linked with other bots created using Microsoft Bot Framework including QnA Maker and Bot Composer.
+
+You should not add trigger phrases. Trigger phrases are defined for each topic and are used by the bot that chooses the best topic based on a user's responses.
+
+You should not merge topics into a single topic. Creating a single topic will mean that the conversation path will be massively complicated, require duplication, and will be harder to maintain. Using multiple topics allows each topic to be well defined and improves customer experience.
+
+You should not use adaptive cards. Adaptive cards allow you to create a richer user experience. Adaptive cards are not directly supported with Power Virtual Agents. To use adaptive cards, you can either use the Bot Framework Composer or customize the bot canvas.
+
+You should use Smart matching to automatically detect the entity when words with different spellings or similar meanings are in the user's input. The Smart matching option enables the bot’s understanding of natural language. Smart matching helps match different spellings and words with similar meanings.
+
+You should use Ask a question to extract an item from the custom entity list using the user's input. The Ask a question node can include a custom entity and the bot will either match automatically based on the user's previous input or prompt the user to select an item from the list. This is known as slot filling.
+
+You should not use synonyms. Synonyms allow the item to be found using other names for the item. For example, if we had Power Platform products as a custom entity, a synonym for Power Automate would be Microsoft Flow and a synonym for Dataverse would be Common Data Service.
+
+You should not use Call an action. Call an action is used to run a Power Automate cloud flow or to perform Authentication of the user.
+
+You should not use a trigger phrase. Trigger phrases are added to topics to help the bot determine which topic is the most appropriate based on the user input.
+
+You should configure sharing in Dataverse and in Power BI. The dashboard consists of two parts – the Dataverse dashboard itself and the embedded Power BI visualization – that should be shared individually. The dashboard will be shared in Dataverse and the embedded visualization will be shared in Power BI.
+
+You should not add the Reporting permission. This permission is required to create, run, and share reports in Dataverse but it cannot be used to share Dataverse dashboards.
+
+You should not convert the dashboard to a system dashboard. System dashboards do not support Power BI visualizations.
+
+You should not set up an access team. Access teams are used for sharing rows among several users without changing the row owner. Dashboards cannot be shared in this way.
+
+You should not configure collaboration using SharePoint. SharePoint is used for managing and sharing documents linked to Dataverse rows. It cannot be used for sharing Dataverse dashboards.
+
+You should use Power Query to create dataflows. Power Query is an extract and transformation tool that can read data from many different services, perform transformations on that data, and then store it in a dataflow.
+ 
+You should not use DAX functions to create dataflows. Power Query uses the M language.
+
+You should not use T-SQL statements to create dataflows. Power Query uses the M language.
+
+You should not use Azure Data Factory to create dataflows. Azure Data Factory uses mapping data flows to transform data. Mapping data flows are not the same technology as Power Platform dataflows.
+
+You should store dataflows in Azure Data Lake Gen2 storage. The Azure Data Lake can either be managed by the Power BI service or an Azure Data Lake that you create in Azure.
+
+Dataflows can extract data from Azure SQL Server and Dataverse. Power BI datasets can be populated from a dataflow.
+
+You must create a dataset from the dataflow in order to add visualizations to a report. You cannot create visualizations directly from a dataflow.
+
+You should not create a dashboard. You create dashboards from reports. The report must be created first.
+
+You should not create a report. The dataset must be created before you can add a visualization to create a report.
+
+You should share the dashboard to allow users to view visualizations only in Power BI. You can share a visualization by sharing either a report or a dashboard with other users.
+
+You should share the workspace to allow users to update the report and dashboard content. A user with access to the workspace can collaborate on the reports and dashboards in that workspace.
+
+You should share the dashboard to view a Power BI tile in a model-driven app dashboard. The user requires access to the Power BI dashboard to view a Power BI tile in a model-driven app.
+
+You should not share a tile. You share the dashboard to which a tile has been added.
+
+You should not share a dataset. Sharing a dataset allows users to build their own reports and dashboards. Sharing a dataset does not share the reports or dashboards created using that dataset.
+
+A Power BI alert can trigger a Power Automate flow. An alert rule is triggered when the threshold for the rule in the alert is breached. A Power Automate flow can be triggered by a Power BI alert. The Power BI connector contains the trigger named When a data driven alert is triggered. You can create a Power Automate flow using this trigger to send notifications using any of the connectors available for Power Automate, including text messages, Microsoft Teams messages, email, and even social media posts.
+
+Comments added to visuals on dashboards cannot trigger a Power Automate flow. Power Automate cannot be triggered when a dataset is refreshed or a workspace is shared.
+
+A Power BI alert can only be added to KPI, gauge, and card visuals. No other Power BI visual can trigger a Power Automate flow.
+
+The visual required on a report that allows users to perform actions is Power Apps. A Power Apps canvas app can be embedded in a Power BI report using the Power Apps visual. The embedded canvas app can take action from within the report.
+
+The Scatter visual shows the relationship between two numerical values. This visual cannot be used to trigger an alert or to take action.
+
+The TreeMap visual shows hierarchical data using rectangles sized on the data value. This visual cannot be used to trigger an alert or to take action.
+
+You should use individual email addresses to share Power BI dashboards with a small number of internal users. You can easily share just by adding their email addresses.
+
+You should use a Microsoft 365 security group to share with external users. External users need to be in a Microsoft 365 security group to access Power BI, or you would need to configure Azure B2B guest users.
+
+You should use a Microsoft 365 security group to share with more than 100 users. You only share with 100 individual users at a time. You should use a distribution group or security group when the number of users is more than 100.
+
+You should use a Power BI app to share with the entire organization. By default, an app is published to all users in an organization.
+
+You can share with individuals, distribution groups, or security groups. However, you cannot share with Dataverse security roles or Power BI roles. Power BI roles are used with row-level security. You cannot share with dynamic distribution groups.
+
+You should create an alternate key on the product table using the ItemID, Color, and Size columns. A model-driven app uses Dataverse for its data. In Dataverse, all rows are uniquely identified by a GUID, which is a string of numbers and letters. This GUID is internal to Dataverse. An alternate key allows external systems to update rows in Dataverse without knowing the GUIDs of the rows. The external system specifies the columns in the alternate key, and the Dataverse platform identifies the unique row from these columns and then can update the quantity available and quantity ordered columns. This is much more efficient than running a query to discover the GUID.
+
+You should not use a Power Automate cloud flow to perform a query using List Rows to find the row and update it. This is inefficient and requires two calls, the query and then the update, rather than a single update call.
+
+You should not use a custom action to query the product table. A custom action cannot query on its own and would require a custom code to perform the query. Coding requires a developer. This is inefficient and requires two calls, the query and then the update, rather than a single update call.
+
+You should not write a plug-in to query the product table. A plug-in requires custom code to perform a query to retrieve the product GUID. Coding requires a developer. This is inefficient and requires two calls, the query and then the update, rather than a single update call.
+
+You should configure a connection role to describe the relationship between two records. Connection roles define the purpose of the relationship between two records in tables.
+
+You should configure the Connection Role Category Choice column to expand the list of connection role categories. The Connection Role Category column is a choice with a list of items used to group connection roles. You can configure this global choice column and add your own items to the list.
+
+You should configure the table to enable connections to be made to a table. The settings on a table has an Enable Connections checkbox. Enabling this option allows connections to be made with the records of the table.
+
+You should not configure a connection. A connection is used to link two records, but it does not describe the purpose of the relationship, which is defined by the connection roles selected on the connection record.
+
+You should not configure a solution. Connection roles can be included in a solution but are not required in order to use connections or connection roles.
+
+You do not need only 12 images to train an AI image recognition model. AI Builder (object detection) requires at least 15 images to train a model, which have to be image files, and cannot be in any other format.
+
+You need to train the AI Builder model before it can be deployed and used. This is because the model needs to learn what it should identify within the images.
+
+You cannot use images in PDF format to train the AI Builder model with. The AI Builder can only accept images in JPG, PNG, and BMP formats for training purposes.
+
+You cannot use the AI model to recognize other types of animals as well with the trained model. AI Builder models can only recognize the object within the image that it was been trained for, and cannot identify other items from the image. A different AI model must be trained in order to recognize a different object.
+
+You can use Power Automate to automatically send captured images through the trained AI Builder model. Power Automate has a connector that allows you to push files through to a specific AI model for analysis.
+
+You should use Classic workflow. With the Send Email step and Form Assistant, you can include columns from a custom table.
+
+You should not use Email templates. Email templates can only add columns from a few standard tables.
+
+You should not use Word templates. Word templates cannot be sent by email.
+
+You should not use a template in SharePoint. Such templates cannot be used with data in Dataverse.
+
+You should recreate the template in the production environment. There is no provided method to transfer templates between environments. 
+
+You should not add the template to a solution, export from sandbox, and import into production. Excel templates are not solution-aware and cannot be added to a solution.
+
+You should not download the template from the sandbox environment and import it into production. It is not possible to download an Excel template for importing into another environment.
+
+You should not copy and paste the template. Copying and pasting between environments is not supported.
+
+You should use a business rule. This is the only option that will perform the calculation without saving the record and that will display the result when any column referenced by the rule is changed.
+
+You should not use a calculated column. Calculated columns are only updated when a row is saved. This option does not meet the requirement of showing the result immediately.
+
+You should not use a rollup column. Rollup columns are updated only once per hour. They are used only to aggregate values from related tables and not to calculate values.
+
+You should not use Power Automate cloud flow. Cloud flows run asynchronously after a row is saved and will perform the calculation in the background. The user will need to refresh the screen to see the result. This option does not meet the requirement of showing the result immediately.
+
+You need to perform the following steps in order:
+From Actions toolbar in the solution, select Word Templates -> Create Word Template.
+Select 1-to-many, Many-to-1, and Many-to-many relationships.
+Enable the Developer tab in Word.
+Click on the XML Mapping Pane and select the Microsoft-crm XML path.
+Insert plain text controls.
+There are three places to create a Word Template. The option here is from a record form, clicking on Create Word Template from the Actions toolbar.
+
+You then select the entity and all related entities in 1-to-many, Many-to-1, and Many-to-many relationships and download the Word file.
+
+In Word, you need to enable the Developer tab by customizing the Ribbon.
+
+In the Developer tab, click on the XML Mapping Pane and select the CRM XML path from the drop-down list
+
+You can then right-click on fields and insert controls into the document. You must use the plain text option.
+
+You should not use rich text controls. Only picture and plain text controls are supported for Word Templates with model-driven apps.
+
+You should not create a mail merge template. Mail merge templates are for the old mail merge functionality.
+
+You should do the following:
+
+• Export the templates to a zip file as an unmanaged solution.
+• Import the saved file into the testing environment.
+• Select the Make Template Available to Organization option for each template.
+
+To export templates, the templates should be added to an exporting customization solution, which then can be imported to another environment. You share the template by selecting the Make Template Available to Organization option.
+
+You should not export the templates to an XML schema file. Although an XML schema file can be used to transfer reference data to other environments, it must be accompanied by an XML data file that contains the data itself.
+
+Though HTML formatting is supported by email templates, it is not possible to export several templates to a HTML file and then import the file into another environment.
+
+You should not export the templates to a JSON data file. JSON files are used for API communication for sending key-value pairs and cannot be used to deploy templates to other environments. 
+
+To create the template that shows all patient appointment bookings, you should do the following:
+
+• Create a Microsoft Word template for the Patient table and add the 1-to-many relationship with the Booking table to get all related appointments.
+• Upload the document as a Word template.
+
+You should not convert the Word document to Excel. You can upload a Word file directly to the system.
+
+You should not select the Booking table and add the relationship with the Patient table when you want to show all patient appointments. The file will contain information about all patients that have a booking, but not about all bookings for the patient.
+
+To create the Excel template for managers and display this information on a chart, you should perform the following actions in order:
+Add formulas for calculating revenue.
+Add the chart to the template.
+Select the Refresh data when opening file option in Excel.
+Allow managers to use the new template.
+First you should add the formula to the Excel file to summarize the revenue for all departments.
+
+Next, you should add the chart to the Excel template that will build graphics based on the data you receive from the Dataverse.
+
+Then, you should select the Refresh data when opening file option in Excel. You should enable this option in Excel to allow the users to have up-to-date information when they open their Excel files.
+
+Finally, you should share the uploaded template with the managers to allow them to work with the template.
+
+You should not create an SSRS report when you create an Excel template. SSRS is a server-based reporting system. It requires custom development and is not related to creating Excel templates.
+
+You cannot group records and perform any calculations for them using classic workflows. For this purpose, you need to implement some custom plug-in or action.
+
+The document can be visible only for managers, so you cannot share it with all users.
+
+You should update the column length in either the default or the unmanaged solution and publish only the Contact table without publishing the whole solution.
+
+If you publish all customization, the changes from other entities will apply to the environment. When you want to publish only specific changes, you need to publish a specific table.
+
+If you edit the column length on the Contact table but publish changes on the Account table, the changes will not be applied to the environment.
+
+You should add a form, a connection role, and a choice to the solution. These are all components that are solution-aware and can be added to a solution.
+
+You should not add a word template to the solution. Word templates are not solution-aware.
+
+You should not add a duplicate detection rule to the solution. Duplicate detection rules cannot be included in solutions and are not solution-aware.
+
+You should add an email template to the solution. This is the only template type that can be added to a solution.
+
+All the other templates are not solution-aware and cannot be included in a solution.
+
+To remove components of unmanaged solutions from a Power Platform environment, you need to manually remove every single customization.
+
+You should not delete the environment in the Power Platform admin center. Once you delete the environment, you will lose everything, including data and configurations. There is no way to restore the removed instance again.
+
+Installing the previous version of an unmanaged solution or changing the version number just changes the version number of the solution on environment. It does not remove a customization of the newer version.
+
+In order to export and import a solution only with custom tables and some custom columns added to the Account table, you need to perform the following actions:
+Create a new custom table in the new solution.
+Include the Account table in the solution.
+Add new custom columns to the Account table.
+Microsoft does not recommend renaming the unused tables to use as a customization. You should create a new table from scratch if needed.
+
+You should not create the custom table in the default solution and add appropriate columns, views, and forms to the Account table. You cannot export the default solution.
+
+You should use a managed solution with a custom publisher. You should use a managed solution when it will work as a third-party component. This will allow the end user to remove the solution from the system with all related customizations. A custom publisher has a unique prefix that allows you to understand what solution the components are part of.
+
+You should not select the default publisher in combination with any type of solutions. The default publisher has the prefix: new. When two or more different solutions use the default publisher, you will not know which solution the component is part of.
+
+You should not use an unmanaged solution if you want to deliver functionality to other systems. Users will not be able to remove customizations completely by removing the solution.
+
+Solution A will cause errors and prevent the solution from importing. A dependent component that is missing from a solution will cause an error when importing. This often happens when a field is created in another solution (or the default solution) and another consultant adds the fields to the form and adds the form to the solution.
+
+Solution B will not result in errors that prevent the solution from importing. A field that has been deleted will not cause an error on import. Managed and Unmanaged solutions behave differently with deleted fields.
+
+Solution C will not result in errors that prevent the solution from importing. A workflow that references a record not in the target system will raise a Warning, the workflow will be in Draft, but the import will not error on import. This scenario often occurs when using queues or teams or assigning to users. Although names might be the same, the Globally Unique Identifiers (GUIDs) of the records might be different, and thus the workflow cannot find the record.
+
+Solution D will not result in errors that prevent the solution from importing. A solution previously imported as Unmanaged will not cause an error when imported as Managed. The user will, however, be prompted to convert the solution and its components to managed. Note that if the solution had been imported as Managed, trying to import as Unmanaged will error and stop the import.
+
+Solution components cannot be moved from one publisher to another publisher. When a component is created it belongs to the publisher for the solution in which it was created. You cannot change the publisher for a component.
+
+An existing solution component can be added to a solution that belongs to a different publisher. It is possible to add an existing component created by one publisher into another solution owned by a different publisher. However, the component's publisher may have restricted the changes that can be made to the component with managed properties.
+
+You can change the publisher prefix after the publisher has been created. The prefix on the publisher can be edited but the prefix on any component that was previously created for the publisher will not be changed. New components created for the publisher will use the latest prefix.
+
+The Run a Child flow action is only available for flows created inside a solution. Both the parent and child flows must be in the same solution. You can then add the Run a Child flow action to the parent flow and call the child flow. This action is not available if the flow is not inside the solution.
+
+To run a flow from a canvas app that is in a solution, the flow must also be in the solution. Power Automate instant flows that are run from a canvas app must be in the same solution as the canvas app. You cannot add a flow from outside a solution.
+
+Power Automate flows that are in a solution cannot be monitored from the Teams Flows list. Flows that are in a solution are not visible under My Flows or Team Flows and can only be viewed from inside the solution.
+
+Only the Power Platform CLI has the ability to create a new solution. The Power Platform Build Tools are concerned with moving solutions between environments. The Solution Packager adds existing solution files into a package and cannot create a new solution.
+
+The Power Platform CLI has the ability to export a solution from a Dataverse environment. The Package Deployer is used to deploy packaged solutions to an environment and does not export solutions. The Solution Packager adds existing solution files into a package and cannot export a solution.
+
+The Power Platform Build Tools has the ability to unpack a zipped solution file into multiple XML files for each component. This is typically so that the files can be added to a source code control system. The Package Deployer is used to deploy packaged solutions to an environment and does not unpack solution files.
+
+You should not edit the managed solution provided by the ISV. Managed solutions cannot be edited.
+
+You should not create a new managed solution and add the table to the solution. You cannot create a managed solution. When created, solutions are unmanaged.
+
+You should not change the managed properties of the entity. You cannot change the managed properties of a component from a managed solution.
+
+You should request the ISV to make the changes. The ISV can supply a new updated solution including the changes.
+
+You could also create an unmanaged solution and add the table to the solution. New columns can be added in an unmanaged solution to a custom entity from a managed solution.
+
+You should use a managed solution. This is the only option that will allow the changes to be uninstalled.
+
+You should not use the Default solution. The Default solution contains every component in your Common Data Service environment. The Default solution is special and cannot be deleted. The Default solution cannot be exported.
+
+You should not use the Common Data Services Default solution. This solution is designed for quick changes where there is not a deeper knowledge of solutions. This solution is good for personal projects but not when customization activities need to be coordinated.
+
+You should not use an unmanaged solution. An unmanaged solution cannot roll back the changes applied by the solution.
+
+You should set the child property to allow a Dataverse classic workflow to be initiated by another classic workflow. Setting the on-demand, real-time, and background properties will have no effect as to whether the workflow can be called from another workflow.
+
+You should set the Dataverse classic workflow to run in real-time if the results are to be visible immediately. If the classic workflow is set to background, the user will need to wait and refresh their screen to see the results. On-demand simply defines whether the workflow can be run by the user manually from within a form. The real-time or background setting determines if the results are visible immediately or not. Setting the child property will have no effect on the visibility of the results.
+
+You should set the Dataverse classic workflow to run in the background if there are any wait steps in the workflow. A real-time classic workflow cannot have any wait steps. Setting the child or on-demand properties does not determine whether a wait step can be used.
+
+You should set the on-demand property to allow the Dataverse classic workflow to be called as a step in a business process flow. Setting the child, real-time, or background properties has no effect as to whether the workflow can be used in a business process flow.
+
+You should perform the following actions:
+Create an advanced find view on the Process Sessions entity.
+Deactivate the workflow.
+Edit the workflow.
+Select the Keep Logs for workflow jobs that encountered errors option.
+Activate the workflow.
+You should look in Process Sessions for real-time workflows. Process Sessions has a record for each real-time workflow that is run. Process sessions is not in the SiteMap, so you will need to create a view to see the errors for the workflow using Advanced Find.
+
+You should deactivate the workflow. You must deactivate the workflow to be able to edit it.
+
+You should edit the workflow so you can change its options.
+
+You should select the Keep Logs for workflow jobs that encountered errors option in the workflow. Process sessions are automatically deleted if they are successful by default, so you need to enable this option to see the logs for each workflow you want to monitor.
+
+You should activate the workflow so that it runs.
+
+You should not look in System Jobs. System Jobs has a record for every background workflow that is run. System jobs are not used by real-time workflows.
+
+You should not look in plug-in trace logs. Plug-in trace logs are where the logs for plugin code are stored. It will not have logs for real-time workflows unless the workflow uses .NET assembly code.
+
+You should not look in Power Platform analytics. Power Platform analytics records the number of executions of each workflow and the number of errors, not the details of any error.
+
+You should not change the workflow to run in the background. Just changing the workflow to run in the background will not enable you to monitor because the system jobs that are created will still be deleted.
+
+You should use a managed solution to protect your intellectual property. A managed solution cannot be repackaged and exported as a different solution.
+
+You should also use a managed solution to enable rollback. A managed solution can be deleted, and its components will be uninstalled.
+
+You should use an unmanaged solution to allow the components to be changed. An unmanaged solution simply adds and overwrites the components in default solution.
+
+In order to view component changes, you should access solution layers and select the relevant property details. 
+
+You should not use solution history. Solution history contains information about solution operations (import, export, delete) but not the solution components. 
+
+You should not use solution checker. Solution checker analyzes your solutions against a set of best practice rules but does not track changed components. 
+
+You should not use solution segmentation. Solution segmentation is an approach to creating solution patches in order to transfer minor updates of a parent solution.
+
+You should use Upgrade. This allows you to update the solution without components that are not part of the new version of the solution.
+
+You should not use Stage for upgrade. With this option, you would have two solutions: an old one and a new one. This option is used when you want to migrate some data from one solution to another.
+
+You should not use Update. With this option, the components from the old version of the solution would be included in the new version.
+
+You should not use Overwrite customization. Overwrite customization is a customization option, not a solution option.
+
+You should use 3.6.0.1 as the version number.
+
+When you use clone a solution, you are able to change the first two numbers. The second number will increment automatically. There are no requirements to change the version of the Power Platform environment, so the first number should not be changed.
+
+When you clone the patch, you must update the last two numbers of the solution.
+
+You should check the Stage for Upgrade solution action when you want to keep two solutions in the system to do data migrations before you complete the importing process. You need to select the Overwrite customizations option when you want to be able to keep all old customizations until you apply the solution upgrade manually. You would need to select Apply solution upgrade after the solution has been imported.
+
+You should not select the Maintain customizations option if you want to upgrade the solution completely. This option allows you to maintain the unmanaged components that were applied to the solution that is already in use. Some upgrades within the new version of the solution related to those components will not be applied.
+
+When you do not select Stage for Upgrade, your system will apply changes to the old version of the solution regarding the selected import option.
+
+You should use an environment variable. Environment variables hold key-value pairs that can change from one environment to another. You configure an environment variable to hold configuration data such as the URL for the internal system and then can reference it from canvas apps and Power Automate flows. When you transport the solution into another environment, you can edit the environment variable in one place and the apps and flows will use the updated value.
+
+You should not use Azure Key Vault. Azure Key Vault is used to store secrets such as passwords, not configuration data such as URLs.
+
+You should not use a connection reference. Connection references connect a user account to a connector and are used to streamline the use of connections when flows are transported between environments. They do not hold configuration data such as the URL the connection uses.
+
+You should not use the unsecure configuration in a plug-in. The unsecure configuration in a plug-in step is a way to pass configuration data to a plug-in. You have to manually edit the unsecure configuration for each environment and it is therefore not suitable for application lifecycle management processes. Additionally, unsecure configuration cannot be accessed or used by in a Power Automate cloud flow.
+
+You should first create a connection reference. Connection references separate the connection from the connector and enable the connection reference to be updated as part of the application lifecycle management process. When an app or a flow is created in a solution, it will reuse the existing connection reference. By creating connection references before you create apps and flows, you will reduce the effort required when transporting solutions.
+
+You should not create a connection. Connections are specific to an environment and if you use connections in flows, you will need to edit the flow after importing it into the flow and update all the connections in the flow.
+
+You should not create an environment variable. Environment variables hold key-value pairs that can change from one environment to another. They are used for configuration data that changes between environments. They do not hold connection or authentication information.
+
+You should not create a custom connector. Custom connectors are used to connect to external systems with APIs.
+
+You should trigger the workflow when the email row is created. The Email table in Microsoft Dataverse is responsible for e-mails. When the Power Platform receives a new e-mail message, it creates a new e-mail record.
+
+You should also check if the email direction property is Incoming. The Direction column shows whether a record comes from external systems (Direction = ‘Incoming’) or is being sent to the external world (Direction = ‘Outgoing’).
+
+You should add a step for the email creation if the condition is met. When all conditions above are met, you must add a new step to create the auto-reply e-mail for the message that is just received.
+
+You should not add a wait condition for this workflow. The system does not wait for any conditions to be met before processing any of the steps that complete the creation process.
+
+You should not set up an email signature. This not a part of workflow creation. You need to set this up when you create an email template.
+
+You should choose the Static Analysis Results Interchange Format (SARIF) format. This is a standard format for the output of static analysis tools.
+
+You should not choose the eXtensible Markup Language (XML), Tab Separated Values (TSV), or YAML Ain’t Markup Language (YAML) formats. These are not used by the checker tools.
+
+You should perform the following steps in order:
+Enable the other languages in your environment.
+From the Actions toolbar in the solution, select Export Translations.
+Add the translated text to the exported XML file.
+From the Actions toolbar in the solution, select Import Translations.
+To create translations for custom tables and columns, forms, views and option sets, you need to first enable the languages in your environment.
+
+You should then click on Export Translations from within the solution. This downloads all the strings for the labels for all enabled languages into a zip file.
+
+You should then edit the XML file contained in the zip file by using Excel and enter the translated text. Alternatively, you can send the XML to a specialist translation agency or use The Microsoft Dynamics 365 (DTS) Translation Service in Lifecycle Services (LCS). 
+
+Finally, you should import the translated file using the Import Translations menu option in the solution.
+
+You should not update the form labels with the translated text. This will change the labels for the existing users.
+
+You should not update the display names on the columns with the translated text. This will change the display names for the existing users.
+
+You should not create a web resource to change the labels at runtime. This will require extensive JavaScript that will need to be maintained for every change.
+
+You should add US Dollars to Currencies in the Power Platform admin center. Microsoft Dataverse includes multi-currency capabilities. You need to add currencies and their exchange rates in relation to the currency that was defined when the environment was created, known as the base currency. Users can then select the currency from the list of currencies added to the system. All monetary amounts are automatically converted and stored in the base currency column.
+
+You should not enable the US English language. The language and currency features are not associated with each other.
+
+You should not configure regional options. Regional options control how dates and money amounts are formatted. They do not add additional currencies to the system.
+
+You should not create a choice column for currencies and add Euros and US Dollars. Dataverse contains multi-currency capabilities, and you would need to add processing to convert from one currency to another.
+
+You should add a connection to Microsoft Translator. You can either detect the user's language from their computer or add a drop-down for the user to select their language. You can then call Microsoft Translator to convert the labels and data in the app to their local language. This will cause the app to be slower since it will need to wait for each text value to be translated and additionally the translations may not be accurate for the words used for buttons and menus in the app.
+
+You should not enable languages in Dataverse. Enabling languages in Dataverse does not change how labels or data is displayed. It allows you to translate labels for components in solutions by exporting and importing a file with translated label text, but it does not translate data and only the translated labels in model-driven apps will be used.
+
+You should not create a component with a localization table. By using the language function in Power Apps you can detect the user's language from their computer and use the table to show known text values in the user's language. A localization table can only translate known values such as labels, not the data entered by users.
+
+You should not create a web resource containing a localization table. Web resources are only used in model-driven apps.
+
+
+</p>
+</body>
+</html>
